@@ -90,6 +90,9 @@ sw.*
 *.swp
 components/
 layouts/
-middleware/
-pages/
-store/
+pages/admin
+pages/buyticket
+pages/desciption
+pages/movies
+pages/payment
+pages/showtime
