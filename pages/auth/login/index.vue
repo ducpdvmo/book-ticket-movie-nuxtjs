@@ -103,12 +103,10 @@ export default {
           isLogin: this.isLogin,
         })
         .then((e) => {
+          localStorage.setItem('token', e.result.idToken)
           localStorage.setItem(
-            'token',
-            JSON.stringify({
-              idToken: e.result.idToken,
-              expirationToken: new Date().getTime() + e.result.expiresIn * 1000,
-            })
+            'tokenExpiration',
+            new Date().getTime() + e.result.expiresIn * 1000
           )
 
           this.$router.push('/')

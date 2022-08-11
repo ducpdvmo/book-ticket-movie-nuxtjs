@@ -1,4 +1,4 @@
 export default function (context) {
-  console.log(context.req)
-  context.store.auth.dispatch('auth/initAuth', context.req)
+  console.log(context)
+  context.store.dispatch('auth/initAuth', context.req)
 }
