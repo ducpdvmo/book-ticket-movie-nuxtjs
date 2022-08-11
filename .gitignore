@@ -88,14 +88,6 @@ sw.*
 
 # Vim swap files
 *.swp
-components/ModalLogin.vue
-layouts/
-pages/admin
-pages/buyticket
-pages/description
 pages/movies
-pages/payment
-pages/showtime
 store/user.js
-plugins/
 layouts/
