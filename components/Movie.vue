@@ -7,17 +7,7 @@
         :alt="movie.name"
       />
       <div
-        class="
-          absolute
-          flex flex-col
-          justify-center
-          items-start
-          ml-[30px]
-          mb-[20px]
-          bottom-0
-          left-0
-          text-white
-        "
+        class="absolute flex flex-col justify-center items-start ml-[30px] mb-[20px] bottom-0 left-0 text-white"
       >
         <div class="flex mb-[15px]]">
           <span
@@ -30,8 +20,10 @@
         </div>
         <p class="text-sm mb-[14px] uppercase font-bold">{{ movie.name }}</p>
         <p class="mb-10">
-          <font-awesome-icon class="text-yellow-400 text-2xl mr-2" icon="fa-solid fa-star" /><span class="text-xl"
-            >{{ movie.rating }}</span
+          <font-awesome-icon
+            class="text-yellow-400 text-2xl mr-2"
+            icon="fa-solid fa-star"
+          /><span class="text-xl">{{ movie.rating }}</span
           >/10
         </p>
       </div>
@@ -56,13 +48,13 @@ export default {
 </script>
 
 <style scoped>
-.Adventure{
+.Adventure {
   background-color: #ec5a1a;
 }
-.Comdy{
+.Comdy {
   background-color: #a6bb16;
 }
-.Horror{
-  background-color:  #830823;
+.Horror {
+  background-color: #830823;
 }
 </style>

@@ -17,13 +17,7 @@
           /></a>
           <a href="#"
             ><font-awesome-icon
-              class="
-                text-lg
-                mr-[15px]
-                text-[#abb7c4]
-                hover:bg-[#3EB5EC] hover:text-white
-                rounded-full
-              "
+              class="text-lg mr-[15px] text-[#abb7c4] hover:bg-[#3EB5EC] hover:text-white rounded-full"
               icon="fa-brands fa-twitter"
           /></a>
           <a href="#"
@@ -53,23 +47,15 @@
           <div class="custom-arrow">
             <font-awesome-icon
               class="absolute top-[-16px] right-[-10px] w-8 h-8 text-yellow-500"
-              icon="fa-solid fa-angle-left"
+              icon="fa-solid fa-circle-chevron-left"
             />
           </div>
         </template>
         <template #nextArrow>
           <div class="custom-arrow relative">
             <font-awesome-icon
-              class="
-                absolute
-                top-[-16px]
-                left-[-10px]
-                w-8
-                h-8
-                text-yellow-500
-                rotate-180
-              "
-              icon="fa-solid fa-angle-left"
+              class="absolute top-[-16px] left-[-10px] w-8 h-8 text-yellow-500"
+              icon="fa-solid fa-circle-chevron-right"
             />
           </div>
         </template>
@@ -85,44 +71,14 @@
       </div>
       <div>
         <button
-          class="
-            my-5
-            focus:outline-none
-            text-white
-            bg-red-700
-            hover:bg-red-800
-            focus:ring-4 focus:ring-red-300
-            font-medium
-            rounded-lg
-            text-sm
-            px-5
-            py-2.5
-            mr-2
-            mb-2
-            dark:bg-red-600
-          "
+          class="my-5 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600"
           @click="reload()"
         >
           Try Again
         </button>
         <nuxt-link
           to="/auth/login"
-          class="
-            my-5
-            focus:outline-none
-            text-white
-            bg-red-700
-            hover:bg-red-800
-            focus:ring-4 focus:ring-red-300
-            font-medium
-            rounded-lg
-            text-sm
-            px-5
-            py-2.5
-            mr-2
-            mb-2
-            dark:bg-red-600
-          "
+          class="my-5 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600"
         >
           Login pages
         </nuxt-link>
@@ -139,7 +95,6 @@ import Movie from '@/components/Movie.vue'
 export default {
   components: { VueSlickCarousel, Movie },
   layout: 'home',
-  middleware: 'check-call-movies',
   data() {
     return {
       slickOptions: {
