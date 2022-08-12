@@ -15,13 +15,17 @@ export const mutations = {
 export const actions = {
   getAllMovies(vuexContext) {
     return axios
-      .get('https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/Movies.json')
+      .get('https://nuxt-f6-2ndproject-default-rtdb.firebaseio.co/Movies.json')
       .then((response) => {
         const movies = []
         for (const key in response.data) {
           movies.push({ ...response.data[key], id: key })
         }
         vuexContext.commit('setMovies', movies)
+      })
+      .catch((e) => {
+        console.log(e);
+        vuexContext.commit('setMovies', [])
       })
   },
   setMovies(context, movies) {
