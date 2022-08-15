@@ -81,13 +81,13 @@
             ><font-awesome-icon
               icon="fa-solid fa-heart"
               class="
-                text-red-600
+                text-white
                 w-6
                 h-6
                 p-1.5
                 mr-2
                 rounded-full
-                border border-dashed border-red-500
+                border border-dashed border-white
               "
             />
             Add to Favorite</a
@@ -169,8 +169,8 @@
           <div class="flex ml-[30px] items-center">
             <p class="pr-2 text-2xl font-normal">Rate This Movie:</p>
             <star-rating
-              :max-rating="5"
-              :rating="(movie.rating / 2).toFixed(1)"
+              :max-rating="10"
+              :rating="movie.rating"
               :read-only="true"
               :star-size="28"
               :show-rating="false"

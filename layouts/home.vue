@@ -137,7 +137,6 @@
                 <option value="movies">
                   {{ $t('homeLayout.moviesInTheater') }}
                 </option>
-                <option>{{ $t('homeLayout.tvShow') }}</option>
               </select>
               <div
                 :class="{
