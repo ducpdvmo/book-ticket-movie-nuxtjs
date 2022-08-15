@@ -8,24 +8,58 @@
       <div class="flex justify-end">
         <div class="flex items-center justify-start">
           <p class="uppercase mr-4 text-lg text-[#90959b] font-bold">
-            Follow us:
+            {{ $t('home.followUs') }}
           </p>
-          <a href="#"
+          <a
+            href="#"
+            class="
+              hover:scale-125
+              hover:transition-all
+              hover:ease-in-out
+              hover:duration-200
+            "
             ><font-awesome-icon
               class="text-lg mr-[15px] text-[#abb7c4] hover:text-[#4280bf]"
               icon="fa-brands fa-facebook"
           /></a>
-          <a href="#"
+          <a
+            href="#"
+            class="
+              hover:scale-125
+              hover:transition-all
+              hover:ease-in-out
+              hover:duration-200
+            "
             ><font-awesome-icon
-              class="text-lg mr-[15px] text-[#abb7c4] hover:bg-[#3EB5EC] hover:text-white rounded-full"
+              class="
+                text-lg
+                mr-[15px]
+                text-[#abb7c4]
+                hover:bg-[#3EB5EC] hover:text-white
+                rounded-full
+              "
               icon="fa-brands fa-twitter"
           /></a>
-          <a href="#"
+          <a
+            href="#"
+            class="
+              hover:scale-125
+              hover:transition-all
+              hover:ease-in-out
+              hover:duration-200
+            "
             ><font-awesome-icon
               class="text-lg mr-[15px] text-[#abb7c4] hover:text-[#dcf836]"
               icon="fa-brands fa-google"
           /></a>
-          <a href="#"
+          <a
+            href="#"
+            class="
+              hover:scale-125
+              hover:transition-all
+              hover:ease-in-out
+              hover:duration-200
+            "
             ><font-awesome-icon
               class="text-lg mr-[15px] text-[#abb7c4] hover:text-[#E72D23]"
               icon="fa-brands fa-youtube"
@@ -71,14 +105,44 @@
       </div>
       <div>
         <button
-          class="my-5 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600"
+          class="
+            my-5
+            focus:outline-none
+            text-white
+            bg-red-700
+            hover:bg-red-800
+            focus:ring-4 focus:ring-red-300
+            font-medium
+            rounded-lg
+            text-sm
+            px-5
+            py-2.5
+            mr-2
+            mb-2
+            dark:bg-red-600
+          "
           @click="reload()"
         >
           Try Again
         </button>
         <nuxt-link
           to="/auth/login"
-          class="my-5 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600"
+          class="
+            my-5
+            focus:outline-none
+            text-white
+            bg-red-700
+            hover:bg-red-800
+            focus:ring-4 focus:ring-red-300
+            font-medium
+            rounded-lg
+            text-sm
+            px-5
+            py-2.5
+            mr-2
+            mb-2
+            dark:bg-red-600
+          "
         >
           Login pages
         </nuxt-link>
@@ -103,8 +167,8 @@ export default {
         slidesToScroll: 4,
         arrows: true,
         draggable: true,
-        autoplay: true,
-        autoplaySpeed: 10000,
+        // autoplay: true,
+        // autoplaySpeed: 10000,
         dots: false,
         responsive: [
           {

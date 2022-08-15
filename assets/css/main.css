@@ -8,3 +8,6 @@ div#__nuxt,
 #app {
   user-select: none;
 }
+::-webkit-scrollbar {
+  width: 0px;
+}
