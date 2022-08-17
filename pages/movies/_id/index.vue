@@ -54,6 +54,7 @@
               py-2.5
               mb-2
             "
+            @click="showMovieSchedule"
           >
             <font-awesome-icon class="mr-3" icon="fa-solid fa-credit-card" />Buy
             ticket
@@ -454,6 +455,10 @@ export default {
         ? (this.showOptions = !this.showOptions)
         : (this.showOptions = false)
     },
+    showMovieSchedule(){
+      console.log(this.$route.params);
+      this.$store.dispatch('movie-schedule/filterMovieScheduleWithMovieID',this.$route.params)
+    }
   },
 }
 </script>
