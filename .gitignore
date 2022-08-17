@@ -88,6 +88,4 @@ sw.*
 
 # Vim swap files
 *.swp
-layouts/
 pages/movies
-plugins/
