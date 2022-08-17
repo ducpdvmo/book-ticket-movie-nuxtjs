@@ -2,7 +2,18 @@
   <div class="min-h-screen flex flex-col justify-between">
     <header class="flex flex-col items-center">
       <div
-        class="fixed top-0 z-10 w-full h-[110px] flex justify-between bg-[#1F2937] items-center text-white"
+        class="
+          fixed
+          top-0
+          z-10
+          w-full
+          h-[110px]
+          flex
+          justify-between
+          bg-[#1F2937]
+          items-center
+          text-white
+        "
       >
         <h1 class="ml-20 w-[190px] h-[63px]">
           <img
@@ -12,21 +23,43 @@
           />
         </h1>
         <div class="font-normal text-2xl">
-          <nuxt-link class="mx-8" to="/">Trang chủ</nuxt-link>
-          <nuxt-link class="mx-8" to="/movies">Phim</nuxt-link>
-          <nuxt-link class="mx-8" to="/showtime">Lịch chiếu</nuxt-link>
-          <nuxt-link class="mx-8" to="/buyticket">Mua vé</nuxt-link>
+          <nuxt-link class="mx-8" to="/">{{ $t('homeLayout.home') }}</nuxt-link>
+          <nuxt-link class="mx-8" to="/movies">{{
+            $t('homeLayout.movies')
+          }}</nuxt-link>
+          <nuxt-link class="mx-8" to="/showtime">{{
+            $t('homeLayout.showTime')
+          }}</nuxt-link>
+          <nuxt-link class="mx-8" to="/buyticket">{{
+            $t('homeLayout.bookTicket')
+          }}</nuxt-link>
         </div>
         <div v-if="!isLogin" class="mr-16 font-normal text-2xl">
           <nuxt-link
             to="/auth/login"
-            class="mx-5 px-4 bg-[#13C6B2] hover:bg-[#0f8779] text-white py-2 rounded"
-            >Đăng nhập</nuxt-link
+            class="
+              mx-5
+              px-4
+              bg-[#13C6B2]
+              hover:bg-[#0f8779]
+              text-white
+              py-2
+              rounded
+            "
+            >{{ $t('homeLayout.login') }}</nuxt-link
           >
           <nuxt-link
             to="/auth/register"
-            class="mx-5 px-4 bg-[#13C6B2] hover:bg-[#0f8779] text-white py-2 rounded"
-            >Đăng ký</nuxt-link
+            class="
+              mx-5
+              px-4
+              bg-[#13C6B2]
+              hover:bg-[#0f8779]
+              text-white
+              py-2
+              rounded
+            "
+            >{{ $t('homeLayout.register') }}</nuxt-link
           >
         </div>
         <div v-else class="relative z-50">
@@ -53,7 +86,18 @@
           <transition name="profile">
             <div
               v-show="showPopups.showProfile"
-              class="m-5 ml-0 absolute top-[65px] z-50 rounded-2xl left-0 bg-white text-black w-[250px]"
+              class="
+                m-5
+                ml-0
+                absolute
+                top-[65px]
+                z-50
+                rounded-2xl
+                left-0
+                bg-white
+                text-black
+                w-[250px]
+              "
             >
               <div class="p-5 text-xl font-light">
                 <p class="drop-menu">Profile</p>
@@ -70,19 +114,47 @@
           <div class="w-1/5 mb-6 h-16">
             <div class="relative h-full">
               <select
+                v-model="typeSearch"
                 v-click-outside="closePopupOptions"
-                class="cursor-pointer h-full block appearance-none w-full bg-gray-700 text-white text-xl font-medium py-3 px-8 border-gray-500 border-r-2 rounded-l-lg leading-tight focus:outline-none focus:bg-gray-500 focus:border-gray-500"
+                class="
+                  cursor-pointer
+                  h-full
+                  block
+                  appearance-none
+                  w-full
+                  bg-gray-700
+                  text-white text-xl
+                  font-medium
+                  py-3
+                  px-8
+                  border-gray-500 border-r-2
+                  rounded-l-lg
+                  leading-tight
+                  focus:outline-none focus:bg-gray-500 focus:border-gray-500
+                "
                 @click="handlePopupsOptions()"
               >
-                <option>Movies In Theater</option>
-                <option>TV Show</option>
+                <option value="movies">
+                  {{ $t('homeLayout.moviesInTheater') }}
+                </option>
               </select>
               <div
                 :class="{
                   active: showPopups.showOptions,
                   notActive: !showPopups.showOptions,
                 }"
-                class="pointer-events-none text-3xl absolute inset-y-0 right-0 flex items-center px-2 text-white -rotate-90"
+                class="
+                  pointer-events-none
+                  text-3xl
+                  absolute
+                  inset-y-0
+                  right-0
+                  flex
+                  items-center
+                  px-2
+                  text-white
+                  -rotate-90
+                "
               >
                 <font-awesome-icon icon="fa-solid fa-caret-down" />
               </div>
@@ -91,13 +163,40 @@
           <div class="relative w-4/5 h-16">
             <input
               type="search"
-              class="h-full block p-2.5 w-full z-20 px-6 text-xl rounded-r-lg bg-gray-700 placeholder-gray-400 text-white outline-none"
-              placeholder="Search for a movie, TV Show or celebrity that you are looking for..."
+              class="
+                h-full
+                block
+                p-2.5
+                w-full
+                z-20
+                px-6
+                text-xl
+                rounded-r-lg
+                bg-gray-700
+                placeholder-gray-400
+                text-white
+                outline-none
+              "
+              :placeholder="$t('homeLayout.searchPlaceholder')"
               required
             />
             <button
               type="submit"
-              class="h-full w-[100px] absolute top-0 right-0 p-2.5 text-2xl font-medium text-white rounded-r-lg focus:outline-none bg-blue-600 hover:bg-blue-700"
+              class="
+                h-full
+                w-[100px]
+                absolute
+                top-0
+                right-0
+                p-2.5
+                text-2xl
+                font-medium
+                text-white
+                rounded-r-lg
+                focus:outline-none
+                bg-blue-600
+                hover:bg-blue-700
+              "
             >
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
               <span class="sr-only">Search</span>
@@ -116,7 +215,15 @@
     <nuxt />
     <footer class="px-4 divide-y bg-gray-800 text-white">
       <div
-        class="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0"
+        class="
+          container
+          flex flex-col
+          justify-between
+          py-10
+          mx-auto
+          space-y-8
+          lg:flex-row lg:space-y-0
+        "
       >
         <div class="lg:w-1/3">
           <a href="#" class="flex justify-center space-x-3 lg:justify-start">
@@ -129,7 +236,13 @@
           </a>
         </div>
         <div
-          class="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4"
+          class="
+            grid grid-cols-2
+            text-sm
+            gap-x-3 gap-y-8
+            lg:w-2/3
+            sm:grid-cols-4
+          "
         >
           <div class="space-y-3">
             <h3 class="tracking-wide uppercase">Product</h3>
@@ -236,14 +349,15 @@ export default {
   data() {
     return {
       showPopups: {
-        showProfile: false,
-        showOptions: false,
+        showProfile: null,
+        showOptions: null,
       },
       isLogin: null,
       user: {
         userName: 'Phạm Đình Đức',
         avt: 'https://i.pinimg.com/474x/3d/b7/9e/3db79e59b9052890ea1ffbef0f3970cc.jpg',
       },
+      typeSearch: 'movies',
     }
   },
   mounted() {
@@ -278,6 +392,12 @@ export default {
       this.showPopups.showOptions
         ? (this.showPopups.showOptions = !this.showPopups.showOptions)
         : (this.showPopups.showOptions = false)
+      if (
+        !this.showPopups.showOptions &&
+        this.showPopups.showProfile === null
+      ) {
+        document.documentElement.style.overflow = 'auto'
+      }
     },
   },
 }

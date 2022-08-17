@@ -37,6 +37,7 @@ export default {
   },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/i18n',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
@@ -44,6 +45,21 @@ export default {
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
   ],
+  i18n: {
+    locales: [
+      {
+        code: 'vi',
+        file: 'vi.js'
+      },
+      {
+        code: 'en',
+        file: 'en.js'
+      }
+    ],
+    lazy: true,
+    langDir: 'lang/',
+    defaultLocale: 'vi'
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

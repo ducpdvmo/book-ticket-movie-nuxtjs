@@ -88,4 +88,4 @@ sw.*
 
 # Vim swap files
 *.swp
-pages/movies
+package-lock.json
