@@ -1,6 +1,7 @@
 import axios from 'axios'
 export const state = () => ({
   movieSchedules: null,
+  filterMovieSchedule: null,
 })
 export const getters = {
   movieSchedules(state) {
@@ -21,16 +22,13 @@ export const actions = {
       .then((response) => {
         const movieSchedules = []
         for (const key in response.data) {
-          movieSchedules.push({ ...response.data[key], id: key })
+          movieSchedules.push({ ...response.data[key] })
         }
         vuexContext.commit('setMovieSchedule', movieSchedules)
       })
       .catch((e) => {
-        console.log(e);
+        console.log(e)
         vuexContext.commit('setMovieSchedule', null)
       })
-  },
-  setMovies(context, payload) {
-    context.commit('setMovieSchedule', payload)
-  },
+  }
 }
