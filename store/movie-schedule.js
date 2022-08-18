@@ -7,16 +7,10 @@ export const getters = {
   movieSchedules(state) {
     return state.movieSchedules
   },
-  getFilterMovieSchedule(state) {
-    return state.filterMovieSchedule
-  },
 }
 export const mutations = {
   setMovieSchedule(state, payload) {
     state.movieSchedules = payload
-  },
-  setFilterMovieSchedule(state, payload) {
-    state.filterMovieSchedule = payload
   },
 }
 export const actions = {
@@ -36,18 +30,5 @@ export const actions = {
         console.log(e)
         vuexContext.commit('setMovieSchedule', null)
       })
-  },
-  filterMovieScheduleWithMovieID(vuexContext, payload) {
-    const filterMovieSchedule = []
-    vuexContext.getters.movieSchedules.forEach((schedule,key) => {
-      filterMovieSchedule.push({ ...schedule })
-      console.log(filterMovieSchedule);
-      schedule.cinemas.forEach((item,index) => {
-        if (item.movie_id !== payload) {
-          filterMovieSchedule[key].cinemas[index].cinema = null
-        }
-      })
-    })
-    vuexContext.commit('setFilterMovieSchedule', filterMovieSchedule)
   }
 }
