@@ -16,7 +16,13 @@
           <nuxt-link
             v-for="(show_time, index) in cinema.show_time"
             :key="index"
-            :to="redirect"
+            :to="{
+              name: 'bookticket___vi',
+              query:{
+                movie_id: movieId,
+                schedule_id: show_time.schedule_id
+              }
+            }"
             ><button
               class="
                 mx-5
@@ -70,6 +76,10 @@ export default {
           ],
         }
       },
+    },
+    movieId:{
+      type: Number,
+      required: true
     },
     logoCinema: {
       type: String,
