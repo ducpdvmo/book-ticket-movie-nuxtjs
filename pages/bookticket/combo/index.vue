@@ -308,13 +308,14 @@
 <script>
 import axios from 'axios'
 export default {
+  name: 'ComboPage',
   filters: {
     formatMoney(value) {
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     },
   },
   layout: 'home',
-  middleware: 'setSeat',
+  middleware: ['keepUserLogin', 'check-login','auth', 'setSeat'],
   async asyncData(context) {
     const TicketRoom = await axios.get(
       'https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/TicketRoom.json'
@@ -352,7 +353,6 @@ export default {
           cost: 83000,
         },
       },
-      // seatSelected: null
     }
   },
   computed: {
@@ -370,13 +370,8 @@ export default {
   created() {
     this.fetchMovie()
     this.currentTicketRoom = this.fetchCurrentTicketRoom()
-    // this.seatSelected = this.fetchSeatSelected()
-    console.log(this.seatSelected);
   },
   methods: {
-    // fetchSeatSelected(){
-    //   return this.$store.getters['seatCinema/getSeatSelected']
-    // },
     fetchMovie() {
       this.$store.dispatch('movies/getAllMovies')
     },

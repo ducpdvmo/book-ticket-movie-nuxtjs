@@ -496,8 +496,10 @@ import axios from 'axios'
 import 'vue-tabs-component/docs/resources/tabs-component.css'
 import MovieSchedule from '../../../components/MovieSchedule.vue'
 export default {
+  name: 'MovieDetail',
   components: { MovieSchedule },
   layout: 'home',
+  middleware: ['keepUserLogin', 'check-login'],
   async asyncData(context) {
     const movie = await axios.get(
       `https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/Movies/${context.route.params.id}.json`

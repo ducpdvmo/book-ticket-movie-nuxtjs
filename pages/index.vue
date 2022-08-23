@@ -31,7 +31,13 @@
               hover:duration-200
             "
             ><font-awesome-icon
-              class="text-lg mr-[15px] text-[#abb7c4] hover:bg-[#3EB5EC] hover:text-white rounded-full"
+              class="
+                text-lg
+                mr-[15px]
+                text-[#abb7c4]
+                hover:bg-[#3EB5EC] hover:text-white
+                rounded-full
+              "
               icon="fa-brands fa-twitter"
           /></a>
           <a
@@ -99,14 +105,44 @@
       </div>
       <div>
         <button
-          class="my-5 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600"
+          class="
+            my-5
+            focus:outline-none
+            text-white
+            bg-red-700
+            hover:bg-red-800
+            focus:ring-4 focus:ring-red-300
+            font-medium
+            rounded-lg
+            text-sm
+            px-5
+            py-2.5
+            mr-2
+            mb-2
+            dark:bg-red-600
+          "
           @click="reload()"
         >
           Try Again
         </button>
         <nuxt-link
           to="/auth/login"
-          class="my-5 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600"
+          class="
+            my-5
+            focus:outline-none
+            text-white
+            bg-red-700
+            hover:bg-red-800
+            focus:ring-4 focus:ring-red-300
+            font-medium
+            rounded-lg
+            text-sm
+            px-5
+            py-2.5
+            mr-2
+            mb-2
+            dark:bg-red-600
+          "
         >
           Login pages
         </nuxt-link>
@@ -121,8 +157,10 @@ import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import Movie from '@/components/Movie.vue'
 export default {
+  name: 'HomePages',
   components: { VueSlickCarousel, Movie },
   layout: 'home',
+  middleware: ['keepUserLogin', 'check-login'],
   data() {
     return {
       slickOptions: {
@@ -174,7 +212,6 @@ export default {
     onLogout() {
       this.$store.dispatch('auth/logout')
       this.$router.replace('/auth/login')
-      console.log(this.movies)
     },
     reload() {
       this.$nuxt.refresh()
