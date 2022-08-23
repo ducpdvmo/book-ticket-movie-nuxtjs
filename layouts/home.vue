@@ -2,7 +2,18 @@
   <div class="min-h-screen flex flex-col justify-between">
     <header class="flex flex-col items-center">
       <div
-        class="fixed top-0 z-10 w-full h-[110px] flex justify-between bg-[#1F2937] items-center text-white"
+        class="
+          fixed
+          top-0
+          z-10
+          w-full
+          h-[110px]
+          flex
+          justify-between
+          bg-[#1F2937]
+          items-center
+          text-white
+        "
       >
         <h1 class="ml-20 w-[190px] h-[63px]">
           <img
@@ -23,15 +34,31 @@
             $t('homeLayout.bookTicket')
           }}</nuxt-link>
         </div>
-        <div v-if="!isLogin" class="mr-16 font-normal text-2xl">
+        <div v-if="!user || !isLogin" class="mr-16 font-normal text-2xl">
           <nuxt-link
             to="/auth/login"
-            class="mx-5 px-4 bg-[#13C6B2] hover:bg-[#0f8779] text-white py-2 rounded"
+            class="
+              mx-5
+              px-4
+              bg-[#13C6B2]
+              hover:bg-[#0f8779]
+              text-white
+              py-2
+              rounded
+            "
             >{{ $t('homeLayout.login') }}</nuxt-link
           >
           <nuxt-link
             to="/auth/register"
-            class="mx-5 px-4 bg-[#13C6B2] hover:bg-[#0f8779] text-white py-2 rounded"
+            class="
+              mx-5
+              px-4
+              bg-[#13C6B2]
+              hover:bg-[#0f8779]
+              text-white
+              py-2
+              rounded
+            "
             >{{ $t('homeLayout.register') }}</nuxt-link
           >
         </div>
@@ -42,11 +69,13 @@
             @click="handlePopups()"
           >
             <img
-              :src="user.avt"
+              :src="user.avatar ? user.avatar : avatarNull"
               :alt="user.userName"
               class="w-10 h-10 inline-block rounded-full mr-3"
             />
-            <p class="text-lg cursor-pointer">Phạm Đình Đức</p>
+            <p class="text-lg cursor-pointer">
+              {{ user.userName ? user.userName : user.email }}
+            </p>
             <font-awesome-icon
               :class="{
                 active: showPopups.showProfile,
@@ -59,10 +88,21 @@
           <transition name="profile">
             <div
               v-show="showPopups.showProfile"
-              class="m-5 ml-0 absolute top-[65px] z-50 rounded-2xl left-0 bg-white text-black w-[250px]"
+              class="
+                m-5
+                ml-0
+                absolute
+                top-[65px]
+                z-50
+                rounded-2xl
+                left-0
+                bg-white
+                text-black
+                w-[250px]
+              "
             >
               <div class="p-5 text-xl font-light">
-                <p class="drop-menu">Profile</p>
+                <nuxt-link to="/user" class="drop-menu">Profile</nuxt-link>
                 <p class="drop-menu">Vé đã mua</p>
                 <p class="drop-menu">Phim đã xem</p>
                 <p class="drop-menu" @click="logout()">Logout</p>
@@ -78,7 +118,22 @@
               <select
                 v-model="typeSearch"
                 v-click-outside="closePopupOptions"
-                class="cursor-pointer h-full block appearance-none w-full bg-gray-700 text-white text-xl font-medium py-3 px-8 border-gray-500 border-r-2 rounded-l-lg leading-tight focus:outline-none focus:bg-gray-500 focus:border-gray-500"
+                class="
+                  cursor-pointer
+                  h-full
+                  block
+                  appearance-none
+                  w-full
+                  bg-gray-700
+                  text-white text-xl
+                  font-medium
+                  py-3
+                  px-8
+                  border-gray-500 border-r-2
+                  rounded-l-lg
+                  leading-tight
+                  focus:outline-none focus:bg-gray-500 focus:border-gray-500
+                "
                 @change="queryData"
                 @click="handlePopupsOptions()"
               >
@@ -94,7 +149,18 @@
                   active: showPopups.showOptions,
                   notActive: !showPopups.showOptions,
                 }"
-                class="pointer-events-none text-3xl absolute inset-y-0 right-0 flex items-center px-2 text-white -rotate-90"
+                class="
+                  pointer-events-none
+                  text-3xl
+                  absolute
+                  inset-y-0
+                  right-0
+                  flex
+                  items-center
+                  px-2
+                  text-white
+                  -rotate-90
+                "
               >
                 <font-awesome-icon icon="fa-solid fa-caret-down" />
               </div>
@@ -105,13 +171,40 @@
               id="search"
               v-model="querySearch"
               v-click-outside="closedSearch"
-              class="h-full block p-2.5 w-full z-20 px-6 text-xl rounded-r-lg bg-gray-700 placeholder-gray-400 text-white outline-none"
+              class="
+                h-full
+                block
+                p-2.5
+                w-full
+                z-20
+                px-6
+                text-xl
+                rounded-r-lg
+                bg-gray-700
+                placeholder-gray-400
+                text-white
+                outline-none
+              "
               :placeholder="$t('homeLayout.searchPlaceholder')"
               @input="queryData"
             />
             <button
               type="submit"
-              class="h-full w-[100px] absolute top-0 right-0 p-2.5 text-2xl font-medium text-white rounded-r-lg focus:outline-none bg-blue-600 hover:bg-blue-700"
+              class="
+                h-full
+                w-[100px]
+                absolute
+                top-0
+                right-0
+                p-2.5
+                text-2xl
+                font-medium
+                text-white
+                rounded-r-lg
+                focus:outline-none
+                bg-blue-600
+                hover:bg-blue-700
+              "
             >
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
               <span class="sr-only">Search</span>
@@ -127,10 +220,32 @@
               v-for="(result, index) in queryResult"
               :key="index"
               :to="{ name: 'movies-id___vi', params: { id: result.movie_id } }"
-              class="text-white mb-5 py-3 px-8 cursor-pointer flex items-center bg-gray-300"
+              class="
+                text-white
+                mb-5
+                py-3
+                px-8
+                cursor-pointer
+                flex
+                items-center
+                bg-gray-300
+              "
             >
               <div
-                class="py-2 pl-4 mr-5 flex items-center cursor-pointer w-full hover:scale-105 hover:transition-all hover:ease-in-out hover:duration-200 hover:bg-[#c0b9b9]"
+                class="
+                  py-2
+                  pl-4
+                  mr-5
+                  flex
+                  items-center
+                  cursor-pointer
+                  w-full
+                  hover:scale-105
+                  hover:transition-all
+                  hover:ease-in-out
+                  hover:duration-200
+                  hover:bg-[#c0b9b9]
+                "
               >
                 <img class="w-36 h-24" :src="result.photoUrl" alt="" />
                 <span class="text-2xl font-bold ml-5">{{ result.name }}</span>
@@ -150,7 +265,15 @@
     <nuxt />
     <footer class="px-4 divide-y bg-gray-800 text-white">
       <div
-        class="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0"
+        class="
+          container
+          flex flex-col
+          justify-between
+          py-10
+          mx-auto
+          space-y-8
+          lg:flex-row lg:space-y-0
+        "
       >
         <div class="lg:w-1/3">
           <a href="#" class="flex justify-center space-x-3 lg:justify-start">
@@ -163,7 +286,13 @@
           </a>
         </div>
         <div
-          class="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4"
+          class="
+            grid grid-cols-2
+            text-sm
+            gap-x-3 gap-y-8
+            lg:w-2/3
+            sm:grid-cols-4
+          "
         >
           <div class="space-y-3">
             <h3 class="tracking-wide uppercase">Product</h3>
@@ -266,6 +395,7 @@
 
 <script>
 export default {
+  name: 'LayoutHome',
   transition: 'home',
   data() {
     return {
@@ -273,37 +403,37 @@ export default {
         showProfile: null,
         showOptions: null,
       },
-      isLogin: null,
-      user: {
-        userName: 'Phạm Đình Đức',
-        avt: 'https://i.pinimg.com/474x/3d/b7/9e/3db79e59b9052890ea1ffbef0f3970cc.jpg',
-      },
       typeSearch: 'movies',
       querySearch: '',
       queryResult: [],
       unsubscribleListenSeachInput: null,
+      avatarNull:
+        'https://i.pinimg.com/280x280_RS/2e/45/66/2e4566fd829bcf9eb11ccdb5f252b02f.jpg',
     }
   },
   computed: {
     movies() {
       return this.$store.getters['movies/movies']
     },
+    user() {
+      return this.$store.getters['user/getUser']
+    },
+    isLogin() {
+      return this.$store.getters['auth/isLogged']
+    },
   },
   mounted() {
-    this.isLogin = this.$store.getters['auth/isLogged']
-
     const searchInputEl = document.getElementById('search')
-
     this.unsubscribleListenSeachInput = searchInputEl.addEventListener(
       'focus',
       () => {
         const bodyEl = document.querySelector('body')
         bodyEl.style.height = '100vh'
         bodyEl.style.overflowY = 'hidden'
-        console.log(bodyEl)
       }
     )
   },
+  created() {},
   methods: {
     logout() {
       this.$store.dispatch('auth/logout')

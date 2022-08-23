@@ -59,7 +59,7 @@ export const actions = {
         .split(';')
         .find((c) => c.trim().startsWith('tokenExpiration='))
       if (!tokenKey || !tokenExpirationKey) {
-        context.dispatch('logout')
+        // context.dispatch('logout')
         return false
       }
       token = tokenKey.split('=')[1]
@@ -69,7 +69,7 @@ export const actions = {
       tokenExpiration = localStorage.getItem('tokenExpiration')
     }
     if (new Date().getTime() > tokenExpiration || !token) {
-      context.dispatch('logout')
+      // context.dispatch('logout')
       return false
     }
     context.dispatch('setTimerLogout', tokenExpiration - new Date().getTime())
@@ -82,7 +82,13 @@ export const actions = {
   },
   logout(context) {
     Cookies.remove('token')
+    Cookies.remove('tokenExpiration')
+    Cookies.remove('currentUser')
+    Cookies.remove('seatSelected')
     localStorage.removeItem('token')
+    localStorage.removeItem('tokenExpiration')
+    localStorage.removeItem('currentUser')
+    localStorage.removeItem('seatSelected')
     context.commit('clearToken')
   },
 }

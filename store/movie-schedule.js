@@ -27,8 +27,7 @@ export const actions = {
         vuexContext.commit('setMovieSchedule', movieSchedules)
       })
       .catch((e) => {
-        console.log(e)
         vuexContext.commit('setMovieSchedule', null)
       })
-  }
+  },
 }

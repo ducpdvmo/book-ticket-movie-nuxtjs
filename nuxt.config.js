@@ -49,16 +49,16 @@ export default {
     locales: [
       {
         code: 'vi',
-        file: 'vi.js'
+        file: 'vi.js',
       },
       {
         code: 'en',
-        file: 'en.js'
-      }
+        file: 'en.js',
+      },
     ],
     lazy: true,
     langDir: 'lang/',
-    defaultLocale: 'vi'
+    defaultLocale: 'vi',
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

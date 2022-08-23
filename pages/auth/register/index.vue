@@ -1,6 +1,15 @@
 <template>
   <div
-    class="w-screen h-screen flex justify-center items-center bg-gradient-to-br from-purple-700 to-amber-700"
+    class="
+      w-screen
+      h-screen
+      flex
+      justify-center
+      items-center
+      bg-gradient-to-br
+      from-purple-700
+      to-amber-700
+    "
   >
     <form
       class="p-10 bg-white rounded-xl drop-shadow-lg space-y-5"
@@ -20,7 +29,14 @@
         />
         <div
           v-if="error !== null && invalid === 'email'"
-          class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+          class="
+            p-4
+            mb-4
+            text-sm text-red-700
+            bg-red-100
+            rounded-lg
+            dark:bg-red-200 dark:text-red-800
+          "
           role="alert"
         >
           {{ error }}
@@ -39,7 +55,14 @@
         />
         <div
           v-if="error !== null && invalid === 'password'"
-          class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+          class="
+            p-4
+            mb-4
+            text-sm text-red-700
+            bg-red-100
+            rounded-lg
+            dark:bg-red-200 dark:text-red-800
+          "
           role="alert"
         >
           {{ error }}
@@ -57,7 +80,14 @@
         />
         <div
           v-if="!checkValidateRePassword"
-          class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+          class="
+            p-4
+            mb-4
+            text-sm text-red-700
+            bg-red-100
+            rounded-lg
+            dark:bg-red-200 dark:text-red-800
+          "
           role="alert"
           @blur="checkValidate()"
         >
@@ -66,7 +96,17 @@
       </div>
 
       <button
-        class="w-full px-10 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 hover:drop-shadow-md duration-300 ease-in"
+        class="
+          w-full
+          px-10
+          py-2
+          bg-blue-600
+          text-white
+          rounded-md
+          hover:bg-blue-500 hover:drop-shadow-md
+          duration-300
+          ease-in
+        "
         type="submit"
       >
         Register
@@ -75,7 +115,14 @@
         Have an account yet?
         <nuxt-link
           to="/auth/login"
-          class="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+          class="
+            text-red-600
+            hover:text-red-700
+            focus:text-red-700
+            transition
+            duration-200
+            ease-in-out
+          "
           >Login</nuxt-link
         >
       </p>
@@ -99,7 +146,6 @@ export default {
     error(newValue) {
       if (newValue.includes('PASS')) this.invalid = 'password'
       else this.invalid = 'email'
-      console.log(this.invalid)
     },
   },
   methods: {
@@ -110,12 +156,24 @@ export default {
     onSubmit() {
       if (this.password === this.rePassword) {
         this.$store
-          .dispatch('authenticateUser', {
+          .dispatch('auth/authenticateUser', {
             email: this.email,
             password: this.password,
             isLogin: this.isLogin,
           })
-          .then(() => this.$router.push('/auth/login'))
+          .then(async (res) => {
+            const newUser = {
+              userName: 'abc',
+              email: this.email,
+              uid: res.result.localId,
+              avatar: '',
+            }
+            await this.$store.dispatch('user/initUser', newUser)
+            this.$store.commit('user/setUser', newUser)
+          })
+          .then(() => {
+            this.$router.push('/')
+          })
           .catch((e) => {
             this.error = e.data.error.message
           })

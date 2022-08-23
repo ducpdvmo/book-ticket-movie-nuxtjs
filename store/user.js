@@ -34,8 +34,32 @@ export const actions = {
         }
         currentUser = user.filter((user) => user.uid === payload)
       })
-      .then(()=>{
+      .then(() => {
         context.commit('setUser', currentUser[0])
       })
+  },
+  handleKeepUserLogin(context, req) {
+    let result = {}
+    if (req) {
+      if (!req.headers.cookie) return false
+      const Cookie = req.headers.cookie.split(';')
+      const userCookie = Cookie.filter((ck) => {
+        return ck.includes('currentUser')
+      })
+      if (userCookie.length === 0) return false
+      const currentUser = userCookie[0]
+        .split('=')[1]
+        .replace(/%22/g, '')
+        .replace('{', '')
+        .replace('}', '')
+      currentUser.split('%2C').forEach((fiel, key) => {
+        const cur = fiel.split(':')
+        result[cur[0]] = cur[1]
+      })
+    } else {
+      const currentUserLocal = localStorage.getItem('currentUser')
+      result = { ...JSON.parse(currentUserLocal) }
+    }
+    context.commit('setUser', result)
   },
 }

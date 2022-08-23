@@ -75,6 +75,7 @@ import { computed } from 'vue'
 import SeatCinema from '../../components/SeatCinema.vue'
 import BillInformation from '../../components/BillInformation.vue'
 export default {
+  name: 'BookTicket',
   components: { SeatCinema, BillInformation },
   provide() {
     return {
@@ -83,6 +84,7 @@ export default {
     }
   },
   layout: 'home',
+  middleware: ['keepUserLogin', 'check-login','auth'],
   async asyncData(context) {
     const TicketRoom = await axios.get(
       'https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/TicketRoom.json'
