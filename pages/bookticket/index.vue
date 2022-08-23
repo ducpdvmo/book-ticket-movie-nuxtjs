@@ -36,11 +36,32 @@
             text-center
             inline-flex
             items-center
+            mx-4
+          "
+          @click="setSeatSelected"
+        >
+          <font-awesome-icon class="mr-2" icon="fa-solid fa-credit-card" />
+          Combo
+        </button>
+        <button
+          class="
+            text-white
+            bg-blue-700
+            hover:bg-blue-800
+            font-medium
+            rounded-lg
+            text-sm
+            px-5
+            py-2.5
+            text-center
+            inline-flex
+            items-center
+            mx-4
           "
           @click="submitBookTicket"
         >
           <font-awesome-icon class="mr-2" icon="fa-solid fa-credit-card" />
-          Thanh toán
+          Đặt Vé Ngay
         </button>
       </div>
     </BillInformation>
@@ -49,6 +70,7 @@
 
 <script>
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import { computed } from 'vue'
 import SeatCinema from '../../components/SeatCinema.vue'
 import BillInformation from '../../components/BillInformation.vue'
@@ -57,7 +79,7 @@ export default {
   provide() {
     return {
       movie: computed(() => this.movie),
-      seatNameSelectedComputed: computed(() => this.seatNameSelected),
+      seatSelectedComputed: computed(() => this.seatSelected),
     }
   },
   layout: 'home',
@@ -72,7 +94,7 @@ export default {
   data() {
     return {
       currentTicketRoom: null,
-      seatNameSelected: [],
+      seatSelected: [],
       seatSelectedRowA: [],
       seatSelectedRowB: [],
       seatSelectedRowC: [],
@@ -87,8 +109,8 @@ export default {
       )
       return currentMovieBooking
     },
-    seatNameSelectedComputed() {
-      return this.seatNameSelected
+    seatSelectedComputed() {
+      return this.seatSelected
     },
   },
   created() {
@@ -147,55 +169,43 @@ export default {
             this.seatSelectedRowD.push(seat)
           }
         }
-        const indexName = this.seatNameSelected.indexOf(seat.seat_name)
-        if (indexName > -1) {
-          this.seatNameSelected.splice(indexName, 1)
+        const indexSeat = this.seatSelected.findIndex(
+          (item) => item.seat_name === seat.seat_name
+        )
+        if (indexSeat > -1) {
+          this.seatSelected.splice(indexSeat, 1)
         } else {
-          this.seatNameSelected.push(seat.seat_name)
+          this.seatSelected.push(seat)
         }
       } else return false
     },
     submitBookTicket() {
-      const api =
-        'https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/TicketRoom/' +
-        this.$route.query.schedule_id +
-        '/listseat/'
-      this.seatSelectedRowA.forEach((seat) => {
-        const seatTmp = { ...seat }
-        seatTmp.status = false
-        console.log(seatTmp)
-        axios.put(api + 'RowA/' + seat.serial + '.json', seatTmp)
-      })
-      this.seatSelectedRowB.forEach((seat) => {
-        const seatTmp = { ...seat }
-        seatTmp.status = false
-        axios.put(api + 'RowB/' + seat.serial + '.json', seatTmp)
-      })
-      this.seatSelectedRowB.forEach((seat) => {
-        const seatTmp = { ...seat }
-        seatTmp.status = false
-        axios.put(api + 'RowB/' + seat.serial + '.json', seatTmp)
-      })
-      this.seatSelectedRowC.forEach((seat) => {
-        const seatTmp = { ...seat }
-        seatTmp.status = false
-        axios.put(api + 'RowC/' + seat.serial + '.json', seatTmp)
-      })
-      this.seatSelectedRowD.forEach((seat) => {
-        const seatTmp = { ...seat }
-        seatTmp.status = false
-        axios.put(api + 'RowD/' + seat.serial + '.json', seatTmp)
-      })
       window.location.reload(true)
+      this.$store.dispatch('seatCinema/bookedTicket', {
+        schedule_id: this.$route.query.schedule_id,
+        seatSelected: this.seatSelected,
+      })
     },
     resetSelected() {
       // eslint-disable-next-line no-unused-expressions, no-sequences
-      ;(this.seatNameSelected = []),
+      ;(this.seatSelected = []),
         (this.seatSelectedRowA = []),
         (this.seatSelectedRowB = []),
         (this.seatSelectedRowC = []),
         (this.seatSelectedRowD = [])
       this.$nuxt.$emit('reset:selectedSeat')
+    },
+    setSeatSelected() {
+      localStorage.setItem('seatSelected', JSON.stringify(this.seatSelected))
+      Cookies.set('seatSelected', JSON.stringify(this.seatSelected))
+      this.$store.commit('seatCinema/setSeatSelected', this.seatSelected)
+      this.$router.push({
+        name: 'bookticket-combo___vi',
+        query: {
+          movie_id: this.$route.query.movie_id,
+          schedule_id: this.$route.query.schedule_id,
+        },
+      })
     },
   },
 }

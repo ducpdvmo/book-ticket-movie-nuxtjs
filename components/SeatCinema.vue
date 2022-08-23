@@ -1,6 +1,6 @@
 <template>
   <div class="w-2/3 flex items-center flex-col border">
-    <div class="relative flex flex-col items-center">
+    <div class="relative flex flex-col items-center mb-10">
       <img class="w-4/5" src="@/assets/img/screen.png" alt="" />
       <img
         class="w-8 h-12 absolute top-14 right-2"
@@ -11,15 +11,21 @@
     <div
       v-for="(Row, index) in listSeat"
       :key="index"
-      class="mt-10 text-center"
+      class="mt-6 text-center flex justify-evenly w-[68%]"
     >
       <Seat
         v-for="(seat, key) in Row"
         :key="key"
         :disabled="isDisabled(seat.status)"
-        :class="{ reserved: !seat.status }"
+        :class="{
+          reserved: !seat.status,
+          normal: seat.seatClass === 'normal',
+          vip: seat.seatClass === 'vip',
+          couple: seat.seatClass === 'couple',
+        }"
         @update:select="targetSeat(seat)"
-        >{{ seat.seat_name }}
+        ><font-awesome-icon v-if="seat.seatClass==='vip'" class="absolute bottom-[85%] text-yellow-400 rotate-[30deg] left-[70%]" icon="fa-solid fa-crown" />
+        {{ seat.seat_name }}
       </Seat>
     </div>
     <div class="flex mt-12 justify-center text-center items-center">
@@ -65,5 +71,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.couple{
+  width: 80px;
+}
 </style>

@@ -5,12 +5,12 @@
       uppercase
       bg-[#3834347c]
       text-[#eae1e1]
-      ml-[5px]
       rounded-md
       w-10
       h-10
       text-center
       font-medium
+      relative
     "
     :class="{ selected: isSelected }"
     @click="handleClick"

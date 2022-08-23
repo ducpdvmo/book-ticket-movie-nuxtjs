@@ -10,8 +10,7 @@
         >Movie: {{ movie[0].name }}</router-link
       >
       <p class="">Rạp CGV Hà Đông</p>
-      <p>Suất : 9:30</p>
-      <p>Giá Vé: 90.000 VNĐ/vé</p>
+      <p>Suất: 9:30</p>
     </div>
   </div>
 </template>
