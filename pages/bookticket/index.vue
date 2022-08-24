@@ -21,7 +21,12 @@
         CHỌN LẠI
       </button>
     </SeatCinema>
-    <BillInformation>
+    <BillInformation
+      :total-cost="totalCostDiscount"
+      :promo="promo"
+      @update:promo="updatePromo"
+      @endTypePromo="handleDiscount"
+    >
       <div class="flex justify-center my-10">
         <button
           class="
@@ -58,13 +63,18 @@
             items-center
             mx-4
           "
-          @click="submitBookTicket"
+          @click="showPopup = true"
         >
           <font-awesome-icon class="mr-2" icon="fa-solid fa-credit-card" />
           Đặt Vé Ngay
         </button>
       </div>
     </BillInformation>
+    <GetPayment
+      v-show="showPopup"
+      @close:popup="showPopup = false"
+      @handle:payment="submitBookTicket"
+    ></GetPayment>
   </div>
 </template>
 
@@ -84,7 +94,7 @@ export default {
     }
   },
   layout: 'home',
-  middleware: ['keepUserLogin', 'check-login','auth'],
+  middleware: ['keepUserLogin', 'check-login', 'auth'],
   async asyncData(context) {
     const TicketRoom = await axios.get(
       'https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/TicketRoom.json'
@@ -101,6 +111,10 @@ export default {
       seatSelectedRowB: [],
       seatSelectedRowC: [],
       seatSelectedRowD: [],
+      showPopup: false,
+      totalCost: 0,
+      totalCostDiscount: 0,
+      promo: '',
     }
   },
   computed: {
@@ -115,14 +129,28 @@ export default {
       return this.seatSelected
     },
   },
+  watch: {
+    seatSelected() {
+      const seatNormal = this.seatSelectedComputed.filter(
+        (seat) => seat.seatClass === 'normal'
+      )
+      const seatVip = this.seatSelectedComputed.filter(
+        (seat) => seat.seatClass === 'vip'
+      )
+      const seatCouple = this.seatSelectedComputed.filter(
+        (seat) => seat.seatClass === 'couple'
+      )
+      this.totalCostDiscount = this.totalCost =
+        seatNormal.length * 90000 +
+        seatVip.length * 105000 +
+        seatCouple.length * 150000
+      this.promo = ''
+    },
+  },
   created() {
-    this.fetchMovie()
     this.currentTicketRoom = this.fetchCurrentTicketRoom()
   },
   methods: {
-    fetchMovie() {
-      this.$store.dispatch('movies/getAllMovies')
-    },
     fetchCurrentTicketRoom() {
       return this.TicketRoom.filter(
         (ticket) =>
@@ -182,11 +210,18 @@ export default {
       } else return false
     },
     submitBookTicket() {
-      window.location.reload(true)
       this.$store.dispatch('seatCinema/bookedTicket', {
         schedule_id: this.$route.query.schedule_id,
         seatSelected: this.seatSelected,
       })
+      const dataBill = {
+        user_id: this.$store.getters['user/getUser'].uid,
+        show_time: this.currentTicketRoom[0].show_time,
+        movie_name: this.movie[0].name,
+        seatSelected: this.seatSelected,
+        totalPay: this.totalCost,
+      }
+      this.$store.dispatch('bill/setBillOfUserId', dataBill)
     },
     resetSelected() {
       // eslint-disable-next-line no-unused-expressions, no-sequences
@@ -200,7 +235,12 @@ export default {
     setSeatSelected() {
       localStorage.setItem('seatSelected', JSON.stringify(this.seatSelected))
       Cookies.set('seatSelected', JSON.stringify(this.seatSelected))
+
+      localStorage.setItem('totalCost', JSON.stringify(this.totalCostDiscount))
+      Cookies.set('totalCost', JSON.stringify(this.totalCostDiscount))
+      
       this.$store.commit('seatCinema/setSeatSelected', this.seatSelected)
+      this.$store.commit('seatCinema/setTotalCost', this.totalCostDiscount)
       this.$router.push({
         name: 'bookticket-combo___vi',
         query: {
@@ -208,6 +248,18 @@ export default {
           schedule_id: this.$route.query.schedule_id,
         },
       })
+    },
+    updatePromo(value) {
+      this.promo = value
+    },
+    handleDiscount(value) {
+      if (this.movie[0].voucher.name === value) {
+        this.totalCostDiscount = this.totalCost * this.movie[0].voucher.discount
+      } else if(this.currentTicketRoom[0].voucher.name === value){
+        this.totalCostDiscount = this.totalCost * this.currentTicketRoom[0].voucher.discount
+      }else {
+        this.totalCostDiscount = this.totalCost
+      }
     },
   },
 }

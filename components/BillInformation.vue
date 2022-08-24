@@ -1,18 +1,30 @@
 <template>
   <div class="w-1/3 pt-5">
     <MovieBooking></MovieBooking>
-    <!-- <Combo
-      :combo1="combo_1"
-      :combo2="combo_2"
-      @update:combo1="updateCombo1"
-      @update:combo2="updateCombo2"
-    ></Combo> -->
     <TotalPay>
-      <p class="mt-3 text-2xl font-bold text-red-600">
-        Tổng:
-        {{ totalCost() | formatMoney }}
-        VNĐ
-      </p>
+      <div>
+        <div class="py-10 flex flex-col ml-5">
+          <label
+            for="promo"
+            class="font-semibold inline-block mb-3 text-sm uppercase"
+            >Promo Code</label
+          >
+          <input
+            id="promo"
+            ref="promo"
+            v-model="promoComputed"
+            type="text"
+            placeholder="Enter your code"
+            class="p-2 text-sm w-3/5"
+            @blur="endTypePromo"
+          />
+        </div>
+        <p class="mt-3 text-2xl font-bold text-red-600">
+          Tổng:
+          {{ totalCost | formatMoney }}
+          VNĐ
+        </p>
+      </div>
     </TotalPay>
     <slot>Thanh toán</slot>
   </div>
@@ -20,7 +32,6 @@
 
 <script>
 import MovieBooking from './MovieBooking.vue'
-// import Combo from './Combo.vue'
 import TotalPay from './TotalPay.vue'
 export default {
   filters: {
@@ -29,35 +40,32 @@ export default {
     },
   },
   components: { MovieBooking, TotalPay },
-  inject: ['seatSelectedComputed'],
+  props: {
+    totalCost: {
+      type: Number,
+      required: true,
+    },
+    promo: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
-    return {
-      combo_1: 0,
-      combo_2: 0,
-    }
+    return {}
+  },
+  computed: {
+    promoComputed: {
+      get() {
+        return this.promo
+      },
+      set() {
+        this.$emit('update:promo', this.$refs.promo.value)
+      },
+    },
   },
   methods: {
-    updateCombo1(value) {
-      this.combo_1 = parseInt(value)
-    },
-    updateCombo2(value) {
-      this.combo_2 = parseInt(value)
-    },
-    totalCost() {
-      const seatNormal = this.seatSelectedComputed.filter(
-        (seat) => seat.seatClass === 'normal'
-      )
-      const seatVip = this.seatSelectedComputed.filter(
-        (seat) => seat.seatClass === 'vip'
-      )
-      const seatCouple = this.seatSelectedComputed.filter(
-        (seat) => seat.seatClass === 'couple'
-      )
-      return (
-        seatNormal.length * 90000 +
-        seatVip.length * 105000 +
-        seatCouple.length * 150000
-      )
+    endTypePromo() {
+      this.$emit('endTypePromo', this.$refs.promo.value)
     },
   },
 }

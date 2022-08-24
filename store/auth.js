@@ -85,10 +85,12 @@ export const actions = {
     Cookies.remove('tokenExpiration')
     Cookies.remove('currentUser')
     Cookies.remove('seatSelected')
+    Cookies.remove('totalCost')
     localStorage.removeItem('token')
     localStorage.removeItem('tokenExpiration')
     localStorage.removeItem('currentUser')
     localStorage.removeItem('seatSelected')
+    localStorage.removeItem('totalCost')
     context.commit('clearToken')
   },
 }

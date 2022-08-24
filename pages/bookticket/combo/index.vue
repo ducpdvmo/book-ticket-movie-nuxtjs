@@ -266,7 +266,7 @@
         <div class="w-[30%] flex flex-col justify-center items-center">
           <div class="flex justify-between w-4/5">
             <p>Tổng giá vé:</p>
-            <p>{{ costSeat() | formatMoney }}</p>
+            <p>{{ costSeat | formatMoney }}</p>
           </div>
           <div class="flex justify-between w-4/5">
             <p>Combo:</p>
@@ -293,7 +293,7 @@
           h-24
           pl-2
         "
-        @click="submitBooking"
+        @click="showPopup = true"
       >
         NEXT
         <font-awesome-icon
@@ -302,11 +302,18 @@
         />
       </button>
     </div>
+    <GetPayment
+      v-show="showPopup"
+      @close:popup="showPopup = false"
+      @handle:payment="submitBooking"
+      >ABC</GetPayment
+    >
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import GetPayment from '../../../components/GetPayment.vue'
 export default {
   name: 'ComboPage',
   filters: {
@@ -314,8 +321,9 @@ export default {
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     },
   },
+  components: { GetPayment },
   layout: 'home',
-  middleware: ['keepUserLogin', 'check-login','auth', 'setSeat'],
+  middleware: ['keepUserLogin', 'check-login', 'auth', 'setSeat'],
   async asyncData(context) {
     const TicketRoom = await axios.get(
       'https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/TicketRoom.json'
@@ -353,6 +361,7 @@ export default {
           cost: 83000,
         },
       },
+      showPopup: false,
     }
   },
   computed: {
@@ -365,6 +374,9 @@ export default {
     },
     seatSelected() {
       return this.$store.getters['seatCinema/getSeatSelected']
+    },
+    costSeat() {
+      return this.$store.getters['seatCinema/getTotalCost']
     },
   },
   created() {
@@ -391,37 +403,23 @@ export default {
         this.combo.combo6.count * this.combo.combo6.cost
       )
     },
-    costSeat() {
-      const seatNormal = this.seatSelected.filter(
-        (seat) => seat.seatClass === 'normal'
-      )
-      const seatVip = this.seatSelected.filter(
-        (seat) => seat.seatClass === 'vip'
-      )
-      const seatCouple = this.seatSelected.filter(
-        (seat) => seat.seatClass === 'couple'
-      )
-      return (
-        seatNormal.length * 90000 +
-        seatVip.length * 105000 +
-        seatCouple.length * 150000
-      )
-    },
     totalCost() {
-      return this.costCombo() + this.costSeat()
+      return this.costCombo() + this.costSeat
     },
     submitBooking() {
       this.$store.dispatch('seatCinema/bookedTicket', {
         schedule_id: parseInt(this.$route.query.schedule_id),
         seatSelected: this.seatSelected,
       })
-      this.$router.replace({
-        name: 'bookticket___vi',
-        query: {
-          movie_id: this.$route.query.movie_id,
-          schedule_id: this.$route.query.schedule_id,
-        },
-      })
+      const dataBill = {
+        user_id: this.$store.getters['user/getUser'].uid,
+        show_time: this.currentTicketRoom[0].show_time,
+        movie_name: this.movie[0].name,
+        seatSelected: this.seatSelected,
+        totalPay: this.totalCost(),
+        voucher: this.currentTicketRoom[0].voucher
+      }
+      this.$store.dispatch('bill/setBillOfUserId', dataBill)
     },
   },
 }
