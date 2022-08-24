@@ -266,7 +266,7 @@
         <div class="w-[30%] flex flex-col justify-center items-center">
           <div class="flex justify-between w-4/5">
             <p>Tổng giá vé:</p>
-            <p>{{ costSeat() | formatMoney }}</p>
+            <p>{{ costSeat | formatMoney }}</p>
           </div>
           <div class="flex justify-between w-4/5">
             <p>Combo:</p>
@@ -375,6 +375,9 @@ export default {
     seatSelected() {
       return this.$store.getters['seatCinema/getSeatSelected']
     },
+    costSeat() {
+      return this.$store.getters['seatCinema/getTotalCost']
+    },
   },
   created() {
     this.fetchMovie()
@@ -400,24 +403,8 @@ export default {
         this.combo.combo6.count * this.combo.combo6.cost
       )
     },
-    costSeat() {
-      const seatNormal = this.seatSelected.filter(
-        (seat) => seat.seatClass === 'normal'
-      )
-      const seatVip = this.seatSelected.filter(
-        (seat) => seat.seatClass === 'vip'
-      )
-      const seatCouple = this.seatSelected.filter(
-        (seat) => seat.seatClass === 'couple'
-      )
-      return (
-        seatNormal.length * 90000 +
-        seatVip.length * 105000 +
-        seatCouple.length * 150000
-      )
-    },
     totalCost() {
-      return this.costCombo() + this.costSeat()
+      return this.costCombo() + this.costSeat
     },
     submitBooking() {
       this.$store.dispatch('seatCinema/bookedTicket', {
@@ -430,6 +417,7 @@ export default {
         movie_name: this.movie[0].name,
         seatSelected: this.seatSelected,
         totalPay: this.totalCost(),
+        voucher: this.currentTicketRoom[0].voucher
       }
       this.$store.dispatch('bill/setBillOfUserId', dataBill)
     },
