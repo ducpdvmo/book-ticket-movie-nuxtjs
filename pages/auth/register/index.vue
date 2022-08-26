@@ -130,6 +130,7 @@
   </div>
 </template>
 <script>
+import Cookies from 'js-cookie'
 export default {
   data() {
     return {
@@ -162,11 +163,18 @@ export default {
             isLogin: this.isLogin,
           })
           .then(async (res) => {
+            localStorage.setItem('token', res.result.idToken)
+            localStorage.setItem(
+              'tokenExpiration',
+              new Date().getTime() + res.result.expiresIn * 1000
+            )
+            localStorage.setItem('uid', res.result.localId)
+            Cookies.set('uid', res.result.localId)
             const newUser = {
-              userName: 'abc',
+              userName: '',
               email: this.email,
               uid: res.result.localId,
-              avatar: '',
+              avatar: 'https://support.pega.com/sites/default/files/pega-user-image/357/REG-356652.png',
             }
             await this.$store.dispatch('user/initUser', newUser)
             this.$store.commit('user/setUser', newUser)

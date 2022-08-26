@@ -1,15 +1,26 @@
+import axios from 'axios'
 export const state = () => ({
   user: null,
+  allUser: null,
 })
 
 export const getters = {
+  getCurrentUser: (state, getters) => (userId) => {
+    return getters.getAllUser.filter((user) => user.uid === userId)
+  },
   getUser(state) {
     return state.user
+  },
+  getAllUser(state) {
+    return state.allUser
   },
 }
 export const mutations = {
   setUser(state, payload) {
     state.user = payload
+  },
+  setAllUser(state, payload) {
+    state.allUser = payload
   },
 }
 
@@ -23,43 +34,44 @@ export const actions = {
       .then((res) => {})
       .catch((e) => console.log(e))
   },
-  getUserByUID(context, payload) {
-    let currentUser
+  getAllUser(context) {
     return this.$axios
       .$get('https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/Users.json')
       .then((res) => {
-        const user = []
+        const users = []
         for (const key in res) {
-          user.push({ ...res[key] })
+          users.push({ ...res[key], id: key })
         }
-        currentUser = user.filter((user) => user.uid === payload)
+        context.commit('setAllUser', users)
       })
-      .then(() => {
-        context.commit('setUser', currentUser[0])
-      })
+      .catch((e) => console.log(e))
   },
   handleKeepUserLogin(context, req) {
-    let result = {}
     if (req) {
       if (!req.headers.cookie) return false
       const Cookie = req.headers.cookie.split(';')
       const userCookie = Cookie.filter((ck) => {
-        return ck.includes('currentUser')
+        return ck.includes('uid')
       })
       if (userCookie.length === 0) return false
-      const currentUser = userCookie[0]
-        .split('=')[1]
-        .replace(/%22/g, '')
-        .replace('{', '')
-        .replace('}', '')
-      currentUser.split('%2C').forEach((fiel, key) => {
-        const cur = fiel.split(':')
-        result[cur[0]] = cur[1]
-      })
+      const currentUserUId = userCookie[0].split('=')[1].replace(/%22/g, '')
+      context.commit(
+        'setUser',
+        context.getters.getCurrentUser(currentUserUId)[0]
+      )
     } else {
-      const currentUserLocal = localStorage.getItem('currentUser')
-      result = { ...JSON.parse(currentUserLocal) }
+      const currentUserUIdLocal = localStorage.getItem('uid')
+      context.commit(
+        'setUser',
+        context.getters.getCurrentUser(currentUserUIdLocal)[0]
+      )
     }
-    context.commit('setUser', result)
+  },
+  updateUserById(context, payload) {
+    const API =
+      'https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/Users/' +
+      payload.id +
+      '.json'
+    axios.put(API, payload.user)
   },
 }
