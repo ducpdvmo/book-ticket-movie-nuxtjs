@@ -103,7 +103,7 @@
                 <nuxt-link to="/user/profile" class="drop-menu w-full"
                   >Profile</nuxt-link
                 >
-                <nuxt-link to="/user/bills" class="drop-menu w-full"
+                <nuxt-link to="/user/bill" class="drop-menu w-full"
                   >Vé Đã Mua</nuxt-link
                 >
                 <p class="drop-menu w-full">Phim đã xem</p>

@@ -173,7 +173,7 @@ export default {
       this.$emit('handle:payment')
     },
     redirect() {
-      this.$router.push('/')
+      window.location.assign('/')
     },
   },
 }
