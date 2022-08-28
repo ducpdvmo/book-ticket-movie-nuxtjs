@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col justify-between">
+  <div class="min-h-screen flex flex-col relative">
     <header class="flex flex-col items-center">
       <div
         class="
@@ -89,23 +89,25 @@
             <div
               v-show="showPopups.showProfile"
               class="
-                m-5
-                ml-0
                 absolute
-                top-[65px]
+                top-20
                 z-50
                 rounded-2xl
-                left-0
+                right-20
                 bg-white
                 text-black
                 w-[250px]
               "
             >
-              <div class="p-5 text-xl font-light">
-                <nuxt-link to="/user" class="drop-menu">Profile</nuxt-link>
-                <p class="drop-menu">Vé đã mua</p>
-                <p class="drop-menu">Phim đã xem</p>
-                <p class="drop-menu" @click="logout()">Logout</p>
+              <div class="p-5 text-xl font-light flex flex-col">
+                <nuxt-link to="/user/profile" class="drop-menu w-full"
+                  >Profile</nuxt-link
+                >
+                <nuxt-link to="/user/bills" class="drop-menu w-full"
+                  >Vé Đã Mua</nuxt-link
+                >
+                <p class="drop-menu w-full">Phim đã xem</p>
+                <p class="drop-menu w-full" @click="logout()">Logout</p>
               </div>
             </div>
           </transition>
@@ -263,7 +265,9 @@
       class="fixed top-0 left-0 z-0 w-screen bg-[#00000077]"
     ></div>
     <nuxt />
-    <footer class="px-4 divide-y bg-gray-800 text-white">
+    <footer
+      class="px-4 divide-y bg-gray-800 text-white absolute top-[100%] w-full"
+    >
       <div
         class="
           container

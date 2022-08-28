@@ -143,27 +143,18 @@ export default {
           password: this.password,
           isLogin: this.isLogin,
         })
-        .then(async (e) => {
+        .then((e) => {
           localStorage.setItem('token', e.result.idToken)
           localStorage.setItem(
             'tokenExpiration',
             new Date().getTime() + e.result.expiresIn * 1000
           )
-          await this.$store.dispatch('user/getUserByUID', e.result.localId)
+          return e.result.localId
         })
-        .then(() => {
-          localStorage.setItem(
-            'currentUser',
-            JSON.stringify(this.$store.getters['user/getUser'])
-          )
-          Cookies.set(
-            'currentUser',
-            JSON.stringify(this.$store.getters['user/getUser'])
-          )
+        .then((res) => {
+          localStorage.setItem('uid',res)
+          Cookies.set('uid', res)
           this.$router.push('/')
-        })
-        .catch((e) => {
-          this.error = e.data.error.message
         })
     },
   },
