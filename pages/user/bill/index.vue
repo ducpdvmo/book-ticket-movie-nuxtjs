@@ -74,7 +74,7 @@ export default {
         this.tempBills.bills = [...Object.values(this.billsOfUser[0].bills)]
     },
     async deleteBill(id) {
-      const API = `https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/Bills/-NAZF9qfTz0djc4YQ597/bills/${id}.json`
+      const API = `https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/Bills/${this.tempBills.id}/bills/${id}.json`
       await this.$axios.$delete(API)
       await this.fetchAllBills()
       window.location.reload(true)
