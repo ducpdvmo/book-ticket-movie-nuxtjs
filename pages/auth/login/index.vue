@@ -154,7 +154,9 @@ export default {
         .then((res) => {
           localStorage.setItem('uid',res)
           Cookies.set('uid', res)
-          this.$router.push('/')
+          if (res === 'wtkIfgkrPKXikjGaTuMsxOVrU162')
+            this.$router.push('/admin/dashboard')
+          else this.$router.push('/')
         })
     },
   },

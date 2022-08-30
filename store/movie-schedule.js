@@ -14,8 +14,8 @@ export const mutations = {
   },
 }
 export const actions = {
-  getAllMovieSchedules(vuexContext) {
-    return axios
+  async getAllMovieSchedules(vuexContext) {
+    await axios
       .get(
         'https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/MovieSchedules.json'
       )

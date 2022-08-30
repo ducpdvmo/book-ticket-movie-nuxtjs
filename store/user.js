@@ -2,6 +2,7 @@ import axios from 'axios'
 export const state = () => ({
   user: null,
   allUser: null,
+  isAdmin: false,
 })
 
 export const getters = {
@@ -14,6 +15,9 @@ export const getters = {
   getAllUser(state) {
     return state.allUser
   },
+  checkAdmin(state) {
+    return state.isAdmin
+  },
 }
 export const mutations = {
   setUser(state, payload) {
@@ -21,6 +25,9 @@ export const mutations = {
   },
   setAllUser(state, payload) {
     state.allUser = payload
+  },
+  checkAdmin(state, payload) {
+    state.isAdmin = payload
   },
 }
 
@@ -59,12 +66,16 @@ export const actions = {
         'setUser',
         context.getters.getCurrentUser(currentUserUId)[0]
       )
+      if(currentUserUId === 'wtkIfgkrPKXikjGaTuMsxOVrU162')
+      context.commit('checkAdmin', true)
     } else {
       const currentUserUIdLocal = localStorage.getItem('uid')
       context.commit(
         'setUser',
         context.getters.getCurrentUser(currentUserUIdLocal)[0]
       )
+      if(currentUserUIdLocal === 'wtkIfgkrPKXikjGaTuMsxOVrU162')
+      context.commit('checkAdmin', true)
     }
   },
   updateUserById(context, payload) {
