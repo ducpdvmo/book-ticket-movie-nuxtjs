@@ -128,6 +128,11 @@ export default {
     seatSelectedComputed() {
       return this.seatSelected
     },
+    billOfCurrentUser() {
+      return this.$store.getters['bill/getBillOfUser'](
+        this.$store.getters['user/getUser'].uid
+      )
+    },
   },
   watch: {
     seatSelected() {
@@ -209,19 +214,43 @@ export default {
         }
       } else return false
     },
-    submitBookTicket() {
-      this.$store.dispatch('seatCinema/bookedTicket', {
+    async submitBookTicket() {
+      await this.$store.dispatch('seatCinema/bookedTicket', {
         schedule_id: this.$route.query.schedule_id,
         seatSelected: this.seatSelected,
       })
-      const dataBill = {
-        user_id: this.$store.getters['user/getUser'].uid,
+      const bill = {
         show_time: this.currentTicketRoom[0].show_time,
         movie_name: this.movie[0].name,
         seatSelected: this.seatSelected,
         totalPay: this.totalCost,
       }
-      this.$store.dispatch('bill/setBillOfUserId', dataBill)
+      let tempBill
+      if (this.billOfCurrentUser.length !== 0) {
+        tempBill = JSON.parse(JSON.stringify(this.billOfCurrentUser[0]))
+        delete tempBill.id
+        if (Array.isArray(tempBill.bills)) tempBill.bills.push(bill)
+        else {
+          tempBill.bills = [...Object.values(tempBill.bills)]
+          tempBill.bills.push(bill)
+        }
+      }
+      const payload = {
+        methods: this.billOfCurrentUser.length !== 0 ? 'put' : 'post',
+        id:
+          this.billOfCurrentUser.length !== 0
+            ? this.billOfCurrentUser[0].id
+            : null,
+        dataBill:
+          this.billOfCurrentUser.length !== 0
+            ? tempBill
+            : {
+                user_id: this.$store.getters['user/getUser'].uid,
+                bills: [bill],
+              },
+      }
+      await this.$store.dispatch('bill/setBillOfUserId', payload)
+      await this.$store.dispatch('bill/getAllBills')
     },
     resetSelected() {
       // eslint-disable-next-line no-unused-expressions, no-sequences
@@ -238,7 +267,7 @@ export default {
 
       localStorage.setItem('totalCost', JSON.stringify(this.totalCostDiscount))
       Cookies.set('totalCost', JSON.stringify(this.totalCostDiscount))
-      
+
       this.$store.commit('seatCinema/setSeatSelected', this.seatSelected)
       this.$store.commit('seatCinema/setTotalCost', this.totalCostDiscount)
       this.$router.push({
@@ -255,9 +284,10 @@ export default {
     handleDiscount(value) {
       if (this.movie[0].voucher.name === value) {
         this.totalCostDiscount = this.totalCost * this.movie[0].voucher.discount
-      } else if(this.currentTicketRoom[0].voucher.name === value){
-        this.totalCostDiscount = this.totalCost * this.currentTicketRoom[0].voucher.discount
-      }else {
+      } else if (this.currentTicketRoom[0].voucher.name === value) {
+        this.totalCostDiscount =
+          this.totalCost * this.currentTicketRoom[0].voucher.discount
+      } else {
         this.totalCostDiscount = this.totalCost
       }
     },

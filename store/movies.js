@@ -13,8 +13,8 @@ export const mutations = {
   },
 }
 export const actions = {
-  getAllMovies(vuexContext) {
-    return axios
+  async getAllMovies(vuexContext) {
+    await axios
       .get('https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/Movies.json')
       .then((response) => {
         const movies = []

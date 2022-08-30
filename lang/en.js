@@ -13,9 +13,17 @@ export default {
     home: {
         followUs: 'follow Us:',
         types: {
-            Adventure: 'Adventure',
-            Comedy: 'Comedy',
-            Horror: 'Horror',
+            superhero: 'superhero',
+            action: 'action',
+            drama: 'drama',
+            family: 'family',
+            fiction: 'fiction',
+            fantasy: 'fantasy',
+            adventure: 'adventure',
+            horror: 'horror',
+            animation: 'animation',
+            comedy: 'comedy',
+            LGBT: 'LGBT'
         }
     }
 }

@@ -6,9 +6,10 @@ export const mutations = {}
 
 export const actions = {
   async nuxtServerInit(vuexContext) {
-    await Promise.all([
+    return await Promise.all([
       vuexContext.dispatch('user/getAllUser'),
-      vuexContext.dispatch('movies/getAllMovies')
+      vuexContext.dispatch('movies/getAllMovies'),
+      vuexContext.dispatch('bill/getAllBills')
     ])
   },
 }

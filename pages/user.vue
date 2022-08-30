@@ -22,6 +22,7 @@
         <p class="text-base">Account Detail</p>
         <div class="flex flex-col mt-3 text-lg">
           <nuxt-link class="font-bold" to="/user/profile">Profile</nuxt-link>
+          <nuxt-link class="font-bold" to="/user/bill">Bills</nuxt-link>
         </div>
       </div>
       <div class="flex flex-col justify-center items-start">

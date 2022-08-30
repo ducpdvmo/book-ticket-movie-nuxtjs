@@ -34,8 +34,8 @@ export const actions = {
       .then((res) => {})
       .catch((e) => console.log(e))
   },
-  getAllUser(context) {
-    return this.$axios
+  async getAllUser(context) {
+    await this.$axios
       .$get('https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/Users.json')
       .then((res) => {
         const users = []

@@ -13,9 +13,17 @@ export default {
     home: {
         followUs: 'Theo dõi chúng tôi:',
         types: {
-            Adventure: 'Phiêu lưu',
-            Comedy: 'Hài hước',
-            Horror: 'Kinh dị',
+            superhero: 'Siêu anh hùng',
+            action: 'Hành động',
+            drama: 'gay cấn',
+            family: 'Gia đình',
+            fiction: 'Viễn tưởng',
+            fantasy: 'Tưởng tượng',
+            adventure: 'phiêu lưu',
+            horror: 'Hài hước',
+            animation: 'Hoạt hình',
+            comedy: 'hài kịch',
+            LGBT: 'Đồng tính'
         }
     }
 }

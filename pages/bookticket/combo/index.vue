@@ -378,6 +378,11 @@ export default {
     costSeat() {
       return this.$store.getters['seatCinema/getTotalCost']
     },
+    billOfCurrentUser() {
+      return this.$store.getters['bill/getBillOfUser'](
+        this.$store.getters['user/getUser'].uid
+      )
+    },
   },
   created() {
     this.fetchMovie()
@@ -406,20 +411,43 @@ export default {
     totalCost() {
       return this.costCombo() + this.costSeat
     },
-    submitBooking() {
-      this.$store.dispatch('seatCinema/bookedTicket', {
+    async submitBooking() {
+      await this.$store.dispatch('seatCinema/bookedTicket', {
         schedule_id: parseInt(this.$route.query.schedule_id),
         seatSelected: this.seatSelected,
       })
-      const dataBill = {
-        user_id: this.$store.getters['user/getUser'].uid,
+      const bill = {
         show_time: this.currentTicketRoom[0].show_time,
         movie_name: this.movie[0].name,
         seatSelected: this.seatSelected,
         totalPay: this.totalCost(),
-        voucher: this.currentTicketRoom[0].voucher
       }
-      this.$store.dispatch('bill/setBillOfUserId', dataBill)
+      let tempBill
+      if (this.billOfCurrentUser.length !== 0) {
+        tempBill = JSON.parse(JSON.stringify(this.billOfCurrentUser[0]))
+        delete tempBill.id
+        if (Array.isArray(tempBill.bills)) tempBill.bills.push(bill)
+        else {
+          tempBill.bills = [...Object.values(tempBill.bills)]
+          tempBill.bills.push(bill)
+        }
+      }
+      const payload = {
+        methods: this.billOfCurrentUser.length !== 0 ? 'put' : 'post',
+        id:
+          this.billOfCurrentUser.length !== 0
+            ? this.billOfCurrentUser[0].id
+            : null,
+        dataBill:
+          this.billOfCurrentUser.length !== 0
+            ? tempBill
+            : {
+                user_id: this.$store.getters['user/getUser'].uid,
+                bills: [bill],
+              },
+      }
+      await this.$store.dispatch('bill/setBillOfUserId', payload)
+      await this.$store.dispatch('bill/getAllBills')
     },
   },
 }
