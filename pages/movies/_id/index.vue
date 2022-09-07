@@ -524,16 +524,13 @@ export default {
   },
   methods: {
     filterMovieSchedule() {
-      const filterMovieScheduleTmp = []
-      this.movieschedule.forEach((schedule, key) => {
-        filterMovieScheduleTmp.push({ ...schedule })
+      this.movieschedule.forEach((schedule, index) => {
         schedule.cinemas.forEach((item, index) => {
-          if (item.movie_id !== parseInt(this.$route.params.id)) {
-            filterMovieScheduleTmp[key].cinemas[index].cinema = null
-          }
+          item.cinema.show_time = [...Object.values(item.cinema.show_time)]
+          console.log(item.cinema.show_time)
+          item.cinema.show_time = item.cinema.show_time.filter(item=>item.movie_id.toString() === this.$route.params.id.toString())
         })
       })
-      this.movieschedule = filterMovieScheduleTmp
     },
     closePopupOptions() {
       this.showOptions

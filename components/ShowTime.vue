@@ -3,8 +3,7 @@
     <day-schedule
       v-for="(cinema, key) in cinemas"
       :key="key"
-      :movie-id="cinema.movie_id"
-      :cinema="cinema.cinema ? cinema.cinema : null"
+      :cinema="cinema.cinema"
       :cinema-name="cinema.cine_name"
       :logo-cinema="cinema.logo"
     ></day-schedule>
