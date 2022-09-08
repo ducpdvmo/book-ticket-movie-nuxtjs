@@ -82,8 +82,10 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { computed } from 'vue'
+// import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import SeatCinema from '../../components/SeatCinema.vue'
 import BillInformation from '../../components/BillInformation.vue'
+// import { db } from '@/firebase/config'
 export default {
   name: 'BookTicket',
   components: { SeatCinema, BillInformation },
@@ -225,6 +227,13 @@ export default {
         seatSelected: this.seatSelected,
         totalPay: this.totalCost,
       }
+      // const billForAdmin = {
+      //   seatSelected: this.seatSelected,
+      //   totalPay: (this.totalCost / 23400).toFixed(2),
+      //   bookedAt: serverTimestamp()
+      // }
+      // await addDoc(collection(db, "TicketForAdmin"), billForAdmin)
+
       let tempBill
       if (this.billOfCurrentUser.length !== 0) {
         tempBill = JSON.parse(JSON.stringify(this.billOfCurrentUser[0]))
