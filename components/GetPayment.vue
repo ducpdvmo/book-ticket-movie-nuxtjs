@@ -43,14 +43,9 @@
             class="w-4 h-4 flex items-center text-red-500 mx-auto mb-1"
             icon="fa-solid fa-circle-info"
           />
-          <font-awesome-icon
-            class="w-16 h-16 flex items-center text-red-500 mx-auto"
-            icon="fa-solid fa-cart-arrow-down"
-          />
+          <slot name="icon_noti"></slot>
           <h2 class="text-xl font-bold py-4">Are you sure?</h2>
-          <p class="text-sm text-gray-500 px-8">
-            Do you realy want to payment? This process cannot be undone
-          </p>
+          <slot class="text-sm text-gray-500 px-8" name="title_noti"></slot>
         </div>
         <div class="p-3 mt-2 text-center space-x-4 md:block">
           <button
@@ -89,9 +84,9 @@
               rounded-full
               hover:shadow-lg hover:bg-red-600
             "
-            @click="submitPayment"
+            @click="submit"
           >
-            Payment
+            <slot name="handle_name"></slot>
           </button>
         </div>
       </div>
@@ -125,10 +120,7 @@
             "
             icon="fa-solid fa-circle-check"
           />
-          <h2 class="text-xl font-bold py-4">Payment Successfull</h2>
-          <p class="text-sm text-gray-500 px-8">
-            The Ticket be booked done, thanks you!
-          </p>
+          <slot name="title_success"></slot>
         </div>
         <div class="p-3 mt-2 text-center space-x-4 md:block">
           <button
@@ -149,7 +141,7 @@
             "
             @click="redirect"
           >
-            Go back to Home Page
+            Done
           </button>
         </div>
       </div>
@@ -168,12 +160,12 @@ export default {
     close() {
       this.$emit('close:popup', false)
     },
-    submitPayment() {
+    submit() {
       this.show = false
       this.$emit('handle:payment')
     },
     redirect() {
-      window.location.assign('/')
+      window.location.reload(true)
     },
   },
 }

@@ -306,8 +306,26 @@
       v-show="showPopup"
       @close:popup="showPopup = false"
       @handle:payment="submitBooking"
-      >ABC</GetPayment
     >
+      <template #icon_noti>
+        <font-awesome-icon
+          class="w-16 h-16 flex items-center text-red-500 mx-auto"
+          icon="fa-solid fa-cart-arrow-down"
+        />
+      </template>
+      <template #title_noti
+        ><p>
+          Do you realy want to payment? This process cannot be undone
+        </p></template
+      >
+      <template #handle_name>Payment</template>
+      <template #title_success>
+        <h2 class="text-xl font-bold py-4">Payment Successfull</h2>
+        <p class="text-sm text-gray-500 px-8">
+          The Ticket be booked done, thanks you!
+        </p>
+      </template>
+    </GetPayment>
   </div>
 </template>
 
@@ -325,11 +343,18 @@ export default {
   layout: 'home',
   middleware: ['keepUserLogin', 'check-login', 'auth', 'setSeat'],
   async asyncData(context) {
-    const TicketRoom = await axios.get(
-      'https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/TicketRoom.json'
-    )
+    const tickets = []
+    await axios
+      .get(
+        'https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/TicketRoom.json'
+      )
+      .then((response) => {
+        for (const key in response.data) {
+          tickets.push({ ...response.data[key], id: key })
+        }
+      })
     return {
-      TicketRoom: TicketRoom.data,
+      TicketRoom: tickets,
     }
   },
   data() {
@@ -368,7 +393,7 @@ export default {
     movie() {
       const movies = this.$store.getters['movies/movies']
       const currentMovieBooking = movies.filter(
-        (movie) => movie.movie_id === parseInt(this.$route.query.movie_id)
+        (movie) => movie.id.toString() === this.$route.query.movie_id.toString()
       )
       return currentMovieBooking
     },
@@ -393,10 +418,20 @@ export default {
       this.$store.dispatch('movies/getAllMovies')
     },
     fetchCurrentTicketRoom() {
-      return this.TicketRoom.filter(
-        (ticket) =>
-          ticket.schedule_id === parseInt(this.$route.query.schedule_id)
-      )
+      if (Array.isArray(this.TicketRoom))
+        return this.TicketRoom.filter(
+          (ticket) =>
+            ticket.schedule_id.toString() ===
+            this.$route.query.schedule_id.toString()
+        )
+      else {
+        const tempTicketRoom = [...Object.values(this.TicketRoom)]
+        return tempTicketRoom.filter(
+          (ticket) =>
+            ticket.schedule_id.toString() ===
+            this.$route.query.schedule_id.toString()
+        )
+      }
     },
     costCombo() {
       return (
@@ -413,7 +448,7 @@ export default {
     },
     async submitBooking() {
       await this.$store.dispatch('seatCinema/bookedTicket', {
-        schedule_id: parseInt(this.$route.query.schedule_id),
+        schedule_id: this.currentTicketRoom[0].id,
         seatSelected: this.seatSelected,
       })
       const bill = {

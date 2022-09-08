@@ -11,17 +11,17 @@
           cinemaName
         }}</span>
       </li>
-      <li v-if="cinema">
+      <li v-if="cinema.show_time.length">
         <ul class="ml-[80px] flex">
           <nuxt-link
             v-for="(show_time, index) in cinema.show_time"
             :key="index"
             :to="{
               name: 'bookticket___vi',
-              query:{
-                movie_id: movieId,
-                schedule_id: show_time.schedule_id
-              }
+              query: {
+                movie_id: show_time.movie_id,
+                schedule_id: show_time.schedule_id,
+              },
             }"
             ><button
               class="
@@ -62,24 +62,23 @@ export default {
         return {
           show_time: [
             {
+              movie_id: 1,
               schedule_id: 1,
               time: '9:30',
             },
             {
+              movie_id: 1,
               schedule_id: 1,
               time: '9:30',
             },
             {
+              movie_id: 1,
               schedule_id: 1,
               time: '9:30',
             },
           ],
         }
       },
-    },
-    movieId:{
-      type: Number,
-      required: true
     },
     logoCinema: {
       type: String,

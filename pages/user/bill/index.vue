@@ -70,8 +70,16 @@ export default {
         this.tempBills.bills = bills.filter(
           (bill) => Object.keys(bill).length > 1
         )
-      } else
-        this.tempBills.bills = [...Object.values(this.billsOfUser[0].bills)]
+      } else {
+        console.log(this.tempBills.bills);
+        const bills = []
+        for(const key in this.tempBills.bills){
+          bills.push({...this.tempBills.bills[key], id: key})
+        }
+        this.tempBills.bills = bills.filter(
+          (bill) => Object.keys(bill).length > 1
+        )
+      }
     },
     async deleteBill(id) {
       const API = `https://nuxt-f6-2ndproject-default-rtdb.firebaseio.com/Bills/${this.tempBills.id}/bills/${id}.json`
@@ -84,9 +92,9 @@ export default {
         this.bills = this.$store.getters['bill/getBill']
       })
     },
-    deleteBIll(index) {
-      this.tempBills.splice(this.tempBills.length - 1 - index, 1)
-    },
+    // deleteBIll(index) {
+    //   this.tempBills.splice(this.tempBills.length - 1 - index, 1)
+    // },
   },
 }
 </script>
