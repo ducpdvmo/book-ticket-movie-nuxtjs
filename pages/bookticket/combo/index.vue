@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center border w-[60%] mx-auto">
-    <h2 class="font-bold text-2xl mb-5">BOOKING ONLINE</h2>
-    <h4 class="mb-5 text-xl">Bắp Nước</h4>
+    <h2 class="font-bold text-2xl mb-5">{{ $t('combo.titlePage') }}</h2>
+    <h4 class="mb-5 text-xl">{{ $t('combo.title') }}</h4>
     <div class="flex mx-auto flex-wrap border">
       <div class="w-[45%] px-10 flex">
         <img
@@ -10,13 +10,14 @@
           alt=""
         />
         <div class="ml-5 mb-5">
-          <p class="font-bold text-xl">SNOOPY SINGLE COMBO</p>
-          <p>
-            1 ly Snoopy 32Oz (kèm nước) + 1 bắp ngọt lớn <br />* Miễn phí đổi vị
-            bắp Phô mai, Caramel <br />**Nhận trong ngày xem phim <br />***Mẫu
-            ly phụ thuộc vào số lượng hàng tại rạp
+          <p class="font-bold text-xl">{{ $t('combo.combo1.title') }}</p>
+          <p>{{ $t('combo.combo1.description.1') }}</p>
+          <p>{{ $t('combo.combo1.description.2') }}</p>
+          <p>{{ $t('combo.combo1.description.3') }}</p>
+          <p>{{ $t('combo.combo1.description.4') }}</p>
+          <p class="font-bold text-lg">
+            {{ $t('combo.cost') }}: {{ combo.combo1.cost | formatMoney }} ₫
           </p>
-          <p class="font-bold text-lg">Giá: 239.000,00 ₫</p>
           <div class="flex">
             <button
               :disabled="combo.combo1.count <= 0"
@@ -44,13 +45,14 @@
           alt=""
         />
         <div class="ml-5 mb-5">
-          <p class="font-bold text-xl">SNOOPY DOUBLE COMBO</p>
-          <p>
-            2 ly Snoopy 32Oz (kèm nước) + 1 bắp ngọt lớn <br />* Miễn phí đổi vị
-            bắp Phô mai, Caramel <br />**Nhận trong ngày xem phim <br />***Mẫu
-            ly phụ thuộc vào số lượng hàng tại rạp
+          <p class="font-bold text-xl">{{ $t('combo.combo2.title') }}</p>
+          <p>{{ $t('combo.combo2.description.1') }}</p>
+          <p>{{ $t('combo.combo2.description.2') }}</p>
+          <p>{{ $t('combo.combo2.description.3') }}</p>
+          <p>{{ $t('combo.combo2.description.4') }}</p>
+          <p class="font-bold text-lg">
+            {{ $t('combo.cost') }}: {{ combo.combo2.cost | formatMoney }} ₫
           </p>
-          <p class="font-bold text-lg">Giá: 409.000,00 ₫</p>
           <div class="flex">
             <button
               :disabled="combo.combo2.count <= 0"
@@ -78,13 +80,14 @@
           alt=""
         />
         <div class="ml-5 mb-5">
-          <p class="font-bold text-xl">SNOOPY TRIPLE COMBO</p>
-          <p>
-            3 ly Snoopy 32Oz (kèm nước) + 1 bắp ngọt lớn <br />* Miễn phí đổi vị
-            bắp Phô mai, Caramel <br />**Nhận trong ngày xem phim <br />***Mẫu
-            ly phụ thuộc vào số lượng hàng tại rạp
+          <p class="font-bold text-xl">{{ $t('combo.combo3.title') }}</p>
+          <p>{{ $t('combo.combo3.description.1') }}</p>
+          <p>{{ $t('combo.combo3.description.2') }}</p>
+          <p>{{ $t('combo.combo3.description.3') }}</p>
+          <p>{{ $t('combo.combo3.description.4') }}</p>
+          <p class="font-bold text-lg">
+            {{ $t('combo.cost') }}: {{ combo.combo3.cost | formatMoney }} ₫
           </p>
-          <p class="font-bold text-lg">Giá: 599.000,00 ₫</p>
           <div class="flex">
             <button
               :disabled="combo.combo3.count <= 0"
@@ -112,13 +115,14 @@
           alt=""
         />
         <div class="ml-5 mb-5">
-          <p class="font-bold text-xl">SINGLE BT21 COMBO</p>
-          <p>
-            1 ly BT21 Back To School 32Oz + 1 nước siêu lớn <br />* Tặng ngay 01
-            phần bắp ngọt lớn từ 19-26.08 <br />**Nhận trong ngày xem phim
-            <br />***Mẫu ly phụ thuộc vào số lượng hàng tại rạp
+          <p class="font-bold text-xl">{{ $t('combo.combo4.title') }}</p>
+          <p>{{ $t('combo.combo4.description.1') }}</p>
+          <p>{{ $t('combo.combo4.description.2') }}</p>
+          <p>{{ $t('combo.combo4.description.3') }}</p>
+          <p>{{ $t('combo.combo4.description.4') }}</p>
+          <p class="font-bold text-lg">
+            {{ $t('combo.cost') }}: {{ combo.combo4.cost | formatMoney }} ₫
           </p>
-          <p class="font-bold text-lg">Giá: 299.000,00 ₫</p>
           <div class="flex">
             <button
               :disabled="combo.combo4.count <= 0"
@@ -146,13 +150,14 @@
           alt=""
         />
         <div class="ml-5 mb-5">
-          <p class="font-bold text-xl">BT21 BACK TO SCHOOL</p>
-          <p>
-            08 ly BT21 Back To School 32Oz <br />* Tặng ngay 01 phần bắp ngọt
-            lớn từ 19-26.08 <br />**Nhận trong ngày xem phim <br />***Mẫu ly phụ
-            thuộc vào số lượng hàng tại rạp
+          <p class="font-bold text-xl">{{ $t('combo.combo5.title') }}</p>
+          <p>{{ $t('combo.combo5.description.1') }}</p>
+          <p>{{ $t('combo.combo5.description.2') }}</p>
+          <p>{{ $t('combo.combo5.description.3') }}</p>
+          <p>{{ $t('combo.combo5.description.4') }}</p>
+          <p class="font-bold text-lg">
+            {{ $t('combo.cost') }}: {{ combo.combo5.cost | formatMoney }} ₫
           </p>
-          <p class="font-bold text-lg">Giá: 2.099.000,00 ₫</p>
           <div class="flex">
             <button
               :disabled="combo.combo5.count <= 0"
@@ -180,13 +185,14 @@
           alt=""
         />
         <div class="ml-5 mb-5">
-          <p class="font-bold text-xl">MY COMBO</p>
-          <p>
-            1 bắp lớn + 1 nước siêu lớn. Nhận trong ngày xem phim <br />* Tặng
-            ngay 01 phần bắp ngọt lớn từ 19-26.08 <br />**Nhận trong ngày xem
-            phim <br />***Mẫu ly phụ thuộc vào số lượng hàng tại rạp
+          <p class="font-bold text-xl">{{ $t('combo.combo6.title') }}</p>
+          <p>{{ $t('combo.combo6.description.1') }}</p>
+          <p>{{ $t('combo.combo6.description.2') }}</p>
+          <p>{{ $t('combo.combo6.description.3') }}</p>
+          <p>{{ $t('combo.combo6.description.4') }}</p>
+          <p class="font-bold text-lg">
+            {{ $t('combo.cost') }}: {{ combo.combo6.cost | formatMoney }} ₫
           </p>
-          <p class="font-bold text-lg">Giá: 83.000,00 ₫</p>
           <div class="flex">
             <button
               :disabled="combo.combo6.count <= 0"
@@ -229,7 +235,7 @@
           class="font-bold text-3xl absolute left-2 top-[35%]"
           icon="fa-solid fa-angle-left"
         />
-        PREV
+        {{$t('combo.prev')}}
       </button>
       <div class="flex text-white">
         <div
@@ -255,25 +261,25 @@
           "
         >
           <div class="flex mb-5 justify-between w-4/5">
-            <p>Rạp:</p>
+            <p>{{$t('combo.cinema')}}:</p>
             <p>{{ currentTicketRoom[0].cine_name }}</p>
           </div>
           <div class="flex justify-between w-4/5">
-            <p>Suất chiếu:</p>
+            <p>{{$t('combo.showtime')}}:</p>
             <p>{{ currentTicketRoom[0].show_time }}</p>
           </div>
         </div>
         <div class="w-[30%] flex flex-col justify-center items-center">
           <div class="flex justify-between w-4/5">
-            <p>Tổng giá vé:</p>
+            <p>{{$t('combo.totalCostTicket')}}:</p>
             <p>{{ costSeat | formatMoney }}</p>
           </div>
           <div class="flex justify-between w-4/5">
-            <p>Combo:</p>
+            <p>{{$t('combo.combo')}}:</p>
             <p>{{ costCombo() | formatMoney }}</p>
           </div>
           <div class="flex justify-between w-4/5">
-            <p>Tổng:</p>
+            <p>{{$t('combo.total')}}:</p>
             <p>{{ totalCost() | formatMoney }}</p>
           </div>
         </div>
@@ -295,7 +301,7 @@
         "
         @click="showPopup = true"
       >
-        NEXT
+        {{$t('combo.next')}}
         <font-awesome-icon
           class="font-bold text-3xl absolute right-2 top-[35%]"
           icon="fa-solid fa-angle-right"
@@ -315,14 +321,14 @@
       </template>
       <template #title_noti
         ><p>
-          Do you realy want to payment? This process cannot be undone
+          {{$t('bookTicket.contentPayment')}}
         </p></template
       >
-      <template #handle_name>Payment</template>
+      <template #handle_name>{{$t('bookTicket.payment')}}</template>
       <template #title_success>
-        <h2 class="text-xl font-bold py-4">Payment Successfull</h2>
+        <h2 class="text-xl font-bold py-4">{{$t('bookTicket.paymentSuccess')}}</h2>
         <p class="text-sm text-gray-500 px-8">
-          The Ticket be booked done, thanks you!
+          {{$t('bookTicket.thanks')}}
         </p>
       </template>
     </GetPayment>

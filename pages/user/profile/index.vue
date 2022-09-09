@@ -1,19 +1,19 @@
 <template>
   <div class="w-[75%] flex flex-col rounded-3xl">
     <div class="font-bold">
-      <nuxt-link class="text-lg" to="/">Home</nuxt-link>
-      <nuxt-link class="text-lg" to="/user/profile"
+      <nuxt-link class="text-lg" :to="{name: `index___${$i18n.locale}`}">{{$t('homeLayout.home')}}</nuxt-link>
+      <nuxt-link class="text-lg" :to="{name: `user-profile___${$i18n.locale}`}"
         ><font-awesome-icon class="text-sm" icon="fa-solid fa-chevron-right" />
-        User</nuxt-link
+        {{$t('profile.user')}}</nuxt-link
       >
-      <nuxt-link class="text-lg" to="/user/profile"
+      <nuxt-link class="text-lg" :to="{name: `user-profile___${$i18n.locale}`}"
         ><font-awesome-icon class="text-sm" icon="fa-solid fa-chevron-right" />
-        Profile</nuxt-link
+        {{$t('profile.profile')}}</nuxt-link
       >
     </div>
     <div class="mt-5 bg-white rounded-3xl p-5">
       <div class="flex items-center p-5 border-b border-gray-200">
-        <h2 class="font-medium text-base mr-auto">Display Information</h2>
+        <h2 class="font-medium text-base mr-auto">{{$t('profile.displayInfor')}}</h2>
       </div>
       <div class="flex p-5">
         <div
@@ -86,7 +86,7 @@
                 w-full
               "
             >
-              Change Avatar
+              {{$t('profile.changeAvt')}}
             </button>
             <input
               ref="file"
@@ -125,7 +125,7 @@
             />
           </div>
           <div class="mt-2">
-            <label>Display Name</label>
+            <label>{{$t('profile.displayName')}}</label>
             <input
               disabled
               class="
@@ -145,7 +145,7 @@
           </div>
           <div class="mt-2 flex w-full justify-between">
             <div class="flex flex-col w-[47%]">
-              <label>Age</label>
+              <label>{{$t('profile.age')}}</label>
               <input
                 disabled
                 class="
@@ -163,7 +163,7 @@
               />
             </div>
             <div class="flex flex-col w-[47%]">
-              <label>Sex</label>
+              <label>{{$t('profile.sex')}}</label>
               <input
                 disabled
                 class="
@@ -177,12 +177,12 @@
                   mt-2
                 "
                 type="text"
-                :value="currentUser.sex ? currentUser.sex : 'N/A'"
+                :value="currentUser.sex ? $t('profile.'+ currentUser.sex) : 'N/A'"
               />
             </div>
           </div>
           <div class="mt-2">
-            <label>Address</label>
+            <label>{{$t('profile.address')}}</label>
             <input
               disabled
               class="
@@ -205,13 +205,13 @@
     </div>
     <div class="mt-5 bg-white rounded-3xl p-5">
       <div class="flex items-center p-5 border-b border-gray-200">
-        <h2 class="font-medium text-base mr-auto">Personal Information</h2>
+        <h2 class="font-medium text-base mr-auto">{{$t('profile.personalInfor')}}</h2>
       </div>
       <div class="p-5">
         <div class="grid grid-cols-12 gap-5">
           <div class="col-span-12 xl:col-span-6">
             <div>
-              <label>Name</label>
+              <label>{{$t('profile.name')}}</label>
               <input
                 v-model="user.userName"
                 class="
@@ -231,7 +231,7 @@
               />
             </div>
             <div class="mt-3">
-              <label>Address</label>
+              <label>{{$t('profile.address')}}</label>
               <input
                 v-model="user.address"
                 class="
@@ -251,7 +251,7 @@
           </div>
           <div class="col-span-12 xl:col-span-6">
             <div>
-              <label>Phone Number</label>
+              <label>{{$t('profile.phoneNumber')}}</label>
               <input
                 v-model="user.phoneNumber"
                 class="
@@ -273,7 +273,7 @@
             <div class="mt-3">
               <div class="flex justify-between">
                 <div class="flex flex-col w-[47%]">
-                  <label>Age</label>
+                  <label>{{$t('profile.age')}}</label>
                   <input
                     v-model="user.age"
                     class="border bg-gray-100 py-2 px-3 rounded-md mt-2"
@@ -282,12 +282,12 @@
                   />
                 </div>
                 <div class="w-[47%]">
-                  <label>Sex</label>
+                  <label>{{$t('profile.sex')}}</label>
                   <div class="border bg-gray-100 py-2 px-3 rounded-md mt-2">
                     <select v-model="user.sex" class="w-full">
-                      <option>Male</option>
-                      <option>Female</option>
-                      <option>Other</option>
+                      <option>{{$t('profile.Male')}}</option>
+                      <option>{{$t('profile.Female')}}</option>
+                      <option>{{$t('profile.other')}}</option>
                     </select>
                   </div>
                 </div>
@@ -301,7 +301,7 @@
               class="w-4 h-4 mr-1"
               icon="fa-solid fa-trash-can"
             />
-            Delete Account
+            {{$t('profile.deleteAcc')}}
           </button>
           <button
             class="
@@ -317,7 +317,7 @@
             "
             @click="saveProfile"
           >
-            Save
+            {{$t('profile.save')}}
           </button>
         </div>
       </div>

@@ -30,7 +30,7 @@
         @click="$emit('handle:deleteBill')"
       >
         <font-awesome-icon class="mr-1" icon="fa-solid fa-trash" />
-        Xóa</button
+        {{$t('bills.delete')}}</button
       ><button
         class="
           font-medium
@@ -42,8 +42,7 @@
           ml-2
         "
       >
-        <font-awesome-icon icon="fa-solid fa-eye" />
-        View
+        <font-awesome-icon icon="fa-solid fa-eye" />{{$t('bills.view')}}
       </button>
     </td>
   </tr>

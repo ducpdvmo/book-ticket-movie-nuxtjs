@@ -18,7 +18,7 @@
         "
         @click="resetSelected"
       >
-        CHỌN LẠI
+        {{$t('bookTicket.reSelect')}}
       </button>
     </SeatCinema>
     <BillInformation
@@ -66,7 +66,7 @@
           @click="showPopup = true"
         >
           <font-awesome-icon class="mr-2" icon="fa-solid fa-credit-card" />
-          Đặt Vé Ngay
+          {{$t('bookTicket.bookingNow')}}
         </button>
       </div>
     </BillInformation>
@@ -83,14 +83,14 @@
       </template>
       <template #title_noti
         ><p>
-          Do you realy want to payment? This process cannot be undone
+         {{$t('bookTicket.contentPayment')}}
         </p></template
       >
-      <template #handle_name>Payment</template>
+      <template #handle_name>{{$t('bookTicket.payment')}}</template>
       <template #title_success>
-        <h2 class="text-xl font-bold py-4">Payment Successfull</h2>
+        <h2 class="text-xl font-bold py-4">{{$t('bookTicket.paymentSuccess')}}</h2>
         <p class="text-sm text-gray-500 px-8">
-          The Ticket be booked done, thanks you!
+          {{$t('bookTicket.thanks')}}
         </p>
       </template>
     </GetPayment>
@@ -109,9 +109,11 @@ export default {
   name: 'BookTicket',
   components: { SeatCinema, BillInformation },
   provide() {
+    this.currentTicketRoom = this.fetchCurrentTicketRoom()
     return {
       movie: computed(() => this.movie),
       seatSelectedComputed: computed(() => this.seatSelected),
+      ticketRoom: this.currentTicketRoom
     }
   },
   layout: 'home',
@@ -316,7 +318,7 @@ export default {
       this.$store.commit('seatCinema/setSeatSelected', this.seatSelected)
       this.$store.commit('seatCinema/setTotalCost', this.totalCostDiscount)
       this.$router.push({
-        name: 'bookticket-combo___vi',
+        name: `bookticket-combo___${this.$i18n.locale}`,
         query: {
           movie_id: this.$route.query.movie_id,
           schedule_id: this.$route.query.schedule_id,

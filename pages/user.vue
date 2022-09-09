@@ -19,17 +19,17 @@
         <p class="text-2xl font-bold mt-5 min-w-[200px] text-center">{{user.userName ? user.userName : user.email}}</p>
       </div>
       <div class="mt-5">
-        <p class="text-base">Account Detail</p>
+        <p class="text-base">{{$t('profile.accountDetail')}}</p>
         <div class="flex flex-col mt-3 text-lg">
-          <nuxt-link class="font-bold" to="/user/profile">Profile</nuxt-link>
-          <nuxt-link class="font-bold" to="/user/bill">Bills</nuxt-link>
+          <nuxt-link class="font-bold" :to="{name:`user-profile___${$i18n.locale}`}">{{$t('profile.profile')}}</nuxt-link>
+          <nuxt-link class="font-bold" :to="{name:`user-bill___${$i18n.locale}`}">{{$t('profile.bills')}}</nuxt-link>
         </div>
       </div>
       <div class="flex flex-col justify-center items-start">
-        <p class="mt-20 text-base">Other</p>
+        <p class="mt-20 text-base">{{$t('profile.other')}}</p>
         <div class="flex flex-col justify-center items-start">
-          <button class="font-bold text-lg">Change password</button>
-          <button class="font-bold text-lg">Logout</button>
+          <button class="font-bold text-lg">{{$t('profile.changePass')}}</button>
+          <button class="font-bold text-lg">{{$t('profile.logout')}}</button>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
 <script>
 export default {
   layout: 'default',
-  middleware: ['keepUserLogin', 'check-login'],
+  middleware: ['keepUserLogin', 'check-login', 'auth'],
   computed: {
     user() {
       return this.$store.getters['user/getUser']

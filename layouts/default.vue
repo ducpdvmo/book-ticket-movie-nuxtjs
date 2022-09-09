@@ -23,20 +23,30 @@
           />
         </h1>
         <div class="font-normal text-2xl menu-top">
-          <nuxt-link class="mx-8" to="/">{{ $t('homeLayout.home') }}</nuxt-link>
-          <nuxt-link class="mx-8" to="/movies">{{
+          <nuxt-link class="mx-8" :to="{ name: `index___${$i18n.locale}` }">{{
+            $t('homeLayout.home')
+          }}</nuxt-link>
+          <nuxt-link class="mx-8" :to="{ name: `movies___${$i18n.locale}` }">{{
             $t('homeLayout.movies')
           }}</nuxt-link>
-          <nuxt-link class="mx-8" to="/showtime">{{
+          <nuxt-link class="mx-8" :to="{ name: `index___${$i18n.locale}` }">{{
             $t('homeLayout.showTime')
           }}</nuxt-link>
-          <nuxt-link class="mx-8" to="/buyticket">{{
+          <nuxt-link class="mx-8" :to="{ name: `index___${$i18n.locale}` }">{{
             $t('homeLayout.bookTicket')
           }}</nuxt-link>
         </div>
+        <div>
+          <nuxt-link
+            v-for="locale in availableLocales"
+            :key="locale.code"
+            :to="switchLocalePath(locale.code)"
+            >{{ locale.name }}</nuxt-link
+          >
+        </div>
         <div v-if="!user || !isLogin" class="mr-16 font-normal text-2xl">
           <nuxt-link
-            to="/auth/login"
+            :to="{ name: `auth-login___${$i18n.locale}` }"
             class="
               mx-5
               px-4
@@ -49,7 +59,7 @@
             >{{ $t('homeLayout.login') }}</nuxt-link
           >
           <nuxt-link
-            to="/auth/register"
+            :to="{ name: `auth-register___${$i18n.locale}` }"
             class="
               mx-5
               px-4
@@ -100,10 +110,22 @@
               "
             >
               <div class="p-5 text-xl font-light flex flex-col">
-                <nuxt-link to="/user/profile" class="drop-menu w-full">Profile</nuxt-link>
-                <p class="drop-menu w-full">Vé đã mua</p>
-                <p class="drop-menu w-full">Phim đã xem</p>
-                <p class="drop-menu w-full" @click="logout()">Logout</p>
+                <nuxt-link
+                  :to="{ name: `user-profile___${$i18n.locale}` }"
+                  class="drop-menu w-full"
+                  >{{ $t('profile.profile') }}</nuxt-link
+                >
+                <nuxt-link
+                  :to="{ name: `user-bill___${$i18n.locale}` }"
+                  class="drop-menu w-full"
+                  >{{ $t('profile.bills') }}</nuxt-link
+                >
+                <p class="drop-menu w-full">
+                  {{ $t('homeLayout.movieWatch') }}
+                </p>
+                <p class="drop-menu w-full" @click="logout()">
+                  {{ $t('profile.logout') }}
+                </p>
               </div>
             </div>
           </transition>
@@ -118,9 +140,7 @@
       class="fixed top-0 left-0 z-0 w-screen bg-[#00000077]"
     ></div>
     <nuxt />
-    <footer
-      class="px-4 divide-y bg-gray-800 text-white  top-[100%] w-full"
-    >
+    <footer class="px-4 divide-y bg-gray-800 text-white top-[100%] w-full">
       <div
         class="
           container
@@ -269,6 +289,9 @@ export default {
     isLogin() {
       return this.$store.getters['auth/isLogged']
     },
+    availableLocales() {
+      return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
+    },
   },
   mounted() {},
   created() {},
@@ -334,4 +357,5 @@ export default {
   overflow: hidden;
   min-height: 100vh;
   max-height: 100vh;
-}</style>
+}
+</style>

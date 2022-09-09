@@ -19,7 +19,7 @@
           class="w-4 h-4 mr-2"
           icon="fa-solid fa-square-check"
         />
-        Now Showing
+        {{$t('createSchedule.showing')}}
       </div>
     </td>
     <td class="w-56">
@@ -42,7 +42,7 @@
           "
         >
           <font-awesome-icon icon="fa-solid fa-pen-to-square" />
-          Edit
+         {{$t('createSchedule.edit')}}
         </button>
         <button
           class="
@@ -57,7 +57,7 @@
           @click="$emit('handle:deleteBill')"
         >
           <font-awesome-icon class="mr-1" icon="fa-solid fa-trash" />
-          Xóa
+          {{$t('createSchedule.delete')}}
         </button>
       </div>
     </td>

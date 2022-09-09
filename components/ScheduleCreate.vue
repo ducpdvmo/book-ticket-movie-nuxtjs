@@ -5,7 +5,7 @@
         <label
           for="daySchedule"
           class="block mb-2 text-sm font-medium text-gray-900"
-          >Day Schedule</label
+          >{{$t('formAddNewMovie.daySchedule')}}</label
         >
         <select
           id="daySchedule"
@@ -35,7 +35,7 @@
       </div>
       <div class="col-span-6 sm:col-span-3">
         <label for="cinema" class="block mb-2 text-sm font-medium text-gray-900"
-          >Cinema</label
+          >{{$t('formAddNewMovie.cinema')}}</label
         >
         <select
           id="cinema"
@@ -132,7 +132,7 @@
           class="py-1 px-2 hover:bg-gray-200 rounded-md"
           @click="showMore = true"
         >
-          More
+          {{$t('formAddNewMovie.more')}}
           <font-awesome-icon icon="fa-solid fa-angles-right" />
         </button>
       </div>
@@ -142,7 +142,7 @@
         <label
           for="voucher"
           class="block mb-2 text-sm font-medium text-gray-900"
-          >Voucher</label
+          >{{$t('formAddNewMovie.voucher')}}</label
         >
         <div class="flex justify-between">
           <input
@@ -189,7 +189,7 @@
             class="rotate-180"
             icon="fa-solid fa-angles-right"
           />
-          Less
+          {{$t('formAddNewMovie.less')}}
         </button>
       </div>
     </div>

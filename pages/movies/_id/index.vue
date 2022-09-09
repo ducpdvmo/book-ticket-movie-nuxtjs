@@ -37,8 +37,7 @@
                 mb-[15px]
               "
             >
-              <font-awesome-icon class="mr-3" icon="fa-solid fa-play" /> Watch
-              Trailer
+              <font-awesome-icon class="mr-3" icon="fa-solid fa-play" /> {{$t('movieDetail.watchTrailer')}}
             </button>
             <button
               class="
@@ -60,7 +59,7 @@
               <font-awesome-icon
                 class="mr-3"
                 icon="fa-solid fa-credit-card"
-              />Buy ticket
+              />{{$t('movieDetail.buyTicket')}}
             </button>
           </div>
         </div>
@@ -94,7 +93,7 @@
                   border border-dashed border-white
                 "
               />
-              Add to Favorite</a
+              {{$t('movieDetail.addToFavorite')}}</a
             >
             <div class="flex items-center justify-center focus-share">
               <a
@@ -119,7 +118,7 @@
                     border border-dashed border-red-500
                     mr-2
                   "
-                />share</a
+                />{{$t('movieDetail.share')}}</a
               >
               <div
                 class="
@@ -167,11 +166,11 @@
                   movie.rating
                 }}</span>
                 /10 <br />
-                <span>0 Reviews</span>
+                <span>0 {{$t('movieDetail.review')}}</span>
               </div>
             </div>
             <div class="flex ml-[30px] items-center">
-              <p class="pr-2 text-2xl font-normal">Rate This Movie:</p>
+              <p class="pr-2 text-2xl font-normal">{{$t('movieDetail.rateMovie')}}</p>
               <star-rating
                 :max-rating="10"
                 :rating="movie.rating"
@@ -208,7 +207,7 @@
                         "
                       >
                         <h4 class="text-base text-white font-bold uppercase">
-                          Media
+                          {{$t('movieDetail.media')}}
                         </h4>
                         <a class="text-[#4280bf] text-sm cursor-pointer"
                           >All 5 Videos & 245 Photos
@@ -229,7 +228,7 @@
                         "
                       >
                         <h4 class="text-base text-white font-bold uppercase">
-                          cast
+                          {{$t('movieDetail.cast')}}
                         </h4>
                         <a class="text-[#4280bf] text-sm cursor-pointer"
                           >Full Cast & Crew
@@ -244,7 +243,7 @@
                         <h6
                           class="text-base font-bold mb-[10px] text-[#abb7c4]"
                         >
-                          Director:
+                          {{$t('movieDetail.director')}}:
                         </h6>
                         <p>
                           <a>{{ movie.director }}</a>
@@ -254,7 +253,7 @@
                         <h6
                           class="text-base font-bold mb-[10px] text-[#abb7c4]"
                         >
-                          Producer:
+                          {{$t('movieDetail.producer')}}:
                         </h6>
                         <p>
                           <a>{{ movie.producer }}</a>
@@ -264,14 +263,14 @@
                         <h6
                           class="text-base font-bold mb-[10px] text-[#abb7c4]"
                         >
-                          Genres:
+                          {{$t('movieDetail.genres')}}:
                         </h6>
                         <p>
                           <a
                             v-for="(tag, index) in movie.tags"
                             :key="index"
                             style="cursor: pointer"
-                            >{{ tag }}
+                            >{{ $t('home.types.' + tag)  }}
                           </a>
                         </p>
                       </div>
@@ -279,7 +278,7 @@
                         <h6
                           class="text-base font-bold mb-[10px] text-[#abb7c4]"
                         >
-                          Release Date:
+                          {{$t('movieDetail.releaseDate')}}:
                         </h6>
                         <p>May 1, 2015 (U.S.A)</p>
                       </div>
@@ -287,7 +286,7 @@
                         <h6
                           class="text-base font-bold mb-[10px] text-[#abb7c4]"
                         >
-                          Run Time:
+                          {{$t('movieDetail.runTime')}}:
                         </h6>
                         <p>141 min</p>
                       </div>
@@ -295,7 +294,7 @@
                         <h6
                           class="text-base font-bold mb-[10px] text-[#abb7c4]"
                         >
-                          MMPA Rating:
+                          {{$t('movieDetail.MMPARating')}}:
                         </h6>
                         <p>PG-13</p>
                       </div>
@@ -303,7 +302,7 @@
                         <h6
                           class="text-base font-bold mb-[10px] text-[#abb7c4]"
                         >
-                          Plot Keywords:
+                          {{$t('movieDetail.plotKey')}}:
                         </h6>
                         <p class="">
                           <span
@@ -314,7 +313,7 @@
                               p-2
                               leading-10
                             "
-                            ><a>superhero</a></span
+                            ><a>{{$t('movieDetail.superhero')}}</a></span
                           >
                           <span
                             class="
@@ -324,7 +323,7 @@
                               p-2
                               leading-10
                             "
-                            ><a>marvel universe</a></span
+                            ><a>{{$t('movieDetail.comic')}}</a></span
                           >
                           <span
                             class="
@@ -334,7 +333,7 @@
                               p-2
                               leading-10
                             "
-                            ><a>comic</a></span
+                            ><a>{{$t('movieDetail.blockbuster')}}</a></span
                           >
                           <span
                             class="
@@ -344,17 +343,7 @@
                               p-2
                               leading-10
                             "
-                            ><a>blockbuster</a></span
-                          >
-                          <span
-                            class="
-                              text-xs
-                              bg-gray-400
-                              rounded-md
-                              p-2
-                              leading-10
-                            "
-                            ><a>final battle</a></span
+                            ><a>{{$t('movieDetail.finalBattle')}}</a></span
                           >
                         </p>
                       </div>
@@ -374,7 +363,7 @@
                   <div class="">
                     <div class="flex justify-between items-center mb-10">
                       <div class="">
-                        <h3 class="text-xl">Review Movie</h3>
+                        <h3 class="text-xl">{{$t('movieDetail.review')}}</h3>
                         <h2 class="text-2xl text-[#6497d9]">
                           {{ movie.name }}
                         </h2>
@@ -395,19 +384,19 @@
                           mt-5
                         "
                       >
-                        Write Review
+                        {{$t('movieDetail.writeReview')}}
                       </button>
                     </div>
                     <div
                       class="container-movie flex items-center justify-between"
                     >
                       <p>
-                        Found
-                        <span class="text-[#4280bf] text-base">3 reviews</span>
-                        in total
+                        {{$t('movieDetail.found')}}
+                        <span class="text-[#4280bf] text-base">3 {{$t('movieDetail.review')}}</span>
+                        {{$t('movieDetail.inTotal')}}
                       </p>
                       <div class="relative">
-                        <label for="filter-review">Filter by:</label>
+                        <label for="filter-review">{{$t('movieDetail.filterBy')}}:</label>
                         <select
                           id="filter-review"
                           v-click-outside="closePopupOptions"
@@ -428,15 +417,15 @@
                           @click="showOptions = !showOptions"
                         >
                           <option value="popularity">
-                            Popularity Descending
+                            {{$t('movieDetail.popularDes')}}
                           </option>
                           <option value="popularity">
-                            Popularity Ascending
+                            {{$t('movieDetail.popularInc')}}
                           </option>
-                          <option value="rating">Rating Descending</option>
-                          <option value="rating">Rating Ascending</option>
-                          <option value="date">Release date Descending</option>
-                          <option value="date">Release date Ascending</option>
+                          <option value="rating">{{$t('movieDetail.ratingDes')}}</option>
+                          <option value="rating">{{$t('movieDetail.ratingAsc')}}</option>
+                          <option value="date">{{$t('movieDetail.releaseDes')}}</option>
+                          <option value="date">{{$t('movieDetail.releaseAsc')}}</option>
                         </select>
                         <div
                           :class="{

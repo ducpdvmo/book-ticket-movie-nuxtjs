@@ -21,7 +21,7 @@
       <tab
         v-for="(schedule, index) in schedules"
         :key="index"
-        :name="schedule.date_show"
+        :name="$t(`movieDetail.${schedule.date_show}`)"
         ><show-time :cinemas="schedule.cinemas"></show-time
       ></tab>
     </tabs>
@@ -44,7 +44,7 @@
       "
       @click="$emit('closeSchedule')"
     >
-      close
+      {{$t('movieDetail.close')}}
     </button>
   </div>
 </template>

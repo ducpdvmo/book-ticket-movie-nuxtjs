@@ -1,7 +1,7 @@
 <template>
   <div class="mt-10">
     <label class="title"
-      >Vị Trí Đã Chọn: {{ seatSelectedComputed.length }}</label
+      >{{$t('bookTicket.seatSelected')}}: {{ seatSelectedComputed.length }}</label
     >
     <div
       class="
@@ -18,7 +18,7 @@
         v-if="seatSelectedComputed.length == 0"
         class="text-lg font-bold text-center mt-8 text-red-600 mx-auto"
       >
-        Chưa chọn ghế!
+        {{$t('bookTicket.noSelectSeat')}}!
       </p>
       <button
         v-for="(seat, index) in seatSelectedComputed"
@@ -47,12 +47,12 @@
     </div>
     <div class="">
       <div class="flex justify-between items-center my-5">
-        <p class="w-1/3 pl-5 font-bold text-lg">Loại vé</p>
-        <p class="w-1/3 text-center font-bold text-lg">Số lượng</p>
-        <p class="w-1/3 text-center font-bold text-lg">Thành tiền</p>
+        <p class="w-1/3 pl-5 font-bold text-lg">{{$t('bookTicket.typeTicket')}}</p>
+        <p class="w-1/3 text-center font-bold text-lg">{{$t('bookTicket.quatity')}}</p>
+        <p class="w-1/3 text-center font-bold text-lg">{{$t('bookTicket.totalCost')}}</p>
       </div>
       <div v-if="seatNormal" class="flex justify-between items-center mb-4">
-        <p class="w-1/3 pl-5">Ghế thường</p>
+        <p class="w-1/3 pl-5">{{$t('bookTicket.normalSeat')}}</p>
         <input
           :value="seatNormal"
           disabled
@@ -64,12 +64,12 @@
         </p>
       </div>
       <div v-if="seatVip" class="flex justify-between items-center mb-4">
-        <p class="w-1/3 pl-5">Ghế víp</p>
+        <p class="w-1/3 pl-5">{{$t('bookTicket.vipSeat')}}</p>
         <input :value="seatVip" disabled class="w-10 text-center" type="text" />
         <p class="w-1/3 text-center">{{ (seatVip * 105000) | formatMoney }}</p>
       </div>
       <div v-if="seatCouple" class="flex justify-between items-center">
-        <p class="w-1/3 pl-5">Ghế đôi</p>
+        <p class="w-1/3 pl-5">{{$t('bookTicket.coupleSeat')}}</p>
         <input
           :value="seatCouple"
           disabled

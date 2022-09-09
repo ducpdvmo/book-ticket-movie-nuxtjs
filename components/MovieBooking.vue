@@ -7,17 +7,17 @@
         :to="{
           name: 'index___vi',
         }"
-        >Movie: {{ movie[0].name }}</router-link
+        >{{$t('bookTicket.movie')}}: {{ movie[0].name }}</router-link
       >
-      <p class="">Rạp CGV Hà Đông</p>
-      <p>Suất: 9:30</p>
+      <p class="">{{$t('bookTicket.cinema')}} {{$t(`bookTicket.${ticketRoom[0].cine_name}`)}}</p>
+      <p>{{$t('bookTicket.showTime')}}: {{ticketRoom[0].show_time}}</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  inject: ['movie'],
+  inject: ['movie','ticketRoom'],
   data() {
     return {
       movie: this.movie,

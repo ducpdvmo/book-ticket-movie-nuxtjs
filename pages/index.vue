@@ -66,34 +66,98 @@
           /></a>
         </div>
       </div>
-      <VueSlickCarousel
-        ref="slick"
-        v-bind="slickOptions"
-        class="flex justify-center items-center mt-5"
-      >
-        <movie
-          v-for="movie in movies"
-          :key="movie.movie_id"
-          class="mx-5"
-          :movie="movie"
-        ></movie>
-        <template #prevArrow>
-          <div class="custom-arrow">
-            <font-awesome-icon
-              class="absolute top-[-16px] right-[-10px] w-8 h-8 text-yellow-500"
-              icon="fa-solid fa-circle-chevron-left"
-            />
-          </div>
-        </template>
-        <template #nextArrow>
-          <div class="custom-arrow relative">
-            <font-awesome-icon
-              class="absolute top-[-16px] left-[-10px] w-8 h-8 text-yellow-500"
-              icon="fa-solid fa-circle-chevron-right"
-            />
-          </div>
-        </template>
-      </VueSlickCarousel>
+      <div>
+        <div>
+          <p class="px-[20px] text-2xl font-bold">{{$t('home.movieShow')}}</p>
+          <VueSlickCarousel
+            ref="slick"
+            v-bind="slickOptions"
+            class="flex justify-center items-center mt-5"
+          >
+            <movie
+              v-for="movie in movies"
+              :key="movie.movie_id"
+              class="mx-5"
+              :movie="movie"
+            ></movie>
+            <template #prevArrow>
+              <div class="custom-arrow">
+                <font-awesome-icon
+                  class="
+                    absolute
+                    top-[-16px]
+                    right-[-10px]
+                    w-8
+                    h-8
+                    text-yellow-500
+                  "
+                  icon="fa-solid fa-circle-chevron-left"
+                />
+              </div>
+            </template>
+            <template #nextArrow>
+              <div class="custom-arrow relative">
+                <font-awesome-icon
+                  class="
+                    absolute
+                    top-[-16px]
+                    left-[-10px]
+                    w-8
+                    h-8
+                    text-yellow-500
+                  "
+                  icon="fa-solid fa-circle-chevron-right"
+                />
+              </div>
+            </template>
+          </VueSlickCarousel>
+        </div>
+        <div>
+          <p class="px-[20px] text-2xl font-bold">{{$t('home.comingsoon')}}</p>
+          <VueSlickCarousel
+            ref="slick"
+            v-bind="slickOptions"
+            class="flex justify-center items-center mt-5"
+          >
+            <movie
+              v-for="movie in movies"
+              :key="movie.movie_id"
+              class="mx-5"
+              :movie="movie"
+            ></movie>
+            <template #prevArrow>
+              <div class="custom-arrow">
+                <font-awesome-icon
+                  class="
+                    absolute
+                    top-[-16px]
+                    right-[-10px]
+                    w-8
+                    h-8
+                    text-yellow-500
+                  "
+                  icon="fa-solid fa-circle-chevron-left"
+                />
+              </div>
+            </template>
+            <template #nextArrow>
+              <div class="custom-arrow relative">
+                <font-awesome-icon
+                  class="
+                    absolute
+                    top-[-16px]
+                    left-[-10px]
+                    w-8
+                    h-8
+                    text-yellow-500
+                  "
+                  icon="fa-solid fa-circle-chevron-right"
+                />
+              </div>
+            </template>
+          </VueSlickCarousel>
+        </div>
+      </div>
     </div>
     <div
       v-else
@@ -126,7 +190,7 @@
           Try Again
         </button>
         <nuxt-link
-          to="/auth/login"
+          :to="{ name: `auth-login___${$i18n.locale}` }"
           class="
             my-5
             focus:outline-none

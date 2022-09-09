@@ -92,7 +92,7 @@
         <p class="text-sm font-semibold pt-1 mb-0 mt-2">
           Don't have an account?
           <nuxt-link
-            to="/auth/register"
+            :to="{name:`auth-register___${$i18n.locale}`}"
             class="
               text-red-600
               hover:text-red-700

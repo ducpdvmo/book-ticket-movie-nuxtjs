@@ -31,15 +31,15 @@
     <div class="flex mt-12 justify-center text-center items-center">
       <div class="mr-5 text-[#eae1e1] flex justify-center items-center">
         <button class="w-5 h-5 rounded-md mr-1 bg-[#3834347c]"></button>
-        <span>Chưa Đặt</span>
+        <span>{{$t('bookTicket.nonOrder')}}</span>
       </div>
       <div class="mr-5 text-[#eae1e1] flex justify-center items-center">
         <button class="w-5 h-5 rounded-md mr-1 bg-[#b01010e6]"></button>
-        <span>Đã Đặt</span>
+        <span>{{$t('bookTicket.booked')}}</span>
       </div>
       <div class="mr-5 text-[#eae1e1] flex justify-center items-center">
         <button class="w-5 h-5 rounded-md mr-1 bg-[#85c325e6]"></button>
-        <span>Đang Chọn</span>
+        <span>{{$t('bookTicket.selecting')}}</span>
       </div>
     </div>
     <slot></slot>

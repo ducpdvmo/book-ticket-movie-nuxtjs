@@ -7,7 +7,7 @@
           <label
             for="promo"
             class="font-semibold inline-block mb-3 text-sm uppercase"
-            >Promo Code</label
+            >{{$t('bookTicket.promoCode')}}</label
           >
           <input
             id="promo"
@@ -20,7 +20,7 @@
           />
         </div>
         <p class="mt-3 text-2xl font-bold text-red-600">
-          Tổng:
+          {{$t('bookTicket.total')}}:
           {{ totalCost | formatMoney }}
           VNĐ
         </p>

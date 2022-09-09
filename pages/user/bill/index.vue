@@ -1,14 +1,14 @@
 <template>
   <div class="min-h-full w-[75%] rounded-3xl">
     <div class="font-bold">
-      <nuxt-link class="text-lg" to="/">Home</nuxt-link>
-      <nuxt-link class="text-lg" to="/user/profile"
+      <nuxt-link class="text-lg" :to="{name: `index___${$i18n.locale}`}">{{$t('homeLayout.home')}}</nuxt-link>
+      <nuxt-link class="text-lg" :to="{name: `user-profile___${$i18n.locale}`}"
         ><font-awesome-icon class="text-sm" icon="fa-solid fa-chevron-right" />
-        User</nuxt-link
+        {{$t('profile.user')}}</nuxt-link
       >
-      <nuxt-link class="text-lg" to="/user/profile"
+      <nuxt-link class="text-lg" :to="{name: `user-bill___${$i18n.locale}`}"
         ><font-awesome-icon class="text-sm" icon="fa-solid fa-chevron-right" />
-        Bills</nuxt-link
+        {{$t('profile.bills')}}</nuxt-link
       >
     </div>
     <div class="my-5 w-full">
@@ -16,11 +16,11 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 w-full">
           <tr>
             <th scope="col" class="p-4">STT</th>
-            <th scope="col" class="py-3 px-6">Tên Phim</th>
-            <th scope="col" class="py-3 px-6">Suất Chiếu</th>
-            <th scope="col" class="py-3 px-6">Số lượng</th>
-            <th scope="col" class="py-3 px-6">Giá dịch vụ</th>
-            <th scope="col" class="py-3 px-6">Hành động</th>
+            <th scope="col" class="py-3 px-6">{{$t('bills.movieName')}}</th>
+            <th scope="col" class="py-3 px-6">{{$t('bills.showTime')}}</th>
+            <th scope="col" class="py-3 px-6">{{$t('bills.quatity')}}</th>
+            <th scope="col" class="py-3 px-6">{{$t('bills.cost')}}</th>
+            <th scope="col" class="py-3 px-6">{{$t('bills.action')}}</th>
           </tr>
         </thead>
         <tbody>

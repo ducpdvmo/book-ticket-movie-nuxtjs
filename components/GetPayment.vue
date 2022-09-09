@@ -44,7 +44,7 @@
             icon="fa-solid fa-circle-info"
           />
           <slot name="icon_noti"></slot>
-          <h2 class="text-xl font-bold py-4">Are you sure?</h2>
+          <h2 class="text-xl font-bold py-4">{{$t('bookTicket.titlePayment')}}?</h2>
           <slot class="text-sm text-gray-500 px-8" name="title_noti"></slot>
         </div>
         <div class="p-3 mt-2 text-center space-x-4 md:block">
@@ -66,7 +66,7 @@
             "
             @click="close"
           >
-            Cancel
+            {{$t('bookTicket.cancel')}}
           </button>
           <button
             class="
@@ -141,7 +141,7 @@
             "
             @click="redirect"
           >
-            Done
+            {{$t('bookTicket.done')}}
           </button>
         </div>
       </div>

@@ -8,7 +8,7 @@
           :alt="cinemaName"
         />
         <span class="text-green-500 font-bold uppercase text-xl ml-5">{{
-          cinemaName
+          $t(`bookTicket.${cinemaName}`)
         }}</span>
       </li>
       <li v-if="cinema.show_time.length">
@@ -17,7 +17,7 @@
             v-for="(show_time, index) in cinema.show_time"
             :key="index"
             :to="{
-              name: 'bookticket___vi',
+              name: `bookticket___${$i18n.locale}`,
               query: {
                 movie_id: show_time.movie_id,
                 schedule_id: show_time.schedule_id,
@@ -46,7 +46,7 @@
       </li>
       <li v-else>
         <p class="ml-24 text-red-600 font-bold uppercase text-base">
-          Chưa Có Lịch Chiếu !
+          {{ $t('movieDetail.noShowTime') }}
         </p>
       </li>
     </ul>

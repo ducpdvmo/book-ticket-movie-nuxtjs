@@ -1,6 +1,9 @@
 <template>
   <div>
-    <nuxt-link :to="`/Movies/${movie.id}`" class="relative">
+    <nuxt-link
+      :to="{ name: `movies-id___${$i18n.locale}`, params: { id: movie.id } }"
+      class="relative"
+    >
       <img
         class="w-[285px] h-[437px]"
         :src="movie.photoUrl"
@@ -43,7 +46,9 @@
           <font-awesome-icon
             class="text-yellow-400 text-2xl mr-2"
             icon="fa-solid fa-star"
-          /><span class="text-2xl font-semibold text-red-500">{{ movie.rating }}</span
+          /><span class="text-2xl font-semibold text-red-500">{{
+            movie.rating
+          }}</span
           >/10
         </p>
       </div>

@@ -19,7 +19,9 @@
     <div class="relative w-full max-w-2xl h-full md:h-auto">
       <div class="relative bg-white rounded-lg shadow">
         <div class="flex justify-between items-start p-4 rounded-t border-b">
-          <h3 class="text-xl font-semibold text-gray-900">Add Movie</h3>
+          <h3 class="text-xl font-semibold text-gray-900">
+            {{ $t('formAddNewMovie.addMovie') }}
+          </h3>
           <button
             type="button"
             class="
@@ -77,7 +79,7 @@
             "
             @click.prevent="handleBackModal()"
           >
-            Back
+            {{ $t('formAddNewMovie.back') }}
           </button>
           <button
             v-if="showFormAddMovie"
@@ -98,7 +100,7 @@
             "
             @click.prevent="handleNextModal()"
           >
-            Next
+            {{ $t('formAddNewMovie.next') }}
           </button>
           <button
             v-else
@@ -119,7 +121,7 @@
             "
             @click.prevent="showPopup = true"
           >
-            Create
+            {{ $t('formAddNewMovie.create') }}
           </button>
           <GetPayment
             v-show="showPopup"
@@ -133,13 +135,15 @@
               />
             </template>
             <template #title_noti
-              ><p>Do you realy want to create new Movie?</p></template
+              ><p>{{ $t('formAddNewMovie.notiCreate') }}</p></template
             >
-            <template #handle_name>Create</template>
+            <template #handle_name>{{ $t('formAddNewMovie.create') }}</template>
             <template #title_success>
-              <h2 class="text-xl font-bold py-4">Created Successfull</h2>
+              <h2 class="text-xl font-bold py-4">
+                {{ $t('formAddNewMovie.createSuccess') }}
+              </h2>
               <p class="text-sm text-gray-500 px-8">
-                The Movie be created dones!
+                {{ $t('formAddNewMovie.desCreated') }}
               </p>
             </template>
           </GetPayment>
@@ -213,7 +217,7 @@ export default {
         time:
           this.data.ampm === 'am'
             ? `${this.data.hours}:${this.data.minutes}`
-            : `${(parseInt(this.data.hours) + 12)}:${this.data.minutes}`,
+            : `${parseInt(this.data.hours) + 12}:${this.data.minutes}`,
         movie_id: idMovie,
       }
       await this.$axios.$post(apiMovieScheduleCreate, data)
@@ -255,7 +259,7 @@ export default {
         show_time:
           this.data.ampm === 'am'
             ? `${this.data.hours}:${this.data.minutes}`
-            : `${(parseInt(this.data.hours) + 12)}:${this.data.minutes}`,
+            : `${parseInt(this.data.hours) + 12}:${this.data.minutes}`,
         listseat: this.createSeatInCinema(listRow),
       }
       await this.$axios.$post(

@@ -15,7 +15,7 @@
         "
         @click="showAddMovie = true"
       >
-        Add New Movie
+        {{ $t('createSchedule.addNewMovie') }}
       </button>
       <div>
         <button class="px-2 text-gray-700">
@@ -29,10 +29,18 @@
       <table class="w-full">
         <thead class="p-5 h-20 border-b">
           <tr>
-            <th class="whitespace-no-wrap w-40">IMAGES</th>
-            <th class="whitespace-no-wrap w-2/5">PRODUCT NAME</th>
-            <th class="text-center whitespace-no-wrap">STATUS</th>
-            <th class="text-center whitespace-no-wrap">ACTIONS</th>
+            <th class="whitespace-no-wrap w-40">
+              {{ $t('createSchedule.img') }}
+            </th>
+            <th class="whitespace-no-wrap w-2/5">
+              {{ $t('createSchedule.movieName') }}
+            </th>
+            <th class="text-center whitespace-no-wrap">
+              {{ $t('createSchedule.status') }}
+            </th>
+            <th class="text-center whitespace-no-wrap">
+              {{ $t('createSchedule.action') }}
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -44,11 +52,14 @@
         </tbody>
       </table>
     </div>
-    <AddNewMovie v-if="showAddMovie" @closeModalCreateMovie="showAddMovie = false"></AddNewMovie>
+    <AddNewMovie
+      v-if="showAddMovie"
+      @closeModalCreateMovie="showAddMovie = false"
+    ></AddNewMovie>
   </div>
 </template>
   
-  <script>
+<script>
 import MovieRow from '../../../components/MovieRow.vue'
 import AddNewMovie from '../../../components/AddNewMovie.vue'
 export default {

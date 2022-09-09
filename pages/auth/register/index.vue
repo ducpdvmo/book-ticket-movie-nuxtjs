@@ -114,7 +114,7 @@
       <p class="text-sm font-semibold mt-2 pt-1 mb-0">
         Have an account yet?
         <nuxt-link
-          to="/auth/login"
+          :to="{ name: `auth-login___${$i18n.locale}` }"
           class="
             text-red-600
             hover:text-red-700
@@ -174,7 +174,8 @@ export default {
               userName: '',
               email: this.email,
               uid: res.result.localId,
-              avatar: 'https://support.pega.com/sites/default/files/pega-user-image/357/REG-356652.png',
+              avatar:
+                'https://support.pega.com/sites/default/files/pega-user-image/357/REG-356652.png',
             }
             await this.$store.dispatch('user/initUser', newUser)
             this.$store.commit('user/setUser', newUser)

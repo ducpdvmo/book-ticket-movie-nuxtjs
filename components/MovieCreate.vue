@@ -5,7 +5,7 @@
         <label
           for="movie-name"
           class="block mb-2 text-sm font-medium text-gray-900"
-          >Movie Name</label
+          >{{$t('formAddNewMovie.movieName')}}</label
         >
         <input
           id="movie-name"
@@ -29,7 +29,7 @@
         <label
           for="year-publish"
           class="block mb-2 text-sm font-medium text-gray-900"
-          >Year</label
+          >{{$t('formAddNewMovie.year')}}</label
         >
         <input
           id="year-publish"
@@ -53,7 +53,7 @@
         <label
           for="director"
           class="block mb-2 text-sm font-medium text-gray-900"
-          >Director</label
+          >{{$t('formAddNewMovie.director')}}</label
         >
         <input
           id="director"
@@ -77,7 +77,7 @@
         <label
           for="producer"
           class="block mb-2 text-sm font-medium text-gray-900"
-          >Producer</label
+          >{{$t('formAddNewMovie.producer')}}</label
         >
         <input
           id="producer"
@@ -101,7 +101,7 @@
         <label
           for="over-view"
           class="block mb-2 text-sm font-medium text-gray-900"
-          >Over View</label
+          >{{$t('formAddNewMovie.overView')}}</label
         >
         <textarea
           id="over-view"
@@ -124,7 +124,7 @@
       </div>
       <div class="col-span-6 sm:col-span-3">
         <label for="tags" class="block mb-2 text-sm font-medium text-gray-900"
-          >Tags</label
+          >{{$t('formAddNewMovie.tags')}}</label
         >
         <select
           id="tags"
@@ -158,7 +158,7 @@
       </div>
       <div class="col-span-6 sm:col-span-3">
         <label for="photo" class="block mb-2 text-sm font-medium text-gray-900"
-          >Photo</label
+          >{{$t('formAddNewMovie.photo')}}</label
         >
         <input
           id="photo"
@@ -183,7 +183,7 @@
         <label
           for="background"
           class="block mb-2 text-sm font-medium text-gray-900"
-          >Background</label
+          >{{$t('formAddNewMovie.background')}}</label
         >
         <input
           id="background"
@@ -209,7 +209,7 @@
           class="py-1 px-2 hover:bg-gray-200 rounded-md"
           @click="showMore = true"
         >
-          More
+          {{$t('formAddNewMovie.more')}}
           <font-awesome-icon icon="fa-solid fa-angles-right" />
         </button>
       </div>
@@ -242,7 +242,7 @@
       </div>
       <div class="col-span-6 sm:col-span-3">
         <label for="cast" class="block mb-2 text-sm font-medium text-gray-900"
-          >Cast</label
+          >{{$t('formAddNewMovie.cast')}}</label
         >
         <input
           id="cast"
@@ -272,7 +272,7 @@
             class="rotate-180"
             icon="fa-solid fa-angles-right"
           />
-          Less
+          {{$t('formAddNewMovie.less')}}
         </button>
       </div>
     </div>

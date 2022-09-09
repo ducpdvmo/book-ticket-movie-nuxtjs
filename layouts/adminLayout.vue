@@ -57,7 +57,7 @@
                 <ul>
                   <li class="p-2">
                     <nuxt-link
-                      to="/admin/dashboard"
+                      :to="{name: `admin-dashboard___${$i18n.locale}`}"
                       class="
                         flex
                         items-center
@@ -77,7 +77,7 @@
                   </li>
                   <li class="p-2 border-t">
                     <nuxt-link
-                      to="/admin/create-schedule"
+                      :to="{name: `admin-create-schedule___${$i18n.locale}`}"
                       class="
                         flex
                         items-center
