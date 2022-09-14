@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-10">
+  <div class="mt-10 w-1/2 lg:w-full">
     <label class="title"
       >{{$t('bookTicket.seatSelected')}}: {{ seatSelectedComputed.length }}</label
     >
@@ -33,7 +33,7 @@
           w-10
           h-10
           text-center
-          font-medium
+          font-normal
           bg-[#85c325e6]
         "
         :class="{
@@ -47,36 +47,36 @@
     </div>
     <div class="">
       <div class="flex justify-between items-center my-5">
-        <p class="w-1/3 pl-5 font-bold text-lg">{{$t('bookTicket.typeTicket')}}</p>
-        <p class="w-1/3 text-center font-bold text-lg">{{$t('bookTicket.quatity')}}</p>
-        <p class="w-1/3 text-center font-bold text-lg">{{$t('bookTicket.totalCost')}}</p>
+        <p class="w-1/3 sm:pl-5 font-bold text-sm lg:text-lg">{{$t('bookTicket.typeTicket')}}</p>
+        <p class="w-1/3 sm:text-center font-bold text-sm lg:text-lg">{{$t('bookTicket.quatity')}}</p>
+        <p class="w-1/3 sm:text-center font-bold text-sm lg:text-lg">{{$t('bookTicket.totalCost')}}</p>
       </div>
       <div v-if="seatNormal" class="flex justify-between items-center mb-4">
-        <p class="w-1/3 pl-5">{{$t('bookTicket.normalSeat')}}</p>
+        <p class="w-1/3 sm:pl-5">{{$t('bookTicket.normalSeat')}}</p>
         <input
           :value="seatNormal"
           disabled
           class="w-10 text-center"
           type="text"
         />
-        <p class="w-1/3 text-center">
+        <p class="w-1/3 sm:text-center">
           {{ (seatNormal * 90000) | formatMoney }}
         </p>
       </div>
       <div v-if="seatVip" class="flex justify-between items-center mb-4">
-        <p class="w-1/3 pl-5">{{$t('bookTicket.vipSeat')}}</p>
+        <p class="w-1/3 sm:pl-5">{{$t('bookTicket.vipSeat')}}</p>
         <input :value="seatVip" disabled class="w-10 text-center" type="text" />
-        <p class="w-1/3 text-center">{{ (seatVip * 105000) | formatMoney }}</p>
+        <p class="w-1/3 sm:text-center">{{ (seatVip * 105000) | formatMoney }}</p>
       </div>
       <div v-if="seatCouple" class="flex justify-between items-center">
-        <p class="w-1/3 pl-5">{{$t('bookTicket.coupleSeat')}}</p>
+        <p class="w-1/3 sm:pl-5">{{$t('bookTicket.coupleSeat')}}</p>
         <input
           :value="seatCouple"
           disabled
           class="w-10 text-center"
           type="text"
         />
-        <p class="w-1/3 text-center">
+        <p class="w-1/3 sm:text-center">
           {{ (150000 * seatCouple) | formatMoney }}
         </p>
       </div>

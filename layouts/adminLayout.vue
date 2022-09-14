@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#0077AD] min-h-screen pb-20">
+  <div class="bg-[#0077AD] pb-20">
     <header class="border-b mb-5">
       <div
         class="

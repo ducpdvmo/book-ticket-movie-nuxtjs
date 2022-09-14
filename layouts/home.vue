@@ -1,139 +1,10 @@
 <template>
-  <div class="min-h-screen flex flex-col relative">
-    <header class="flex flex-col items-center">
-      <div
-        class="
-          fixed
-          top-0
-          z-10
-          w-full
-          h-[110px]
-          flex
-          justify-between
-          bg-[#1F2937]
-          items-center
-          text-white
-        "
-      >
-        <h1 class="ml-20 w-[190px] h-[63px]">
-          <img
-            class="inline-block w-[190px] h-[63px]"
-            src="../assets/img/Logo.png"
-            alt=""
-          />
-        </h1>
-        <div class="font-normal text-2xl menu-top">
-          <nuxt-link class="mx-8" :to="{ name: `index___${$i18n.locale}` }">{{
-            $t('homeLayout.home')
-          }}</nuxt-link>
-          <nuxt-link class="mx-8" :to="{ name: `movies___${$i18n.locale}` }">{{
-            $t('homeLayout.movies')
-          }}</nuxt-link>
-          <nuxt-link class="mx-8" to="#">{{
-            $t('homeLayout.showTime')
-          }}</nuxt-link>
-          <nuxt-link class="mx-8" to="#">{{
-            $t('homeLayout.bookTicket')
-          }}</nuxt-link>
-        </div>
-        <div>
-          <nuxt-link
-            v-for="locale in availableLocales"
-            :key="locale.code"
-            :to="switchLocalePath(locale.code)"
-            >{{ locale.name }}</nuxt-link
-          >
-        </div>
-        <div v-if="!user || !isLogin" class="mr-16 font-normal text-2xl">
-          <nuxt-link
-            :to="{ name: `auth-login___${$i18n.locale}` }"
-            class="
-              mx-5
-              px-4
-              bg-[#13C6B2]
-              hover:bg-[#0f8779]
-              text-white
-              py-2
-              rounded
-            "
-            >{{ $t('homeLayout.login') }}</nuxt-link
-          >
-          <nuxt-link
-            :to="{ name: `auth-register___${$i18n.locale}` }"
-            class="
-              mx-5
-              px-4
-              bg-[#13C6B2]
-              hover:bg-[#0f8779]
-              text-white
-              py-2
-              rounded
-            "
-            >{{ $t('homeLayout.register') }}</nuxt-link
-          >
-        </div>
-        <div v-else class="relative z-50">
-          <div
-            v-click-outside="closePopupProfile"
-            class="drop flex justify-center items-center mr-20 cursor-pointer"
-            @click="handlePopups()"
-          >
-            <img
-              :src="user.avatar ? user.avatar : avatarNull"
-              :alt="user.userName"
-              class="w-10 h-10 inline-block rounded-full mr-3"
-            />
-            <p class="text-lg cursor-pointer">
-              {{ user.userName ? user.userName : user.email }}
-            </p>
-            <font-awesome-icon
-              :class="{
-                active: showPopups.showProfile,
-                notActive: !showPopups.showProfile,
-              }"
-              class="w-7 h-7"
-              icon="fa-solid fa-caret-right"
-            />
-          </div>
-          <transition name="profile">
-            <div
-              v-show="showPopups.showProfile"
-              class="
-                absolute
-                top-20
-                z-50
-                rounded-2xl
-                right-20
-                bg-white
-                text-black
-                w-[250px]
-              "
-            >
-              <div class="p-5 text-xl font-light flex flex-col">
-                <nuxt-link
-                  :to="{ name: `user-profile___${$i18n.locale}` }"
-                  class="drop-menu w-full"
-                  >{{ $t('profile.profile') }}</nuxt-link
-                >
-                <nuxt-link
-                  :to="{ name: `user-bill___${$i18n.locale}` }"
-                  class="drop-menu w-full"
-                  >{{ $t('profile.bills') }}</nuxt-link
-                >
-                <p class="drop-menu w-full">
-                  {{ $t('homeLayout.movieWatch') }}
-                </p>
-                <p class="drop-menu w-full" @click="logout()">
-                  {{ $t('profile.logout') }}
-                </p>
-              </div>
-            </div>
-          </transition>
-        </div>
-      </div>
-      <div class="mt-[110px]">
-        <div class="flex relative w-[1280px] px-[15px] my-8 h-16">
-          <div class="w-1/5 mb-6 h-16">
+  <div class="flex flex-col justify-center relative">
+    <header class="flex flex-col justify-center items-center">
+      <nav-bar></nav-bar>
+      <div class="mt-[150px] w-11/12 flex justify-center">
+        <div class="flex relative px-[15px] my-8 h-14 w-full xl:w-[1280px]">
+          <div class="w-1/5 mb-6 h-14 lg:h-16">
             <div class="relative h-full">
               <select
                 v-model="typeSearch"
@@ -142,13 +13,16 @@
                   cursor-pointer
                   h-full
                   block
+                  text-center
                   appearance-none
                   w-full
                   bg-gray-700
-                  text-white text-xl
+                  text-white
+                  lg:text-xl
                   font-medium
                   py-3
-                  px-8
+                  px-1
+                  lg:px-8 lg:h-16
                   border-gray-500 border-r-2
                   rounded-l-lg
                   leading-tight
@@ -174,6 +48,7 @@
                   text-3xl
                   absolute
                   inset-y-0
+                  top-[3%]
                   right-0
                   flex
                   items-center
@@ -186,7 +61,7 @@
               </div>
             </div>
           </div>
-          <div class="relative w-4/5 h-16">
+          <div class="relative w-4/5 h-14 lg:h-16">
             <input
               id="search"
               v-model="querySearch"
@@ -198,7 +73,8 @@
                 w-full
                 z-20
                 px-6
-                text-xl
+                text-base
+                lg:text-xl
                 rounded-r-lg
                 bg-gray-700
                 placeholder-gray-400
@@ -212,7 +88,8 @@
               type="submit"
               class="
                 h-full
-                w-[100px]
+                px-5
+                lg:w-[100px]
                 absolute
                 top-0
                 right-0
@@ -233,7 +110,7 @@
         </div>
         <div
           v-if="queryResult.length > 0"
-          class="absolute w-[1250px] ml-[15px] p-5 bg-[#080d13ed] z-50"
+          class="absolute xl:w-[1250px] lg:ml-[15px] p-5 bg-[#080d13ed] z-50"
         >
           <div v-if="typeSearch == 'movies'" class="h-96 overflow-y-auto">
             <nuxt-link
@@ -246,8 +123,9 @@
               class="
                 text-white
                 mb-5
-                py-3
-                px-8
+                lg:py-3
+                p-2
+                lg:px-8
                 cursor-pointer
                 flex
                 items-center
@@ -257,7 +135,7 @@
               <div
                 class="
                   py-2
-                  pl-4
+                  lg:pl-4
                   mr-5
                   flex
                   items-center
@@ -270,21 +148,27 @@
                   hover:bg-[#c0b9b9]
                 "
               >
-                <img class="w-36 h-24" :src="result.photoUrl" alt="" />
-                <span class="text-2xl font-bold ml-5">{{ result.name }}</span>
+                <img
+                  class="w-1/5 h-20 center lg:w-36 lg:h-24"
+                  :src="result.photoUrl"
+                  alt=""
+                />
+                <span class="w-4/5 text-base lg:text-2xl lgfont-bold ml-5">{{
+                  result.name
+                }}</span>
               </div>
             </nuxt-link>
           </div>
         </div>
       </div>
     </header>
-    <div
+    <!-- <div
       :class="{
         cover: showPopups.showProfile || showPopups.showOptions,
         notCover: !showPopups.showProfile && !showPopups.showOptions,
       }"
       class="fixed top-0 left-0 z-0 w-screen bg-[#00000077]"
-    ></div>
+    ></div> -->
     <nuxt />
     <footer
       class="px-4 divide-y bg-gray-800 text-white absolute top-[100%] w-full"
@@ -294,6 +178,7 @@
           container
           flex flex-col
           justify-between
+          items-center
           py-10
           mx-auto
           space-y-8
@@ -302,10 +187,8 @@
       >
         <div class="lg:w-1/3">
           <a href="#" class="flex justify-center space-x-3 lg:justify-start">
-            <div
-              class="flex items-center justify-center w-12 h-12 rounded-full"
-            ></div>
-            <span class="self-center text-2xl font-semibold"
+            <span
+              class="inline-block w-[100px] h-[50px] lg:w-[190px] lg:h-[63px]"
               ><img src="../assets/img/Logo.png" alt=""
             /></span>
           </a>
@@ -419,112 +302,160 @@
 </template>
 
 <script>
+import NavBar from '../components/NavBar.vue'
 export default {
-  name: 'LayoutHome',
-  transition: 'home',
-  data() {
-    return {
-      showPopups: {
-        showProfile: null,
-        showOptions: null,
-      },
-      typeSearch: 'movies',
-      querySearch: '',
-      queryResult: [],
-      unsubscribleListenSeachInput: null,
-      avatarNull:
-        'https://i.pinimg.com/280x280_RS/2e/45/66/2e4566fd829bcf9eb11ccdb5f252b02f.jpg',
-    }
-  },
-  computed: {
-    movies() {
-      return this.$store.getters['movies/movies']
+    name: "LayoutHome",
+    components: { NavBar },
+    transition: "home",
+    data() {
+        return {
+            showPopups: {
+                showProfile: null,
+                showOptions: null,
+            },
+            typeSearch: "movies",
+            querySearch: "",
+            queryResult: [],
+            unsubscribleListenSeachInput: null,
+            avatarNull: "https://i.pinimg.com/280x280_RS/2e/45/66/2e4566fd829bcf9eb11ccdb5f252b02f.jpg",
+            showMenu: false,
+            showOptionUser: false,
+            lgScreen: false,
+            xlScreen: false,
+        };
     },
-    user() {
-      return this.$store.getters['user/getUser']
+    computed: {
+        movies() {
+            return this.$store.getters["movies/movies"];
+        },
+        user() {
+            return this.$store.getters["user/getUser"];
+        },
+        isLogin() {
+            return this.$store.getters["auth/isLogged"];
+        },
+        availableLocales() {
+            return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale);
+        },
     },
-    isLogin() {
-      return this.$store.getters['auth/isLogged']
-    },
-    availableLocales() {
-      return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
-    },
-  },
-  mounted() {
-    const searchInputEl = document.getElementById('search')
-    this.unsubscribleListenSeachInput = searchInputEl.addEventListener(
-      'focus',
-      () => {
-        const bodyEl = document.querySelector('body')
-        bodyEl.style.height = '100vh'
-        bodyEl.style.overflowY = 'hidden'
-      }
-    )
-  },
-  created() {},
-  methods: {
-    logout() {
-      this.$store.dispatch('auth/logout')
-      this.$router.replace('/auth/login')
-    },
-    queryData() {
-      if (this.querySearch.toLowerCase() !== '') {
-        if (this.typeSearch === 'movies') {
-          this.queryResult = this.movies.filter((movie) => {
-            return movie.name
-              .toLowerCase()
-              .includes(this.querySearch.toLowerCase())
-          })
+    mounted() {
+        if (window.innerWidth > 1024 && window.innerWidth < 1280) {
+            this.showMenu = true;
+            this.lgScreen = true;
+            this.showOptionUser = true;
         }
-      } else {
-        this.queryResult = []
-      }
+        else if (window.innerWidth > 1280) {
+            this.showMenu = true;
+            this.lgScreen = true;
+            this.showOptionUser = true;
+            this.xlScreen = true;
+        }
+        else {
+            this.lgScreen = false;
+            this.xlScreen = true;
+        }
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 1024 && window.innerWidth < 1280) {
+                this.showMenu = true;
+                this.lgScreen = true;
+                this.showOptionUser = true;
+                this.xlScreen = false;
+            }
+            else if (window.innerWidth > 1280) {
+                this.xlScreen = true;
+                this.showMenu = true;
+                this.lgScreen = true;
+                this.showOptionUser = true;
+            }
+            else {
+                this.lgScreen = false;
+                this.xlScreen = true;
+                this.showMenu = false;
+                this.showOptionUser = false;
+            }
+        });
+        const searchInputEl = document.getElementById("search");
+        this.unsubscribleListenSeachInput = searchInputEl.addEventListener("focus", () => {
+            const bodyEl = document.querySelector("body");
+            bodyEl.style.height = "100vh";
+            bodyEl.style.overflowY = "hidden";
+        });
     },
-    closedSearch() {
-      this.querySearch = ''
-      this.queryResult = []
-      const bodyEl = document.querySelector('body')
-      bodyEl.style.height = 'auto'
-      bodyEl.style.overflowY = 'auto'
+    created() {
+        this.handleOptionUser();
     },
-    handlePopups() {
-      this.showPopups.showProfile = !this.showPopups.showProfile
-      if (this.showPopups.showProfile || this.showPopups.showOptions)
-        document.documentElement.style.overflow = 'hidden'
-      else document.documentElement.style.overflow = 'auto'
-    },
-    handlePopupsOptions() {
-      this.showPopups.showOptions = !this.showPopups.showOptions
-      if (this.showPopups.showProfile || this.showPopups.showOptions)
-        document.documentElement.style.overflow = 'hidden'
-      else document.documentElement.style.overflow = 'auto'
-    },
-    closePopupProfile() {
-      this.showPopups.showProfile
-        ? (this.showPopups.showProfile = !this.showPopups.showProfile)
-        : (this.showPopups.showProfile = false)
-      if (!this.showPopups.showProfile) {
-        document.documentElement.style.overflow = 'auto'
-      }
-    },
-    closePopupOptions() {
-      this.showPopups.showOptions
-        ? (this.showPopups.showOptions = !this.showPopups.showOptions)
-        : (this.showPopups.showOptions = false)
-      if (
-        !this.showPopups.showOptions &&
-        this.showPopups.showProfile === null
-      ) {
-        document.documentElement.style.overflow = 'auto'
-      }
-    },
-  },
+    methods: {
+        handleOptionUser() {
+            if (this.user && this.isLogin)
+                this.showOptionUser = true;
+            else
+                return false;
+        },
+        logout() {
+            this.$store.dispatch("auth/logout");
+            this.$router.replace("/auth/login");
+        },
+        queryData() {
+            if (this.querySearch.toLowerCase() !== "") {
+                if (this.typeSearch === "movies") {
+                    this.queryResult = this.movies.filter((movie) => {
+                        return movie.name
+                            .toLowerCase()
+                            .includes(this.querySearch.toLowerCase());
+                    });
+                }
+            }
+            else {
+                this.queryResult = [];
+            }
+        },
+        closedSearch() {
+            this.querySearch = "";
+            this.queryResult = [];
+            const bodyEl = document.querySelector("body");
+            bodyEl.style.height = "auto";
+            bodyEl.style.overflowY = "auto";
+        },
+        handlePopups() {
+            this.showPopups.showProfile = !this.showPopups.showProfile;
+            if (this.showPopups.showProfile || this.showPopups.showOptions)
+                document.documentElement.style.overflow = "hidden";
+            else
+                document.documentElement.style.overflow = "auto";
+        },
+        handlePopupsOptions() {
+            this.showPopups.showOptions = !this.showPopups.showOptions;
+            if (this.showPopups.showProfile || this.showPopups.showOptions)
+                document.documentElement.style.overflow = "hidden";
+            else
+                document.documentElement.style.overflow = "auto";
+        },
+        closePopupProfile() {
+            this.showPopups.showProfile
+                ? (this.showPopups.showProfile = !this.showPopups.showProfile)
+                : (this.showPopups.showProfile = false);
+            if (!this.showPopups.showProfile) {
+                document.documentElement.style.overflow = "auto";
+            }
+        },
+        closePopupOptions() {
+            this.showPopups.showOptions
+                ? (this.showPopups.showOptions = !this.showPopups.showOptions)
+                : (this.showPopups.showOptions = false);
+            if (!this.showPopups.showOptions &&
+                this.showPopups.showProfile === null) {
+                document.documentElement.style.overflow = "auto";
+            }
+        },
+    }
 }
 </script>
 
 <style scoped>
-.menu-top .nuxt-link-exact-active {
-  border-bottom: 4px solid red;
+@media only screen and (min-width: 1024px) {
+  .menu-top .nuxt-link-exact-active {
+    border-bottom: 4px solid red;
+  }
 }
 .profile-enter-active,
 .profile-leave-active {

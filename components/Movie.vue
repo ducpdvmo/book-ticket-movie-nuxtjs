@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="slide">
     <nuxt-link
       :to="{ name: `movies-id___${$i18n.locale}`, params: { id: movie.id } }"
       class="relative"
     >
       <img
-        class="w-[285px] h-[437px]"
+        class="lg:w-[230px] lg:h-[355px] w-[200px] h-[300px]"
         :src="movie.photoUrl"
         :alt="movie.name"
       />
@@ -73,6 +73,11 @@ export default {
 </script>
 
 <style scoped>
+.slide {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
 .Adventure {
   background-color: #ec5a1a;
 }

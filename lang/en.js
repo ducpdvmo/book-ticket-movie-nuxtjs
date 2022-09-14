@@ -6,8 +6,8 @@ export default {
     bookTicket: 'Book Ticket',
     login: 'Login',
     register: 'Register',
-    moviesInTheater: 'Movies In Theater',
-    tvShow: 'TV Show',
+    moviesInTheater: 'Movies',
+    tvShow: 'Show',
     searchPlaceholder:
       'Search for a movie, TV Show or celebrity that you are looking for...',
     movieWatch: 'Movie Watched',
@@ -28,7 +28,7 @@ export default {
       LGBT: 'LGBT',
     },
     movieShow: 'Movie Play',
-    comingsoon: 'Comming soon'
+    comingsoon: 'Comming soon',
   },
   movieDetail: {
     watchTrailer: 'Watch Trailer',
@@ -124,7 +124,7 @@ export default {
       },
     },
     combo2: {
-      title: 'SNOOPY DOUBLE COMBO',
+      title: 'Snoopy Double combo',
       description: {
         1: '2 glasses of Snoopy 32Oz (with water) + 1 large sweet corn',
         2: '* Free exchange of corn Cheese, Caramel ',
@@ -133,7 +133,7 @@ export default {
       },
     },
     combo3: {
-      title: 'SNOOPY TRIPLE COMBO',
+      title: 'Snoopy triple combo',
       description: {
         1: '3 glasses of Snoopy 32Oz (with water) + 1 large sweet corn',
         2: '* Free exchange of corn Cheese, Caramel',
@@ -142,7 +142,7 @@ export default {
       },
     },
     combo4: {
-      title: 'SINGLE BT21 COMBO',
+      title: 'Sigle BT21 combo',
       description: {
         1: '1 ly BT21 Back To School 32Oz + 1 nước siêu lớn',
         2: '* Free 01 big sweet corn from 19-26.08',
@@ -151,7 +151,7 @@ export default {
       },
     },
     combo5: {
-      title: 'BT21 BACK TO SCHOOL',
+      title: 'BT21 back to school',
       description: {
         1: '08 ly BT21 Back To School 32Oz',
         2: '* Free 01 big sweet corn from 19-26.08',
@@ -160,7 +160,7 @@ export default {
       },
     },
     combo6: {
-      title: 'MY COMBO',
+      title: 'My combo',
       description: {
         1: '1 large corn + 1 super water. Received on movie day',
         2: '* Free 01 big sweet corn from 19-26.08',
@@ -260,5 +260,16 @@ export default {
     createSuccess: 'Create Successfully',
     desCreated: 'The Movie is created!',
     voucher: 'Voucher',
+  },
+  tabs: {
+    monday: 'Monday',
+    tuesday: 'Tuesday',
+    wednesday: 'Wednesday',
+    thursday: 'Thursday',
+    friday: 'Friday',
+    saturday: 'Saturday',
+    sunday: 'Sunday',
+    overView: 'Over View',
+    review: 'Reviews',
   },
 }

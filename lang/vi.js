@@ -6,8 +6,8 @@ export default {
     bookTicket: 'Mua vé',
     login: 'Đăng nhập',
     register: 'Đăng ký',
-    moviesInTheater: 'Phim Chiếu Rạp',
-    tvShow: 'Chương Trình',
+    moviesInTheater: 'Phim',
+    tvShow: 'TV',
     searchPlaceholder:
       'Tìm kiếm bộ phim, chương trình trình truyền hình hoặc người nổi tiếng...',
     movieWatch: 'Phim đã xem',
@@ -28,7 +28,7 @@ export default {
       LGBT: 'Đồng tính',
     },
     movieShow: 'Phim đang chiếu',
-    comingsoon: 'Phim sắp chiếu'
+    comingsoon: 'Phim sắp chiếu',
   },
   movieDetail: {
     watchTrailer: 'Xem Nhanh',
@@ -123,7 +123,7 @@ export default {
       },
     },
     combo2: {
-      title: 'SNOOPY DOUBLE COMBO',
+      title: 'Snoopy Double combo',
       description: {
         1: '2 ly Snoopy 32Oz (kèm nước) + 1 bắp ngọt lớn',
         2: '* Miễn phí đổi vị bắp Phô mai, Caramel ',
@@ -132,7 +132,7 @@ export default {
       },
     },
     combo3: {
-      title: 'SNOOPY TRIPLE COMBO',
+      title: 'Snoopy triple combo',
       description: {
         1: '3 ly Snoopy 32Oz (kèm nước) + 1 bắp ngọt lớn',
         2: '* Miễn phí đổi vị bắp Phô mai, Caramel',
@@ -141,7 +141,7 @@ export default {
       },
     },
     combo4: {
-      title: 'SINGLE BT21 COMBO',
+      title: 'Sigle BT21 combo',
       description: {
         1: '1 ly BT21 Back To School 32Oz + 1 nước siêu lớn',
         2: '* Tặng ngay 01 phần bắp ngọt lớn từ 19-26.08',
@@ -150,7 +150,7 @@ export default {
       },
     },
     combo5: {
-      title: 'BT21 BACK TO SCHOOL',
+      title: 'BT21 back to school',
       description: {
         1: '08 ly BT21 Back To School 32Oz',
         2: '* Tặng ngay 01 phần bắp ngọt lớn từ 19-26.08',
@@ -159,7 +159,7 @@ export default {
       },
     },
     combo6: {
-      title: 'MY COMBO',
+      title: 'My combo',
       description: {
         1: '1 bắp lớn + 1 nước siêu lớn. Nhận trong ngày xem phim',
         2: '* Tặng ngay 01 phần bắp ngọt lớn từ 19-26.08',
@@ -259,5 +259,16 @@ export default {
     createSuccess: 'Tạo thành công!',
     desCreated: 'Phim đã được tạo thành công',
     voucher: 'Mã giảm giá',
+  },
+  tabs: {
+    monday: 'Thứ 2',
+    tuesday: 'Thứ 3',
+    wednesday: 'Thứ 4',
+    thursday: 'Thứ 5',
+    friday: 'Thứ 6',
+    saturday: 'Thứ 7',
+    sunday: 'Chủ Nhật',
+    overView: 'Tổng Quan',
+    review: 'Đánh giá',
   },
 }

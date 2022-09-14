@@ -1,11 +1,19 @@
 <template>
   <div class="p-6 space-y-6">
-    <div class="grid grid-cols-6 gap-6">
+    <div class="grid grid-cols-6 md:gap-6 gap-1">
       <div class="col-span-6 sm:col-span-3">
         <label
           for="movie-name"
-          class="block mb-2 text-sm font-medium text-gray-900"
-          >{{$t('formAddNewMovie.movieName')}}</label
+          class="
+            block
+            mb-2
+            text-xs
+            sm:text-sm
+            md:text-base
+            font-medium
+            text-gray-900
+          "
+          >{{ $t('formAddNewMovie.movieName') }}</label
         >
         <input
           id="movie-name"
@@ -15,8 +23,9 @@
             shadow-sm
             bg-gray-50
             border border-gray-300
-            text-gray-900
+            text-gray-900 text-xs
             sm:text-sm
+            md:text-base
             rounded-lg
             block
             w-full
@@ -28,8 +37,16 @@
       <div class="col-span-6 sm:col-span-3">
         <label
           for="year-publish"
-          class="block mb-2 text-sm font-medium text-gray-900"
-          >{{$t('formAddNewMovie.year')}}</label
+          class="
+            block
+            mb-2
+            text-xs
+            sm:text-sm
+            md:text-base
+            font-medium
+            text-gray-900
+          "
+          >{{ $t('formAddNewMovie.year') }}</label
         >
         <input
           id="year-publish"
@@ -39,8 +56,9 @@
             shadow-sm
             bg-gray-50
             border border-gray-300
-            text-gray-900
+            text-gray-900 text-xs
             sm:text-sm
+            md:text-base
             rounded-lg
             block
             w-full
@@ -52,8 +70,16 @@
       <div class="col-span-6 sm:col-span-3">
         <label
           for="director"
-          class="block mb-2 text-sm font-medium text-gray-900"
-          >{{$t('formAddNewMovie.director')}}</label
+          class="
+            block
+            mb-2
+            text-xs
+            sm:text-sm
+            md:text-base
+            font-medium
+            text-gray-900
+          "
+          >{{ $t('formAddNewMovie.director') }}</label
         >
         <input
           id="director"
@@ -63,8 +89,9 @@
             shadow-sm
             bg-gray-50
             border border-gray-300
-            text-gray-900
+            text-gray-900 text-xs
             sm:text-sm
+            md:text-base
             rounded-lg
             block
             w-full
@@ -76,8 +103,16 @@
       <div class="col-span-6 sm:col-span-3">
         <label
           for="producer"
-          class="block mb-2 text-sm font-medium text-gray-900"
-          >{{$t('formAddNewMovie.producer')}}</label
+          class="
+            block
+            mb-2
+            text-xs
+            sm:text-sm
+            md:text-base
+            font-medium
+            text-gray-900
+          "
+          >{{ $t('formAddNewMovie.producer') }}</label
         >
         <input
           id="producer"
@@ -87,8 +122,9 @@
             shadow-sm
             bg-gray-50
             border border-gray-300
-            text-gray-900
+            text-gray-900 text-xs
             sm:text-sm
+            md:text-base
             rounded-lg
             block
             w-full
@@ -100,8 +136,16 @@
       <div class="col-span-6 sm:col-span-3">
         <label
           for="over-view"
-          class="block mb-2 text-sm font-medium text-gray-900"
-          >{{$t('formAddNewMovie.overView')}}</label
+          class="
+            block
+            mb-2
+            text-xs
+            sm:text-sm
+            md:text-base
+            font-medium
+            text-gray-900
+          "
+          >{{ $t('formAddNewMovie.overView') }}</label
         >
         <textarea
           id="over-view"
@@ -111,8 +155,9 @@
             shadow-sm
             bg-gray-50
             border border-gray-300
-            text-gray-900
+            text-gray-900 text-xs
             sm:text-sm
+            md:text-base
             rounded-lg
             focus:ring-blue-600 focus:border-blue-600
             block
@@ -123,8 +168,18 @@
         ></textarea>
       </div>
       <div class="col-span-6 sm:col-span-3">
-        <label for="tags" class="block mb-2 text-sm font-medium text-gray-900"
-          >{{$t('formAddNewMovie.tags')}}</label
+        <label
+          for="tags"
+          class="
+            block
+            mb-2
+            text-xs
+            sm:text-sm
+            md:text-base
+            font-medium
+            text-gray-900
+          "
+          >{{ $t('formAddNewMovie.tags') }}</label
         >
         <select
           id="tags"
@@ -133,8 +188,9 @@
             shadow-sm
             bg-gray-50
             border border-gray-300
-            text-gray-900
+            text-gray-900 text-xs
             sm:text-sm
+            md:text-base
             rounded-lg
             focus:ring-blue-600 focus:border-blue-600
             block
@@ -157,8 +213,18 @@
         </select>
       </div>
       <div class="col-span-6 sm:col-span-3">
-        <label for="photo" class="block mb-2 text-sm font-medium text-gray-900"
-          >{{$t('formAddNewMovie.photo')}}</label
+        <label
+          for="photo"
+          class="
+            block
+            mb-2
+            text-xs
+            sm:text-sm
+            md:text-base
+            font-medium
+            text-gray-900
+          "
+          >{{ $t('formAddNewMovie.photo') }}</label
         >
         <input
           id="photo"
@@ -168,8 +234,9 @@
             shadow-sm
             bg-gray-50
             border border-gray-300
-            text-gray-900
+            text-gray-900 text-xs
             sm:text-sm
+            md:text-base
             rounded-lg
             focus:ring-blue-600 focus:border-blue-600
             block
@@ -182,8 +249,16 @@
       <div class="col-span-6 sm:col-span-3">
         <label
           for="background"
-          class="block mb-2 text-sm font-medium text-gray-900"
-          >{{$t('formAddNewMovie.background')}}</label
+          class="
+            block
+            mb-2
+            text-xs
+            sm:text-sm
+            md:text-base
+            font-medium
+            text-gray-900
+          "
+          >{{ $t('formAddNewMovie.background') }}</label
         >
         <input
           id="background"
@@ -193,8 +268,9 @@
             shadow-sm
             bg-gray-50
             border border-gray-300
-            text-gray-900
+            text-gray-900 text-xs
             sm:text-sm
+            md:text-base
             rounded-lg
             focus:ring-blue-600 focus:border-blue-600
             block
@@ -209,7 +285,7 @@
           class="py-1 px-2 hover:bg-gray-200 rounded-md"
           @click="showMore = true"
         >
-          {{$t('formAddNewMovie.more')}}
+          {{ $t('formAddNewMovie.more') }}
           <font-awesome-icon icon="fa-solid fa-angles-right" />
         </button>
       </div>
@@ -218,7 +294,15 @@
       <div class="col-span-6 sm:col-span-3">
         <label
           for="trailerID"
-          class="block mb-2 text-sm font-medium text-gray-900"
+          class="
+            block
+            mb-2
+            text-xs
+            sm:text-sm
+            md:text-base
+            font-medium
+            text-gray-900
+          "
           >TrailerID</label
         >
         <input
@@ -229,8 +313,9 @@
             shadow-sm
             bg-gray-50
             border border-gray-300
-            text-gray-900
+            text-gray-900 text-xs
             sm:text-sm
+            md:text-base
             rounded-lg
             focus:ring-blue-600 focus:border-blue-600
             block
@@ -241,8 +326,18 @@
         />
       </div>
       <div class="col-span-6 sm:col-span-3">
-        <label for="cast" class="block mb-2 text-sm font-medium text-gray-900"
-          >{{$t('formAddNewMovie.cast')}}</label
+        <label
+          for="cast"
+          class="
+            block
+            mb-2
+            text-xs
+            sm:text-sm
+            md:text-base
+            font-medium
+            text-gray-900
+          "
+          >{{ $t('formAddNewMovie.cast') }}</label
         >
         <input
           id="cast"
@@ -252,8 +347,9 @@
             shadow-sm
             bg-gray-50
             border border-gray-300
-            text-gray-900
+            text-gray-900 text-xs
             sm:text-sm
+            md:text-base
             rounded-lg
             focus:ring-blue-600 focus:border-blue-600
             block
@@ -272,7 +368,7 @@
             class="rotate-180"
             icon="fa-solid fa-angles-right"
           />
-          {{$t('formAddNewMovie.less')}}
+          {{ $t('formAddNewMovie.less') }}
         </button>
       </div>
     </div>
@@ -280,11 +376,7 @@
 </template>
 
 <script>
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL,
-} from 'firebase/storage'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { uuidv4 } from '@firebase/util'
 import storage from '@/firebase/config'
 export default {

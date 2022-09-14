@@ -12,14 +12,13 @@
       p-4
       w-full
       md:inset-0
-      h-modal
-      md:h-full
+      h-full
     "
   >
     <div class="relative w-full max-w-2xl h-full md:h-auto">
       <div class="relative bg-white rounded-lg shadow">
         <div class="flex justify-between items-start p-4 rounded-t border-b">
-          <h3 class="text-xl font-semibold text-gray-900">
+          <h3 class="lg:text-xl text-sm sm:text-base font-semibold text-gray-900">
             {{ $t('formAddNewMovie.addMovie') }}
           </h3>
           <button
@@ -185,11 +184,9 @@ export default {
     },
     updateData(value) {
       this.data = { ...value }
-      console.log(this.data)
     },
     updateDataSchedule(value) {
       this.data = { ...this.data, ...value }
-      console.log(this.data)
     },
     async handleDataMovie() {
       const data = {
@@ -251,10 +248,10 @@ export default {
       const data = {
         cine_name:
           this.data.cinema === 0
-            ? 'aeon mall Hà Đông'
+            ? 'cgv'
             : this.data.cinema === 1
-            ? 'Lotte Mỹ Đình'
-            : 'beta Hà Đông',
+            ? 'lotte'
+            : 'beta',
         schedule_id: idSchedule,
         show_time:
           this.data.ampm === 'am'
@@ -301,7 +298,6 @@ export default {
           }
         })
       const idSchedule = uuidv4()
-      console.log(movies)
       const idMovie = movieId
       await this.handleDataMovieSchedule(idMovie, idSchedule)
       await this.handleDataTicketRoom(idSchedule, listRow)

@@ -1,144 +1,8 @@
 <template>
-  <div class="min-h-screen flex flex-col relative">
+  <div class="flex flex-col relative min-h-screen justify-between">
     <header class="flex flex-col items-center">
-      <div
-        class="
-          fixed
-          top-0
-          z-10
-          w-full
-          h-[110px]
-          flex
-          justify-between
-          bg-[#1F2937]
-          items-center
-          text-white
-        "
-      >
-        <h1 class="ml-20 w-[190px] h-[63px]">
-          <img
-            class="inline-block w-[190px] h-[63px]"
-            src="../assets/img/Logo.png"
-            alt=""
-          />
-        </h1>
-        <div class="font-normal text-2xl menu-top">
-          <nuxt-link class="mx-8" :to="{ name: `index___${$i18n.locale}` }">{{
-            $t('homeLayout.home')
-          }}</nuxt-link>
-          <nuxt-link class="mx-8" :to="{ name: `movies___${$i18n.locale}` }">{{
-            $t('homeLayout.movies')
-          }}</nuxt-link>
-          <nuxt-link class="mx-8" :to="{ name: `index___${$i18n.locale}` }">{{
-            $t('homeLayout.showTime')
-          }}</nuxt-link>
-          <nuxt-link class="mx-8" :to="{ name: `index___${$i18n.locale}` }">{{
-            $t('homeLayout.bookTicket')
-          }}</nuxt-link>
-        </div>
-        <div>
-          <nuxt-link
-            v-for="locale in availableLocales"
-            :key="locale.code"
-            :to="switchLocalePath(locale.code)"
-            >{{ locale.name }}</nuxt-link
-          >
-        </div>
-        <div v-if="!user || !isLogin" class="mr-16 font-normal text-2xl">
-          <nuxt-link
-            :to="{ name: `auth-login___${$i18n.locale}` }"
-            class="
-              mx-5
-              px-4
-              bg-[#13C6B2]
-              hover:bg-[#0f8779]
-              text-white
-              py-2
-              rounded
-            "
-            >{{ $t('homeLayout.login') }}</nuxt-link
-          >
-          <nuxt-link
-            :to="{ name: `auth-register___${$i18n.locale}` }"
-            class="
-              mx-5
-              px-4
-              bg-[#13C6B2]
-              hover:bg-[#0f8779]
-              text-white
-              py-2
-              rounded
-            "
-            >{{ $t('homeLayout.register') }}</nuxt-link
-          >
-        </div>
-        <div v-else class="relative z-50">
-          <div
-            v-click-outside="closePopupProfile"
-            class="drop flex justify-center items-center mr-20 cursor-pointer"
-            @click="handlePopups()"
-          >
-            <img
-              :src="user.avatar ? user.avatar : avatarNull"
-              :alt="user.userName"
-              class="w-10 h-10 inline-block rounded-full mr-3"
-            />
-            <p class="text-lg cursor-pointer">
-              {{ user.userName ? user.userName : user.email }}
-            </p>
-            <font-awesome-icon
-              :class="{
-                active: showPopups.showProfile,
-                notActive: !showPopups.showProfile,
-              }"
-              class="w-7 h-7"
-              icon="fa-solid fa-caret-right"
-            />
-          </div>
-          <transition name="profile">
-            <div
-              v-show="showPopups.showProfile"
-              class="
-                absolute
-                top-20
-                z-50
-                rounded-2xl
-                right-20
-                bg-white
-                text-black
-                w-[250px]
-              "
-            >
-              <div class="p-5 text-xl font-light flex flex-col">
-                <nuxt-link
-                  :to="{ name: `user-profile___${$i18n.locale}` }"
-                  class="drop-menu w-full"
-                  >{{ $t('profile.profile') }}</nuxt-link
-                >
-                <nuxt-link
-                  :to="{ name: `user-bill___${$i18n.locale}` }"
-                  class="drop-menu w-full"
-                  >{{ $t('profile.bills') }}</nuxt-link
-                >
-                <p class="drop-menu w-full">
-                  {{ $t('homeLayout.movieWatch') }}
-                </p>
-                <p class="drop-menu w-full" @click="logout()">
-                  {{ $t('profile.logout') }}
-                </p>
-              </div>
-            </div>
-          </transition>
-        </div>
-      </div>
+      <nav-bar></nav-bar>
     </header>
-    <div
-      :class="{
-        cover: showPopups.showProfile,
-        notCover: !showPopups.showProfile,
-      }"
-      class="fixed top-0 left-0 z-0 w-screen bg-[#00000077]"
-    ></div>
     <nuxt />
     <footer class="px-4 divide-y bg-gray-800 text-white top-[100%] w-full">
       <div
@@ -270,51 +134,53 @@
   </div>
 </template>
 <script>
+import NavBar from '../components/NavBar.vue'
 export default {
-  name: 'LayoutDefault',
-  data() {
-    return {
-      showPopups: {
-        showProfile: null,
-        showOptions: null,
-      },
-      avatarNull:
-        'https://i.pinimg.com/280x280_RS/2e/45/66/2e4566fd829bcf9eb11ccdb5f252b02f.jpg',
+    name: "LayoutDefault",
+    components: { NavBar },
+    data() {
+        return {
+            showPopups: {
+                showProfile: null,
+                showOptions: null,
+            },
+            avatarNull: "https://i.pinimg.com/280x280_RS/2e/45/66/2e4566fd829bcf9eb11ccdb5f252b02f.jpg",
+        };
+    },
+    computed: {
+        user() {
+            return this.$store.getters["user/getUser"];
+        },
+        isLogin() {
+            return this.$store.getters["auth/isLogged"];
+        },
+        availableLocales() {
+            return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale);
+        },
+    },
+    mounted() { },
+    created() { },
+    methods: {
+        logout() {
+            this.$store.dispatch("auth/logout");
+            this.$router.replace("/auth/login");
+        },
+        handlePopups() {
+            this.showPopups.showProfile = !this.showPopups.showProfile;
+            if (this.showPopups.showProfile)
+                document.documentElement.style.overflow = "hidden";
+            else
+                document.documentElement.style.overflow = "auto";
+        },
+        closePopupProfile() {
+            this.showPopups.showProfile
+                ? (this.showPopups.showProfile = !this.showPopups.showProfile)
+                : (this.showPopups.showProfile = false);
+            if (!this.showPopups.showProfile) {
+                document.documentElement.style.overflow = "auto";
+            }
+        },
     }
-  },
-  computed: {
-    user() {
-      return this.$store.getters['user/getUser']
-    },
-    isLogin() {
-      return this.$store.getters['auth/isLogged']
-    },
-    availableLocales() {
-      return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
-    },
-  },
-  mounted() {},
-  created() {},
-  methods: {
-    logout() {
-      this.$store.dispatch('auth/logout')
-      this.$router.replace('/auth/login')
-    },
-    handlePopups() {
-      this.showPopups.showProfile = !this.showPopups.showProfile
-      if (this.showPopups.showProfile)
-        document.documentElement.style.overflow = 'hidden'
-      else document.documentElement.style.overflow = 'auto'
-    },
-    closePopupProfile() {
-      this.showPopups.showProfile
-        ? (this.showPopups.showProfile = !this.showPopups.showProfile)
-        : (this.showPopups.showProfile = false)
-      if (!this.showPopups.showProfile) {
-        document.documentElement.style.overflow = 'auto'
-      }
-    },
-  },
 }
 </script>
 

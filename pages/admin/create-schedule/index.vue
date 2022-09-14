@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#F1F5F8] p-5 rounded-2xl h-screen">
+  <div class="bg-[#F1F5F8] p-5 rounded-2xl min-h-[800px]">
     <div class="flex flex-wrap sm:flex-no-wrap items-center mt-2">
       <button
         class="
@@ -46,11 +46,19 @@
         <tbody>
           <MovieRow
             v-for="(movie, index) in movies"
+            v-show="pageSize * page <= index && index < pageSize * (page + 1)"
             :key="index"
             :movie="movie"
           ></MovieRow>
         </tbody>
       </table>
+      <Pagination
+        class="text-right mr-10"
+        :current-page="page"
+        :page-size="pageSize"
+        :data="movies"
+        @page:update="pageUpdate"
+      ></Pagination>
     </div>
     <AddNewMovie
       v-if="showAddMovie"
@@ -62,11 +70,14 @@
 <script>
 import MovieRow from '../../../components/MovieRow.vue'
 import AddNewMovie from '../../../components/AddNewMovie.vue'
+import Pagination from '../../../components/Pagination.vue'
 export default {
-  components: { MovieRow, AddNewMovie },
+  components: { MovieRow, AddNewMovie, Pagination },
   data() {
     return {
       showAddMovie: false,
+      pageSize: 5,
+      page: 0,
     }
   },
   computed: {
@@ -77,6 +88,11 @@ export default {
     },
   },
   created() {},
+  methods: {
+    pageUpdate(pageNum) {
+      this.page = pageNum
+    },
+  },
 }
 </script>
   

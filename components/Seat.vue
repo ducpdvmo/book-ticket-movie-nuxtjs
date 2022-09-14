@@ -6,8 +6,10 @@
       bg-[#3834347c]
       text-[#eae1e1]
       rounded-md
-      w-10
-      h-10
+      w-8
+      h-8
+      sm:w-10
+      sm:h-10
       text-center
       font-medium
       relative

@@ -1,21 +1,21 @@
 <template>
-  <div class="flex flex-col items-center border w-[60%] mx-auto">
+  <div class="flex flex-col items-center border w-full xl:w-[60%] mx-auto">
     <h2 class="font-bold text-2xl mb-5">{{ $t('combo.titlePage') }}</h2>
     <h4 class="mb-5 text-xl">{{ $t('combo.title') }}</h4>
     <div class="flex mx-auto flex-wrap border">
-      <div class="w-[45%] px-10 flex">
+      <div class="w-[50%] lg:px-10 flex">
         <img
-          class="w-1/3 h-[150px]"
+          class="w-1/3 h-[90px] md:h-[150px]"
           src="https://www.cgv.vn/media/concession/web/62c3ee7b85011_1657007740.png"
           alt=""
         />
-        <div class="ml-5 mb-5">
-          <p class="font-bold text-xl">{{ $t('combo.combo1.title') }}</p>
-          <p>{{ $t('combo.combo1.description.1') }}</p>
-          <p>{{ $t('combo.combo1.description.2') }}</p>
-          <p>{{ $t('combo.combo1.description.3') }}</p>
-          <p>{{ $t('combo.combo1.description.4') }}</p>
-          <p class="font-bold text-lg">
+        <div class="md:ml-5 mb-5">
+          <p class="font-bold lg:text-xl">{{ $t('combo.combo1.title') }}</p>
+          <p class="text-sm">{{ $t('combo.combo1.description.1') }}</p>
+          <p class="text-sm">{{ $t('combo.combo1.description.2') }}</p>
+          <p class="text-sm">{{ $t('combo.combo1.description.3') }}</p>
+          <p class="text-sm">{{ $t('combo.combo1.description.4') }}</p>
+          <p class="font-bold lg:text-lg">
             {{ $t('combo.cost') }}: {{ combo.combo1.cost | formatMoney }} ₫
           </p>
           <div class="flex">
@@ -38,19 +38,19 @@
           </div>
         </div>
       </div>
-      <div class="w-[45%] px-10 flex">
+      <div class="w-[50%] lg:px-10 flex">
         <img
-          class="w-1/3 h-[150px]"
+          class="w-1/3 h-[90px] md:h-[150px]"
           src="https://www.cgv.vn/media/concession/web/62c3ef50cb95e_1657007953.png"
           alt=""
         />
-        <div class="ml-5 mb-5">
-          <p class="font-bold text-xl">{{ $t('combo.combo2.title') }}</p>
-          <p>{{ $t('combo.combo2.description.1') }}</p>
-          <p>{{ $t('combo.combo2.description.2') }}</p>
-          <p>{{ $t('combo.combo2.description.3') }}</p>
-          <p>{{ $t('combo.combo2.description.4') }}</p>
-          <p class="font-bold text-lg">
+        <div class="md:ml-5 mb-5">
+          <p class="font-bold lg:text-xl">{{ $t('combo.combo2.title') }}</p>
+          <p class="text-sm">{{ $t('combo.combo2.description.1') }}</p>
+          <p class="text-sm">{{ $t('combo.combo2.description.2') }}</p>
+          <p class="text-sm">{{ $t('combo.combo2.description.3') }}</p>
+          <p class="text-sm">{{ $t('combo.combo2.description.4') }}</p>
+          <p class="font-bold lg:text-lg">
             {{ $t('combo.cost') }}: {{ combo.combo2.cost | formatMoney }} ₫
           </p>
           <div class="flex">
@@ -73,19 +73,19 @@
           </div>
         </div>
       </div>
-      <div class="w-[45%] px-10 flex">
+      <div class="w-[50%] lg:px-10 flex">
         <img
-          class="w-1/3 h-[150px]"
+          class="w-1/3 h-[90px] md:h-[150px]"
           src="https://www.cgv.vn/media/concession/web/62c3efe0cf615_1657008097.png"
           alt=""
         />
-        <div class="ml-5 mb-5">
-          <p class="font-bold text-xl">{{ $t('combo.combo3.title') }}</p>
-          <p>{{ $t('combo.combo3.description.1') }}</p>
-          <p>{{ $t('combo.combo3.description.2') }}</p>
-          <p>{{ $t('combo.combo3.description.3') }}</p>
-          <p>{{ $t('combo.combo3.description.4') }}</p>
-          <p class="font-bold text-lg">
+        <div class="md:ml-5 mb-5">
+          <p class="font-bold lg:text-xl">{{ $t('combo.combo3.title') }}</p>
+          <p class="text-sm">{{ $t('combo.combo3.description.1') }}</p>
+          <p class="text-sm">{{ $t('combo.combo3.description.2') }}</p>
+          <p class="text-sm">{{ $t('combo.combo3.description.3') }}</p>
+          <p class="text-sm">{{ $t('combo.combo3.description.4') }}</p>
+          <p class="font-bold lg:text-lg">
             {{ $t('combo.cost') }}: {{ combo.combo3.cost | formatMoney }} ₫
           </p>
           <div class="flex">
@@ -108,19 +108,19 @@
           </div>
         </div>
       </div>
-      <div class="w-[45%] px-10 flex">
+      <div class="w-[50%] lg:px-10 flex">
         <img
-          class="w-1/3 h-[150px]"
+          class="w-1/3 h-[90px] md:h-[150px]"
           src="https://www.cgv.vn/media/concession/web/62fe077bd978b_1660815228.png"
           alt=""
         />
-        <div class="ml-5 mb-5">
-          <p class="font-bold text-xl">{{ $t('combo.combo4.title') }}</p>
-          <p>{{ $t('combo.combo4.description.1') }}</p>
-          <p>{{ $t('combo.combo4.description.2') }}</p>
-          <p>{{ $t('combo.combo4.description.3') }}</p>
-          <p>{{ $t('combo.combo4.description.4') }}</p>
-          <p class="font-bold text-lg">
+        <div class="md:ml-5 mb-5">
+          <p class="font-bold lg:text-xl">{{ $t('combo.combo4.title') }}</p>
+          <p class="text-sm">{{ $t('combo.combo4.description.1') }}</p>
+          <p class="text-sm">{{ $t('combo.combo4.description.2') }}</p>
+          <p class="text-sm">{{ $t('combo.combo4.description.3') }}</p>
+          <p class="text-sm">{{ $t('combo.combo4.description.4') }}</p>
+          <p class="font-bold lg:text-lg">
             {{ $t('combo.cost') }}: {{ combo.combo4.cost | formatMoney }} ₫
           </p>
           <div class="flex">
@@ -143,18 +143,18 @@
           </div>
         </div>
       </div>
-      <div class="w-[45%] px-10 flex">
+      <div class="w-[50%] lg:px-10 flex">
         <img
-          class="w-1/3 h-[150px]"
+          class="w-1/3 h-[90px] md:h-[150px]"
           src="https://www.cgv.vn/media/concession/web/62fe09d0e267d_1660815825.png"
           alt=""
         />
-        <div class="ml-5 mb-5">
-          <p class="font-bold text-xl">{{ $t('combo.combo5.title') }}</p>
-          <p>{{ $t('combo.combo5.description.1') }}</p>
-          <p>{{ $t('combo.combo5.description.2') }}</p>
-          <p>{{ $t('combo.combo5.description.3') }}</p>
-          <p>{{ $t('combo.combo5.description.4') }}</p>
+        <div class="md:ml-5 mb-5">
+          <p class="font-bold lg:text-xl">{{ $t('combo.combo5.title') }}</p>
+          <p class="text-sm">{{ $t('combo.combo5.description.1') }}</p>
+          <p class="text-sm">{{ $t('combo.combo5.description.2') }}</p>
+          <p class="text-sm">{{ $t('combo.combo5.description.3') }}</p>
+          <p class="text-sm">{{ $t('combo.combo5.description.4') }}</p>
           <p class="font-bold text-lg">
             {{ $t('combo.cost') }}: {{ combo.combo5.cost | formatMoney }} ₫
           </p>
@@ -178,18 +178,18 @@
           </div>
         </div>
       </div>
-      <div class="w-[45%] px-10 flex">
+      <div class="w-[50%] lg:px-10 flex">
         <img
-          class="w-1/3 h-[150px]"
+          class="w-1/3 h-[90px] md:h-[150px]"
           src="https://www.cgv.vn/media/concession/web/625f7a6cbe151_1650424429.png"
           alt=""
         />
-        <div class="ml-5 mb-5">
-          <p class="font-bold text-xl">{{ $t('combo.combo6.title') }}</p>
-          <p>{{ $t('combo.combo6.description.1') }}</p>
-          <p>{{ $t('combo.combo6.description.2') }}</p>
-          <p>{{ $t('combo.combo6.description.3') }}</p>
-          <p>{{ $t('combo.combo6.description.4') }}</p>
+        <div class="md:ml-5 mb-5">
+          <p class="font-bold lg:text-xl">{{ $t('combo.combo6.title') }}</p>
+          <p class="text-sm">{{ $t('combo.combo6.description.1') }}</p>
+          <p class="text-sm">{{ $t('combo.combo6.description.2') }}</p>
+          <p class="text-sm">{{ $t('combo.combo6.description.3') }}</p>
+          <p class="text-sm">{{ $t('combo.combo6.description.4') }}</p>
           <p class="font-bold text-lg">
             {{ $t('combo.cost') }}: {{ combo.combo6.cost | formatMoney }} ₫
           </p>
@@ -221,65 +221,74 @@
           text-white
           bg-[#343433]
           hover:bg-[#464643]
-          font-medium
+          sm:font-medium
           rounded-lg
-          text-2xl text-justify
+          text-sm
+          lg:text-2xl text-justify
           py-2.5
-          ml-3
-          w-24
-          h-24
+          sm:ml-3
+          lg:w-24
+          lg:h-24
           pl-6
+          sm:pr-3
         "
       >
         <font-awesome-icon
-          class="font-bold text-3xl absolute left-2 top-[35%]"
+          class="font-bold lg:text-3xl absolute left-2 top-[35%]"
           icon="fa-solid fa-angle-left"
         />
-        {{$t('combo.prev')}}
+        {{ $t('combo.prev') }}
       </button>
-      <div class="flex text-white">
+      <div class="flex flex-col md:flex-row justify-center items-center text-white w-4/5">
         <div
           class="
             flex
-            w-[40%]
-            ml-5
+            w-4/5
+            md:w-[40%]
+            md:ml-5
             justify-center
             items-center
-            border-r-2 border-r-[#b0acac]
+            md:border-r-[1px] md:border-r-[#b0acac]
+            border-b-[1px] border-b-[#b0acac]
+            md:border-b-0
           "
         >
-          <img class="w-20 h-28" :src="movie[0].photoUrl" alt="" />
-          <p class="ml-5">{{ movie[0].name }}</p>
+          <img class="sm:w-20 sm:h-28 w-16 h-24" :src="movie[0].photoUrl" alt="" />
+          <p class="sm:ml-5 text-sm">{{ movie[0].name }}</p>
         </div>
         <div
           class="
-            w-[30%]
+            md:w-[30%]
+            md:min-h-[112px]
+            w-4/5
             flex flex-col
             justify-center
             items-center
-            border-r-2 border-r-[#b0acac]
+            md:border-r-[1px] md:border-r-[#b0acac]
+            border-b-[1px] border-b-[#b0acac]
+            md:border-b-0
           "
         >
-          <div class="flex mb-5 justify-between w-4/5">
-            <p>{{$t('combo.cinema')}}:</p>
-            <p>{{ currentTicketRoom[0].cine_name }}</p>
+          <div class="flex sm:mb-5 text-sm justify-between w-full">
+            <p>{{ $t('combo.cinema') }}:</p>
+            <p>{{ $t(`bookTicket.${currentTicketRoom[0].cine_name}`) }}</p>
           </div>
-          <div class="flex justify-between w-4/5">
-            <p>{{$t('combo.showtime')}}:</p>
+          <div class="flex text-sm justify-between w-full">
+            <p>{{ $t('combo.showtime') }}:</p>
             <p>{{ currentTicketRoom[0].show_time }}</p>
           </div>
         </div>
-        <div class="w-[30%] flex flex-col justify-center items-center">
-          <div class="flex justify-between w-4/5">
-            <p>{{$t('combo.totalCostTicket')}}:</p>
+        <div class="md:w-[30%] md:px-5 w-4/5 text-sm flex flex-col justify-center items-center">
+          <div class="flex justify-between w-full">
+            <p>{{ $t('combo.totalCostTicket') }}:</p>
             <p>{{ costSeat | formatMoney }}</p>
           </div>
-          <div class="flex justify-between w-4/5">
-            <p>{{$t('combo.combo')}}:</p>
+          <div class="flex justify-between w-full">
+            <p>{{ $t('combo.combo') }}:</p>
             <p>{{ costCombo() | formatMoney }}</p>
           </div>
-          <div class="flex justify-between w-4/5">
-            <p>{{$t('combo.total')}}:</p>
+          <div class="flex justify-between w-full">
+            <p>{{ $t('combo.total') }}:</p>
             <p>{{ totalCost() | formatMoney }}</p>
           </div>
         </div>
@@ -290,20 +299,21 @@
           text-white
           bg-red-700
           hover:bg-red-800
-          font-medium
+          sm:font-medium
+          text-sm
           rounded-lg
-          text-2xl text-justify
+          lg:text-2xl text-justify
           py-2.5
-          mr-3
-          w-24
-          h-24
+          sm:mr-3
+          lg:w-24
+          lg:h-24
           pl-2
         "
         @click="showPopup = true"
       >
-        {{$t('combo.next')}}
+        {{ $t('combo.next') }}
         <font-awesome-icon
-          class="font-bold text-3xl absolute right-2 top-[35%]"
+          class="font-bold lg:text-3xl absolute right-2 top-[35%]"
           icon="fa-solid fa-angle-right"
         />
       </button>
@@ -319,16 +329,18 @@
           icon="fa-solid fa-cart-arrow-down"
         />
       </template>
-      <template #title_noti
-        ><p>
-          {{$t('bookTicket.contentPayment')}}
+      <template #title_noti>
+        <p>
+          {{ $t('bookTicket.contentPayment') }}
         </p></template
       >
-      <template #handle_name>{{$t('bookTicket.payment')}}</template>
+      <template #handle_name>{{ $t('bookTicket.payment') }}</template>
       <template #title_success>
-        <h2 class="text-xl font-bold py-4">{{$t('bookTicket.paymentSuccess')}}</h2>
+        <h2 class="text-xl font-bold py-4">
+          {{ $t('bookTicket.paymentSuccess') }}
+        </h2>
         <p class="text-sm text-gray-500 px-8">
-          {{$t('bookTicket.thanks')}}
+          {{ $t('bookTicket.thanks') }}
         </p>
       </template>
     </GetPayment>

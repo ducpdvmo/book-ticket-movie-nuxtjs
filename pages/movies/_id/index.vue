@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex relative w-[1280px] mx-auto">
+    <div class="flex xl:w-[1280px] mx-auto">
       <div
         class="
           bg-overview-movie-page
@@ -15,16 +15,41 @@
           'background-image': 'url(' + movie.backgroundUrl + ')',
         }"
       ></div>
-      <div class="flex w-full">
-        <div class="px-[15px] mr-[30px] mb-[60px] w-1/3">
+      <div class="flex w-full flex-col lg:flex-row">
+        <div
+          class="
+            flex flex-col
+            justify-center
+            items-center
+            px-[15px]
+            mx-auto
+            mb-[60px]
+            w-full
+            sm:w-4/5
+            md:w-3/5
+            lg:w-1/3
+            lg:justify-start
+          "
+        >
           <img
             :src="movie.photoUrl"
             alt="movie.name"
-            class="w-full h-[500px] mb-10"
+            class="w-4/5 sm:w-3/5 md:h-[350px] h-[300px] lg:h-[400px] lg:w-4/5 mb-10"
           />
-          <div class="flex flex-col text-center p-[18px]">
+          <div
+            class="
+              flex flex-col
+              justify-center
+              items-center
+              text-center
+              xl:p-[18px]
+              w-full
+            "
+          >
             <button
               class="
+                w-3/5
+                xl:w-4/5
                 focus:outline-none
                 text-white
                 bg-red-700
@@ -37,10 +62,13 @@
                 mb-[15px]
               "
             >
-              <font-awesome-icon class="mr-3" icon="fa-solid fa-play" /> {{$t('movieDetail.watchTrailer')}}
+              <font-awesome-icon class="mr-3" icon="fa-solid fa-play" />
+              {{ $t('movieDetail.watchTrailer') }}
             </button>
             <button
               class="
+                w-3/5
+                xl:w-4/5
                 focus:outline-none
                 text-white
                 bg-yellow-400
@@ -59,18 +87,19 @@
               <font-awesome-icon
                 class="mr-3"
                 icon="fa-solid fa-credit-card"
-              />{{$t('movieDetail.buyTicket')}}
+              />{{ $t('movieDetail.buyTicket') }}
             </button>
           </div>
         </div>
-        <div class="text-white bg-[#00000055] pl-5 w-2/3 mr-[15px]">
-          <h1 class="text-4xl text-white font-bold mb-[25px]">
+        <div class="text-white bg-[#00000055] pl-5 w-full lg:w-2/3 mr-[15px]">
+          <h1 class="text-2xl xl:text-4xl text-white text-center lg:text-left font-bold mb-[25px]">
             {{ movie.name }}
-            <span class="text-2xl font-medium uppercase text-[#d02a4d]">{{
-              movie.year
-            }}</span>
+            <span
+              class="text-xl xl:text-2xl font-medium uppercase text-[#d02a4d]"
+              >{{ movie.year }}</span
+            >
           </h1>
-          <div class="flex items-center mb-8">
+          <div class="flex items-center justify-center lg:justify-start mb-8">
             <a
               href="#"
               class="
@@ -93,7 +122,7 @@
                   border border-dashed border-white
                 "
               />
-              {{$t('movieDetail.addToFavorite')}}</a
+              {{ $t('movieDetail.addToFavorite') }}</a
             >
             <div class="flex items-center justify-center focus-share">
               <a
@@ -118,7 +147,7 @@
                     border border-dashed border-red-500
                     mr-2
                   "
-                />{{$t('movieDetail.share')}}</a
+                />{{ $t('movieDetail.share') }}</a
               >
               <div
                 class="
@@ -156,9 +185,9 @@
             </div>
           </div>
           <div class="rate-star flex items-center mb-[70px]">
-            <div class="overview-rate flex items-center px-3 py-2">
+            <div class="overview-rate flex flex-col items-center px-3 py-2">
               <font-awesome-icon
-                class="text-yellow-400 text-4xl mr-2"
+                class="text-yellow-400 xl:text-4xl mr-2"
                 icon="fa-solid fa-star"
               />
               <div class="ml-[10px] text-sm font-normal">
@@ -166,16 +195,18 @@
                   movie.rating
                 }}</span>
                 /10 <br />
-                <span>0 {{$t('movieDetail.review')}}</span>
+                <span>0 {{ $t('movieDetail.review') }}</span>
               </div>
             </div>
-            <div class="flex ml-[30px] items-center">
-              <p class="pr-2 text-2xl font-normal">{{$t('movieDetail.rateMovie')}}</p>
+            <div class="flex flex-col ml-[30px] items-center">
+              <p class="pr-2 xl:text-2xl font-normal">
+                {{ $t('movieDetail.rateMovie') }}
+              </p>
               <star-rating
                 :max-rating="10"
                 :rating="movie.rating"
                 :read-only="true"
-                :star-size="28"
+                :star-size="20"
                 :show-rating="false"
                 :border-width="0.5"
                 border-color="#9BA6B2"
@@ -186,274 +217,14 @@
             </div>
           </div>
           <div>
-            <tabs
-              :options="{ useUrlFragment: false }"
-              @clicked="tabClicked"
-              @changed="tabChanged"
+            <TabsCus
+              :my-style="{
+                containTitle: 'flex mb-5 justify-center lg:justify-start',
+                title: 'px-4 border-b-[1px] mr-3',
+              }"
+              :tab-items="tabs"
             >
-              <tab name="Over View">
-                <div id="overview" class="">
-                  <div class="flex justify-between">
-                    <div class="w-2/3">
-                      <p>{{ movie.overView }}</p>
-                      <div
-                        class="
-                          media
-                          flex
-                          items-center
-                          justify-between
-                          my-[27px]
-                          pb-2
-                        "
-                      >
-                        <h4 class="text-base text-white font-bold uppercase">
-                          {{$t('movieDetail.media')}}
-                        </h4>
-                        <a class="text-[#4280bf] text-sm cursor-pointer"
-                          >All 5 Videos & 245 Photos
-                          <font-awesome-icon
-                            class="text-xs"
-                            icon="fa-solid fa-chevron-right"
-                          />
-                        </a>
-                      </div>
-                      <div
-                        class="
-                          media
-                          flex
-                          items-center
-                          justify-between
-                          my-[27px]
-                          pb-2
-                        "
-                      >
-                        <h4 class="text-base text-white font-bold uppercase">
-                          {{$t('movieDetail.cast')}}
-                        </h4>
-                        <a class="text-[#4280bf] text-sm cursor-pointer"
-                          >Full Cast & Crew
-                          <font-awesome-icon
-                            class="text-xs"
-                            icon="fa-solid fa-chevron-right"
-                        /></a>
-                      </div>
-                    </div>
-                    <div class="w-1/3">
-                      <div class="mb-[30px] ml-[30px]">
-                        <h6
-                          class="text-base font-bold mb-[10px] text-[#abb7c4]"
-                        >
-                          {{$t('movieDetail.director')}}:
-                        </h6>
-                        <p>
-                          <a>{{ movie.director }}</a>
-                        </p>
-                      </div>
-                      <div class="mb-[30px] ml-[30px]">
-                        <h6
-                          class="text-base font-bold mb-[10px] text-[#abb7c4]"
-                        >
-                          {{$t('movieDetail.producer')}}:
-                        </h6>
-                        <p>
-                          <a>{{ movie.producer }}</a>
-                        </p>
-                      </div>
-                      <div class="mb-[30px] ml-[30px]">
-                        <h6
-                          class="text-base font-bold mb-[10px] text-[#abb7c4]"
-                        >
-                          {{$t('movieDetail.genres')}}:
-                        </h6>
-                        <p>
-                          <a
-                            v-for="(tag, index) in movie.tags"
-                            :key="index"
-                            style="cursor: pointer"
-                            >{{ $t('home.types.' + tag)  }}
-                          </a>
-                        </p>
-                      </div>
-                      <div class="mb-[30px] ml-[30px]">
-                        <h6
-                          class="text-base font-bold mb-[10px] text-[#abb7c4]"
-                        >
-                          {{$t('movieDetail.releaseDate')}}:
-                        </h6>
-                        <p>May 1, 2015 (U.S.A)</p>
-                      </div>
-                      <div class="mb-[30px] ml-[30px]">
-                        <h6
-                          class="text-base font-bold mb-[10px] text-[#abb7c4]"
-                        >
-                          {{$t('movieDetail.runTime')}}:
-                        </h6>
-                        <p>141 min</p>
-                      </div>
-                      <div class="mb-[30px] ml-[30px]">
-                        <h6
-                          class="text-base font-bold mb-[10px] text-[#abb7c4]"
-                        >
-                          {{$t('movieDetail.MMPARating')}}:
-                        </h6>
-                        <p>PG-13</p>
-                      </div>
-                      <div class="mb-[30px] ml-[30px]">
-                        <h6
-                          class="text-base font-bold mb-[10px] text-[#abb7c4]"
-                        >
-                          {{$t('movieDetail.plotKey')}}:
-                        </h6>
-                        <p class="">
-                          <span
-                            class="
-                              text-xs
-                              bg-gray-400
-                              rounded-md
-                              p-2
-                              leading-10
-                            "
-                            ><a>{{$t('movieDetail.superhero')}}</a></span
-                          >
-                          <span
-                            class="
-                              text-xs
-                              bg-gray-400
-                              rounded-md
-                              p-2
-                              leading-10
-                            "
-                            ><a>{{$t('movieDetail.comic')}}</a></span
-                          >
-                          <span
-                            class="
-                              text-xs
-                              bg-gray-400
-                              rounded-md
-                              p-2
-                              leading-10
-                            "
-                            ><a>{{$t('movieDetail.blockbuster')}}</a></span
-                          >
-                          <span
-                            class="
-                              text-xs
-                              bg-gray-400
-                              rounded-md
-                              p-2
-                              leading-10
-                            "
-                            ><a>{{$t('movieDetail.finalBattle')}}</a></span
-                          >
-                        </p>
-                      </div>
-                      <div class="mb-14 ml-[30px]">
-                        <img
-                          class="w-full"
-                          src="https://fit.haui.edu.vn/media/76/t76930.jpg"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </tab>
-              <tab name="Review">
-                <div id="reviews" class="tab review">
-                  <div class="">
-                    <div class="flex justify-between items-center mb-10">
-                      <div class="">
-                        <h3 class="text-xl">{{$t('movieDetail.review')}}</h3>
-                        <h2 class="text-2xl text-[#6497d9]">
-                          {{ movie.name }}
-                        </h2>
-                      </div>
-                      <button
-                        class="
-                          text-white
-                          bg-red-700
-                          hover:bg-red-800
-                          focus:outline-none focus:ring-4 focus:ring-red-300
-                          font-medium
-                          rounded-full
-                          text-sm
-                          px-5
-                          py-2.5
-                          text-center
-                          mr-2
-                          mt-5
-                        "
-                      >
-                        {{$t('movieDetail.writeReview')}}
-                      </button>
-                    </div>
-                    <div
-                      class="container-movie flex items-center justify-between"
-                    >
-                      <p>
-                        {{$t('movieDetail.found')}}
-                        <span class="text-[#4280bf] text-base">3 {{$t('movieDetail.review')}}</span>
-                        {{$t('movieDetail.inTotal')}}
-                      </p>
-                      <div class="relative">
-                        <label for="filter-review">{{$t('movieDetail.filterBy')}}:</label>
-                        <select
-                          id="filter-review"
-                          v-click-outside="closePopupOptions"
-                          class="
-                            appearance-none
-                            cursor-pointer
-                            bg-gray-700
-                            text-white
-                            font-medium
-                            py-3
-                            px-8
-                            border-gray-500
-                            leading-tight
-                            focus:outline-none
-                            focus:bg-gray-500
-                            focus:border-gray-500
-                          "
-                          @click="showOptions = !showOptions"
-                        >
-                          <option value="popularity">
-                            {{$t('movieDetail.popularDes')}}
-                          </option>
-                          <option value="popularity">
-                            {{$t('movieDetail.popularInc')}}
-                          </option>
-                          <option value="rating">{{$t('movieDetail.ratingDes')}}</option>
-                          <option value="rating">{{$t('movieDetail.ratingAsc')}}</option>
-                          <option value="date">{{$t('movieDetail.releaseDes')}}</option>
-                          <option value="date">{{$t('movieDetail.releaseAsc')}}</option>
-                        </select>
-                        <div
-                          :class="{
-                            active: showOptions,
-                            notActive: !showOptions,
-                          }"
-                          class="
-                            pointer-events-none
-                            text-3xl
-                            absolute
-                            inset-y-0
-                            right-2.5
-                            flex
-                            items-center
-                            px-2
-                            text-white
-                            -rotate-90
-                          "
-                        >
-                          <font-awesome-icon icon="fa-solid fa-caret-down" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="review-container"></div>
-                  </div>
-                </div>
-              </tab>
-            </tabs>
+            </TabsCus>
           </div>
         </div>
       </div>
@@ -470,6 +241,7 @@
         h-full
         bg-[#191a19bb]
         justify-center
+        z-50
       "
     >
       <MovieSchedule
@@ -484,9 +256,16 @@
 import axios from 'axios'
 import 'vue-tabs-component/docs/resources/tabs-component.css'
 import MovieSchedule from '../../../components/MovieSchedule.vue'
+import OverView from '../../../components/OverView.vue'
+import Review from '../../../components/Review.vue'
 export default {
   name: 'MovieDetail',
   components: { MovieSchedule },
+  provide() {
+    return {
+      movie: this.movie,
+    }
+  },
   layout: 'home',
   middleware: ['keepUserLogin', 'check-login'],
   async asyncData(context) {
@@ -505,19 +284,32 @@ export default {
     return {
       showOptions: false,
       showTableSchedule: false,
+      tabs: [
+        { title: 'overView', component: OverView },
+        {
+          title: 'review',
+          component: Review,
+        },
+      ],
+      sizeStar: null,
     }
   },
   computed: {},
   created() {
     this.filterMovieSchedule()
   },
+  mounted() {
+    if (window.innerWidth < 640) this.sizeStar = 1
+  },
   methods: {
     filterMovieSchedule() {
       this.movieschedule.forEach((schedule, index) => {
         schedule.cinemas.forEach((item, index) => {
           item.cinema.show_time = [...Object.values(item.cinema.show_time)]
-          console.log(item.cinema.show_time)
-          item.cinema.show_time = item.cinema.show_time.filter(item=>item.movie_id.toString() === this.$route.params.id.toString())
+          item.cinema.show_time = item.cinema.show_time.filter(
+            (item) =>
+              item.movie_id.toString() === this.$route.params.id.toString()
+          )
         })
       })
     },
@@ -612,5 +404,9 @@ export default {
 .notActive {
   transition: all 0.1s linear;
   rotate: 0deg;
+}
+.vue-star-rating[data-v-fde73a0c] {
+  display: flex;
+  flex-wrap: wrap !important;
 }
 </style>

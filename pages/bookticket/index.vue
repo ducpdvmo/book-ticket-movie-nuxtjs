@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#1615158a] flex w-[1280px] mx-auto justify-around">
+  <div class="flex flex-col lg:flex-row mx-auto mb-10 justify-around w-full xl:w-[1280px]">
     <SeatCinema
       :list-seat="currentTicketRoom[0].listseat"
       @targetSeat="targetSeat"
@@ -36,12 +36,12 @@
             font-medium
             rounded-lg
             text-sm
-            px-5
+            px-3
             py-2.5
             text-center
             inline-flex
             items-center
-            mx-4
+            mr-4
           "
           @click="setSeatSelected"
         >
@@ -56,12 +56,11 @@
             font-medium
             rounded-lg
             text-sm
-            px-5
+            px-3
             py-2.5
             text-center
             inline-flex
             items-center
-            mx-4
           "
           @click="showPopup = true"
         >

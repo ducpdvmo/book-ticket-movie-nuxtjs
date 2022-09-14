@@ -2,7 +2,6 @@
   <div
     class="
       min-w-screen
-      h-screen
       animated
       fadeIn
       faster

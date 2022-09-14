@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[75%] flex flex-col rounded-3xl">
+  <div class="w-full lg:w-[75%] flex flex-col rounded-3xl">
     <div class="font-bold">
       <nuxt-link class="text-lg" :to="{name: `index___${$i18n.locale}`}">{{$t('homeLayout.home')}}</nuxt-link>
       <nuxt-link class="text-lg" :to="{name: `user-profile___${$i18n.locale}`}"
@@ -15,22 +15,28 @@
       <div class="flex items-center p-5 border-b border-gray-200">
         <h2 class="font-medium text-base mr-auto">{{$t('profile.displayInfor')}}</h2>
       </div>
-      <div class="flex p-5">
+      <div class="flex flex-col md:flex-row justify-center items-center mt-5 md:p-5">
         <div
           class="
-            w-1/3
+            md:w-1/3
+            sm:w-1/2
+            w-4/5
             border
             flex flex-col
             justify-center
             items-center
-            p-5
+            lg:p-5
+            p-3
             rounded-md
           "
         >
           <div
             class="
-              w-40
-              h-40
+              lg:w-40
+              lg:h-40
+              w-4/5
+              md:w-full
+              h-auto
               relative
               image-fit
               cursor-pointer
@@ -42,7 +48,7 @@
           >
             <img
               ref="avt"
-              class="w-40 h-40 rounded-md"
+              class="lg:w-40 lg:h-40 w-full h-full rounded-md"
               src="https://dashboard.imkit.io/dist/images/profile-9.jpg"
               alt=""
             />
@@ -72,7 +78,7 @@
               />
             </div>
           </div>
-          <div class="w-40 mx-auto cursor-pointer relative mt-5">
+          <div class="w-4/5 md:w-full lg:w-40 mx-auto cursor-pointer relative mt-5">
             <button
               class="
                 text-white
@@ -81,7 +87,7 @@
                 font-medium
                 rounded-lg
                 text-sm
-                px-5
+                px-3
                 py-2.5
                 w-full
               "
@@ -104,7 +110,7 @@
             />
           </div>
         </div>
-        <div class="flex flex-col w-2/3 ml-5">
+        <div class="flex flex-col w-full md:w-2/3 mt-5 md:mt-0 ml-5">
           <div>
             <label>Email</label>
             <input
