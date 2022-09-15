@@ -25,6 +25,7 @@
       class="
         flex
         w-full
+        h-[52px]
         border-t-[1px] border-b-[1px]
         lg:border-none
         justify-center
@@ -35,7 +36,6 @@
       <div
         class="
           w-1/3
-          md:w-3/5
           min-h-[50px]
           text-center
           border-r-[1px]
@@ -100,25 +100,22 @@
       <div
         class="
           w-1/3
-          min-h-[50px]
+          lg:w-auto
+          h-full
+          lg:h-auto
           text-center
           flex
           justify-center
           items-center
           border-r-[1px]
-          lg:border-none
-          lg:w-auto
-          lg:justify-start
-          lg:bg-[#8cae55]
-          lg:rounded-md
-          lg:pl-3
+          lg:border-none lg:justify-start lg:bg-[#8cae55] lg:rounded-md lg:pl-3
         "
       >
         <font-awesome-icon icon="fa-solid fa-language" />
         <nuxt-link
           v-for="locale in availableLocales"
           :key="locale.code"
-          class="py-2 px-3 rounded-md font-bold"
+          class="py-1 px-3 rounded-md xl:font-bold"
           :to="switchLocalePath(locale.code)"
           >{{ locale.name }}</nuxt-link
         >
@@ -132,16 +129,15 @@
           justify-center
           items-center
           relative
-          lg:w-[30%]
         "
       >
         <font-awesome-icon
-          v-show="!lgScreen && !user"
+          v-show="mdScreen && !user"
           class="w-5 h-5 px-4"
           icon="fa-solid fa-user"
           @click="showOptionUser = !showOptionUser"
         />
-        <div v-show="showOptionUser">
+        <div>
           <div
             v-if="!user || !isLogin"
             class="
@@ -154,6 +150,7 @@
               justify-center
               items-center
               min-w-[250px]
+              lg:min-w-[200px]
               absolute
               top-[100%]
               right-0
@@ -201,7 +198,8 @@
               relative
               lg:mr-5
               xl:mr-16
-              2xl:mr-20
+              2xl:mr-20 
+              lg:ml-5
             "
           >
             <div
@@ -230,15 +228,14 @@
                 v-show="showPopups.showProfile"
                 class="
                   absolute
-                  top-[100%]
                   z-50
                   bg-green-200
                   rounded-2xl
                   lg:right-0
-                  right-
                   text-black
                   w-[200px]
                   xl:w-[250px]
+                  top-[113%]
                   lg:top-[187%]
                 "
               >
@@ -275,6 +272,7 @@ export default {
     return {
       showMenu: false,
       showOptionUser: false,
+      mdScreen: false,
       lgScreen: false,
       xlScreen: false,
       showPopups: {
@@ -301,15 +299,17 @@ export default {
       this.showMenu = true
       this.lgScreen = true
       this.showOptionUser = true
+      this.mdScreen = false
     } else if (window.innerWidth > 1280) {
       this.showMenu = true
       this.lgScreen = true
       this.showOptionUser = true
       this.xlScreen = true
+      this.mdScreen = false
     } else {
       this.lgScreen = false
       this.xlScreen = true
-      this.showOptionUser = true
+      this.mdScreen = true
     }
     window.addEventListener('resize', () => {
       if (window.innerWidth > 1024 && window.innerWidth < 1280) {
@@ -317,25 +317,25 @@ export default {
         this.lgScreen = true
         this.showOptionUser = true
         this.xlScreen = false
+        this.mdScreen = false
       } else if (window.innerWidth > 1280) {
         this.xlScreen = true
         this.showMenu = true
         this.lgScreen = true
         this.showOptionUser = true
+        this.mdScreen = false
       } else {
         this.lgScreen = false
         this.xlScreen = true
         this.showMenu = false
-        this.showOptionUser = true
+        this.mdScreen = true
+        this.showOptionUser = false
       }
     })
   },
   methods: {
     handlePopups() {
       this.showPopups.showProfile = !this.showPopups.showProfile
-      if (this.showPopups.showProfile || this.showPopups.showOptions)
-        document.documentElement.style.overflow = 'hidden'
-      else document.documentElement.style.overflow = 'auto'
     },
     logout() {
       this.$store.dispatch('auth/logout')

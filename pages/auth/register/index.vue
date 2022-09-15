@@ -31,7 +31,16 @@
       @submit.prevent="onSubmit"
     >
       <h1 class="text-center text-3xl">Register</h1>
-      <div class="flex flex-col items-center justify-center space-y-2 w-full sm:w-96">
+      <div
+        class="
+          flex flex-col
+          items-center
+          justify-center
+          space-y-2
+          w-full
+          sm:w-96
+        "
+      >
         <div class="flex flex-col w-full">
           <label class="text-sm text-left font-light" for="email">Email</label>
           <input
@@ -59,7 +68,16 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-col items-center justify-center space-y-2 w-full sm:w-96">
+      <div
+        class="
+          flex flex-col
+          items-center
+          justify-center
+          space-y-2
+          w-full
+          sm:w-96
+        "
+      >
         <div class="flex flex-col w-full">
           <label class="text-sm text-left font-light" for="password"
             >Password</label
@@ -89,7 +107,16 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-col items-center justify-center space-y-2 w-full sm:w-96">
+      <div
+        class="
+          flex flex-col
+          items-center
+          justify-center
+          space-y-2
+          w-full
+          sm:w-96
+        "
+      >
         <div class="flex flex-col w-full">
           <label
             class="text-sm text-left font-light float-left"
@@ -207,9 +234,18 @@ export default {
             }
             await this.$store.dispatch('user/initUser', newUser)
             this.$store.commit('user/setUser', newUser)
+            const payload = {
+              methods: 'post',
+              id: null,
+              dataBill: {
+                user_id: res.result.localId,
+                bills: [],
+              },
+            }
+            await this.$store.dispatch('bill/setBillOfUserId', payload)
           })
           .then(() => {
-            this.$router.push('/')
+            window.location.assign('/')
           })
           .catch((e) => {
             this.error = e.data.error.message

@@ -2,13 +2,12 @@
   <div class="flex flex-col justify-center relative">
     <header class="flex flex-col justify-center items-center">
       <nav-bar></nav-bar>
-      <div class="mt-[150px] w-11/12 flex justify-center">
+      <div class="mt-[150px] w-11/12 flex relative justify-center">
         <div class="flex relative px-[15px] my-8 h-14 w-full xl:w-[1280px]">
           <div class="w-1/5 mb-6 h-14 lg:h-16">
             <div class="relative h-full">
               <select
                 v-model="typeSearch"
-                v-click-outside="closePopupOptions"
                 class="
                   cursor-pointer
                   h-full
@@ -65,7 +64,6 @@
             <input
               id="search"
               v-model="querySearch"
-              v-click-outside="closedSearch"
               class="
                 h-full
                 block
@@ -110,54 +108,86 @@
         </div>
         <div
           v-if="queryResult.length > 0"
-          class="absolute xl:w-[1250px] lg:ml-[15px] p-5 bg-[#080d13ed] z-50"
+          class="absolute top-[100%] flex justify-center items-center w-full"
         >
-          <div v-if="typeSearch == 'movies'" class="h-96 overflow-y-auto">
-            <nuxt-link
-              v-for="(result, index) in queryResult"
-              :key="index"
-              :to="{
-                name: `movies-id___${$i18n.locale}`,
-                params: { id: result.movie_id },
-              }"
+          <div class="2xl:w-4/5 w-full p-5 bg-[#080d13ed] z-50 relative">
+            <div
               class="
-                text-white
-                mb-5
-                lg:py-3
-                p-2
-                lg:px-8
-                cursor-pointer
+                tooltip
+                w-5
+                h-5
                 flex
                 items-center
-                bg-gray-300
+                justify-center
+                absolute
+                rounded-full
+                text-white
+                right-0
+                top-0
+                -mr-2
+                -mt-2
               "
+              @click="closedSearch()"
             >
-              <div
+              <font-awesome-icon
+                class="w-7 h-7 text-red-500 bg-white rounded-full"
+                icon="fa-solid fa-circle-xmark"
+              />
+            </div>
+            <div v-if="typeSearch == 'movies'" class="h-96 overflow-y-auto">
+              <nuxt-link
+                v-for="(result, index) in queryResult"
+                :key="index"
+                :to="{
+                  name: `movies-id___${$i18n.locale}`,
+                  params: { id: result.movie_id },
+                }"
                 class="
-                  py-2
-                  lg:pl-4
-                  mr-5
+                  text-white
+                  mb-5
+                  lg:py-3
+                  p-2
+                  lg:px-8
+                  cursor-pointer
                   flex
                   items-center
-                  cursor-pointer
-                  w-full
-                  hover:scale-105
-                  hover:transition-all
-                  hover:ease-in-out
-                  hover:duration-200
-                  hover:bg-[#c0b9b9]
+                  bg-gray-300
                 "
               >
-                <img
-                  class="w-1/5 h-20 center lg:w-36 lg:h-24"
-                  :src="result.photoUrl"
-                  alt=""
-                />
-                <span class="w-4/5 text-base lg:text-2xl lgfont-bold ml-5">{{
-                  result.name
-                }}</span>
-              </div>
-            </nuxt-link>
+                <div
+                  class="
+                    py-2
+                    mr-5
+                    flex
+                    items-center
+                    cursor-pointer
+                    w-full
+                    hover:scale-105
+                    hover:transition-all
+                    hover:ease-in-out
+                    hover:duration-200
+                    hover:bg-[#c0b9b9]
+                  "
+                >
+                  <img
+                    class="w-1/5 sm:w-[90px] h-20 center lg:h-24"
+                    :src="result.photoUrl"
+                    alt=""
+                  />
+                  <span
+                    class="
+                      w-4/5
+                      text-base
+                      md:text-lg
+                      lg:text-2xl
+                      lgfont-bold
+                      ml-5
+                    "
+                    >{{ result.name }}</span
+                  >
+                </div>
+              </nuxt-link>
+            </div>
           </div>
         </div>
       </div>
@@ -304,150 +334,147 @@
 <script>
 import NavBar from '../components/NavBar.vue'
 export default {
-    name: "LayoutHome",
-    components: { NavBar },
-    transition: "home",
-    data() {
-        return {
-            showPopups: {
-                showProfile: null,
-                showOptions: null,
-            },
-            typeSearch: "movies",
-            querySearch: "",
-            queryResult: [],
-            unsubscribleListenSeachInput: null,
-            avatarNull: "https://i.pinimg.com/280x280_RS/2e/45/66/2e4566fd829bcf9eb11ccdb5f252b02f.jpg",
-            showMenu: false,
-            showOptionUser: false,
-            lgScreen: false,
-            xlScreen: false,
-        };
-    },
-    computed: {
-        movies() {
-            return this.$store.getters["movies/movies"];
-        },
-        user() {
-            return this.$store.getters["user/getUser"];
-        },
-        isLogin() {
-            return this.$store.getters["auth/isLogged"];
-        },
-        availableLocales() {
-            return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale);
-        },
-    },
-    mounted() {
-        if (window.innerWidth > 1024 && window.innerWidth < 1280) {
-            this.showMenu = true;
-            this.lgScreen = true;
-            this.showOptionUser = true;
-        }
-        else if (window.innerWidth > 1280) {
-            this.showMenu = true;
-            this.lgScreen = true;
-            this.showOptionUser = true;
-            this.xlScreen = true;
-        }
-        else {
-            this.lgScreen = false;
-            this.xlScreen = true;
-        }
-        window.addEventListener("resize", () => {
-            if (window.innerWidth > 1024 && window.innerWidth < 1280) {
-                this.showMenu = true;
-                this.lgScreen = true;
-                this.showOptionUser = true;
-                this.xlScreen = false;
-            }
-            else if (window.innerWidth > 1280) {
-                this.xlScreen = true;
-                this.showMenu = true;
-                this.lgScreen = true;
-                this.showOptionUser = true;
-            }
-            else {
-                this.lgScreen = false;
-                this.xlScreen = true;
-                this.showMenu = false;
-                this.showOptionUser = false;
-            }
-        });
-        const searchInputEl = document.getElementById("search");
-        this.unsubscribleListenSeachInput = searchInputEl.addEventListener("focus", () => {
-            const bodyEl = document.querySelector("body");
-            bodyEl.style.height = "100vh";
-            bodyEl.style.overflowY = "hidden";
-        });
-    },
-    created() {
-        this.handleOptionUser();
-    },
-    methods: {
-        handleOptionUser() {
-            if (this.user && this.isLogin)
-                this.showOptionUser = true;
-            else
-                return false;
-        },
-        logout() {
-            this.$store.dispatch("auth/logout");
-            this.$router.replace("/auth/login");
-        },
-        queryData() {
-            if (this.querySearch.toLowerCase() !== "") {
-                if (this.typeSearch === "movies") {
-                    this.queryResult = this.movies.filter((movie) => {
-                        return movie.name
-                            .toLowerCase()
-                            .includes(this.querySearch.toLowerCase());
-                    });
-                }
-            }
-            else {
-                this.queryResult = [];
-            }
-        },
-        closedSearch() {
-            this.querySearch = "";
-            this.queryResult = [];
-            const bodyEl = document.querySelector("body");
-            bodyEl.style.height = "auto";
-            bodyEl.style.overflowY = "auto";
-        },
-        handlePopups() {
-            this.showPopups.showProfile = !this.showPopups.showProfile;
-            if (this.showPopups.showProfile || this.showPopups.showOptions)
-                document.documentElement.style.overflow = "hidden";
-            else
-                document.documentElement.style.overflow = "auto";
-        },
-        handlePopupsOptions() {
-            this.showPopups.showOptions = !this.showPopups.showOptions;
-            if (this.showPopups.showProfile || this.showPopups.showOptions)
-                document.documentElement.style.overflow = "hidden";
-            else
-                document.documentElement.style.overflow = "auto";
-        },
-        closePopupProfile() {
-            this.showPopups.showProfile
-                ? (this.showPopups.showProfile = !this.showPopups.showProfile)
-                : (this.showPopups.showProfile = false);
-            if (!this.showPopups.showProfile) {
-                document.documentElement.style.overflow = "auto";
-            }
-        },
-        closePopupOptions() {
-            this.showPopups.showOptions
-                ? (this.showPopups.showOptions = !this.showPopups.showOptions)
-                : (this.showPopups.showOptions = false);
-            if (!this.showPopups.showOptions &&
-                this.showPopups.showProfile === null) {
-                document.documentElement.style.overflow = "auto";
-            }
-        },
+  name: 'LayoutHome',
+  components: { NavBar },
+  transition: 'home',
+  data() {
+    return {
+      showPopups: {
+        showProfile: null,
+        showOptions: null,
+      },
+      typeSearch: 'movies',
+      querySearch: '',
+      queryResult: [],
+      unsubscribleListenSeachInput: null,
+      avatarNull:
+        'https://i.pinimg.com/280x280_RS/2e/45/66/2e4566fd829bcf9eb11ccdb5f252b02f.jpg',
+      showMenu: false,
+      showOptionUser: false,
+      lgScreen: false,
+      xlScreen: false,
     }
+  },
+  computed: {
+    movies() {
+      return this.$store.getters['movies/movies']
+    },
+    user() {
+      return this.$store.getters['user/getUser']
+    },
+    isLogin() {
+      return this.$store.getters['auth/isLogged']
+    },
+    availableLocales() {
+      return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
+    },
+  },
+  mounted() {
+    if (window.innerWidth > 1024 && window.innerWidth < 1280) {
+      this.showMenu = true
+      this.lgScreen = true
+      this.showOptionUser = true
+    } else if (window.innerWidth > 1280) {
+      this.showMenu = true
+      this.lgScreen = true
+      this.showOptionUser = true
+      this.xlScreen = true
+    } else {
+      this.lgScreen = false
+      this.xlScreen = true
+    }
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1024 && window.innerWidth < 1280) {
+        this.showMenu = true
+        this.lgScreen = true
+        this.showOptionUser = true
+        this.xlScreen = false
+      } else if (window.innerWidth > 1280) {
+        this.xlScreen = true
+        this.showMenu = true
+        this.lgScreen = true
+        this.showOptionUser = true
+      } else {
+        this.lgScreen = false
+        this.xlScreen = true
+        this.showMenu = false
+        this.showOptionUser = false
+      }
+    })
+    const searchInputEl = document.getElementById('search')
+    this.unsubscribleListenSeachInput = searchInputEl.addEventListener(
+      'focus',
+      () => {
+        const bodyEl = document.querySelector('body')
+        bodyEl.style.height = '100vh'
+        bodyEl.style.overflowY = 'hidden'
+      }
+    )
+  },
+  created() {
+    this.handleOptionUser()
+  },
+  methods: {
+    handleOptionUser() {
+      if (this.user && this.isLogin) this.showOptionUser = true
+      else return false
+    },
+    logout() {
+      this.$store.dispatch('auth/logout')
+      this.$router.replace('/auth/login')
+    },
+    queryData() {
+      if (this.querySearch.toLowerCase() !== '') {
+        if (this.typeSearch === 'movies') {
+          this.queryResult = this.movies.filter((movie) => {
+            return movie.name
+              .toLowerCase()
+              .includes(this.querySearch.toLowerCase())
+          })
+        }
+      } else {
+        this.queryResult = []
+      }
+    },
+    closedSearch() {
+      this.querySearch = ''
+      this.queryResult = []
+      const bodyEl = document.querySelector('body')
+      bodyEl.style.height = 'auto'
+      bodyEl.style.overflowY = 'auto'
+    },
+    handlePopups() {
+      this.showPopups.showProfile = !this.showPopups.showProfile
+      if (this.showPopups.showProfile || this.showPopups.showOptions)
+        document.documentElement.style.overflow = 'hidden'
+      else document.documentElement.style.overflow = 'auto'
+    },
+    handlePopupsOptions() {
+      this.showPopups.showOptions = !this.showPopups.showOptions
+      if (this.showPopups.showProfile || this.showPopups.showOptions)
+        document.documentElement.style.overflow = 'hidden'
+      else document.documentElement.style.overflow = 'auto'
+    },
+    closePopupProfile() {
+      this.showPopups.showProfile
+        ? (this.showPopups.showProfile = !this.showPopups.showProfile)
+        : (this.showPopups.showProfile = false)
+      if (!this.showPopups.showProfile) {
+        document.documentElement.style.overflow = 'auto'
+      }
+    },
+    closePopupOptions() {
+      this.showPopups.showOptions
+        ? (this.showPopups.showOptions = !this.showPopups.showOptions)
+        : (this.showPopups.showOptions = false)
+      if (
+        !this.showPopups.showOptions &&
+        this.showPopups.showProfile === null
+      ) {
+        document.documentElement.style.overflow = 'auto'
+      }
+    },
+  },
 }
 </script>
 

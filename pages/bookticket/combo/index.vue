@@ -476,7 +476,7 @@ export default {
         totalPay: this.totalCost(),
       }
       let tempBill
-      if (this.billOfCurrentUser.length !== 0) {
+      if (this.billOfCurrentUser[0]?.bills?.length) {
         tempBill = JSON.parse(JSON.stringify(this.billOfCurrentUser[0]))
         delete tempBill.id
         if (Array.isArray(tempBill.bills)) tempBill.bills.push(bill)
@@ -492,7 +492,7 @@ export default {
             ? this.billOfCurrentUser[0].id
             : null,
         dataBill:
-          this.billOfCurrentUser.length !== 0
+        this.billOfCurrentUser[0].bills
             ? tempBill
             : {
                 user_id: this.$store.getters['user/getUser'].uid,

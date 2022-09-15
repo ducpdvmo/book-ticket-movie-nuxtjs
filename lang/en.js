@@ -191,6 +191,7 @@ export default {
     user: 'User',
     Male: 'Male',
     Female: 'Female',
+    Other: 'Other'
   },
   bills: {
     movieName: "Movie's Name",

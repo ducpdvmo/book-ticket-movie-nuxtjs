@@ -190,6 +190,7 @@ export default {
     user: 'Người dùng',
     Male: 'Nam',
     Female: 'Nữ',
+    Other: 'Khác'
   },
   bills: {
     movieName: 'Tên Phim',

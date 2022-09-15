@@ -2,7 +2,7 @@
   <div id="home">
     <div
       v-if="movies"
-      class="xl:w-[1280px] flex flex-col justify-center mx-auto"
+      class="xl:w-[1280px] 2xl:w-[1380px] flex flex-col justify-center mx-auto"
     >
       <div class="flex justify-end">
         <div class="flex items-center justify-start">
@@ -301,6 +301,14 @@ export default {
 .slick-slider {
   display: flex !important;
 }
+@media (min-width: 640px) {
+  .custom-arrow.slick-prev {
+    left: 20px !important;
+  }
+  .custom-arrow.slick-next {
+    right: 20px !important;
+  }
+}
 @media (min-width: 768px) {
   .custom-arrow.slick-prev {
     left: 6px !important;
@@ -311,10 +319,10 @@ export default {
 }
 @media (min-width: 1280px) {
   .custom-arrow.slick-prev {
-    left: 20px !important;
+    left: 8px !important;
   }
   .custom-arrow.slick-next {
-    right: 20px !important;
+    right: 8px !important;
   }
 }
 @media (min-width: 1536px) {

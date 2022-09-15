@@ -44,7 +44,7 @@
 
 <script>
 export default {
-  layout: 'default',
+  layout: 'user',
   middleware: ['keepUserLogin', 'check-login', 'auth'],
   data(){
     return{

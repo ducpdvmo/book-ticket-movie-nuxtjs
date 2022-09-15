@@ -1,26 +1,32 @@
 <template>
   <div class="min-h-full w-full lg:w-[75%] rounded-3xl">
     <div class="font-bold">
-      <nuxt-link class="md:text-lg text-sm" :to="{ name: `index___${$i18n.locale}` }">{{
-        $t('homeLayout.home')
-      }}</nuxt-link>
+      <nuxt-link
+        class="md:text-lg text-sm"
+        :to="{ name: `index___${$i18n.locale}` }"
+        >{{ $t('homeLayout.home') }}</nuxt-link
+      >
       <nuxt-link
         class="md:text-lg text-sm"
         :to="{ name: `user-profile___${$i18n.locale}` }"
         ><font-awesome-icon class="text-sm" icon="fa-solid fa-chevron-right" />
         {{ $t('profile.user') }}</nuxt-link
       >
-      <nuxt-link class="md:text-lg text-sm" :to="{ name: `user-bill___${$i18n.locale}` }"
+      <nuxt-link
+        class="md:text-lg text-sm"
+        :to="{ name: `user-bill___${$i18n.locale}` }"
         ><font-awesome-icon class="text-sm" icon="fa-solid fa-chevron-right" />
         {{ $t('profile.bills') }}</nuxt-link
       >
     </div>
     <div class="my-5 w-full">
-      <table class="w-full">
+      <table v-if="tempBills?.bills.length" class="w-full">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 w-full">
           <tr>
             <th scope="col" class="p-4">STT</th>
-            <th scope="col" class="py-3 md:px-3">{{ $t('bills.movieName') }}</th>
+            <th scope="col" class="py-3 md:px-3">
+              {{ $t('bills.movieName') }}
+            </th>
             <th scope="col" class="py-3 md:px-3">{{ $t('bills.showTime') }}</th>
             <th scope="col" class="py-3 md:px-3">{{ $t('bills.quatity') }}</th>
             <th scope="col" class="py-3 md:px-3">{{ $t('bills.cost') }}</th>
@@ -38,8 +44,12 @@
           >
         </tbody>
       </table>
+      <p v-else>
+        Danh sách hóa đơn trống, vui lòng đặt vé để sử dụng tính năng này!
+      </p>
     </div>
     <Pagination
+      v-show="tempBills.bills.length"
       class="text-right mr-10"
       :current-page="page"
       :page-size="pageSize"
@@ -71,6 +81,7 @@ export default {
   },
   created() {
     this.handelDataBill()
+    console.log(this.tempBills.bills)
   },
   methods: {
     handelDataBill() {

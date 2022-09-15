@@ -291,9 +291,9 @@
                   <label>{{$t('profile.sex')}}</label>
                   <div class="border bg-gray-100 py-2 px-3 rounded-md mt-2">
                     <select v-model="user.sex" class="w-full">
-                      <option>{{$t('profile.Male')}}</option>
-                      <option>{{$t('profile.Female')}}</option>
-                      <option>{{$t('profile.other')}}</option>
+                      <option value="Male">{{$t('profile.Male')}}</option>
+                      <option value="Female">{{$t('profile.Female')}}</option>
+                      <option value="Other">{{$t('profile.other')}}</option>
                     </select>
                   </div>
                 </div>
