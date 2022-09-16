@@ -261,6 +261,7 @@ export default {
     createSuccess: 'Create Successfully',
     desCreated: 'The Movie is created!',
     voucher: 'Voucher',
+    trailer: 'TrailerID'
   },
   tabs: {
     monday: 'Monday',

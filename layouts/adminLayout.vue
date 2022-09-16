@@ -20,6 +20,33 @@
           />
         </h1>
         <div class="flex mr-10 items-center">
+          <div
+            class="
+              w-1/3
+              lg:w-auto
+              h-full
+              lg:h-auto
+              text-center
+              flex
+              justify-center
+              items-center
+              lg:border-none
+              lg:justify-start
+              lg:bg-[#8cae55]
+              lg:rounded-md
+              lg:pl-3
+              mr-5
+            "
+          >
+            <font-awesome-icon icon="fa-solid fa-language" />
+            <nuxt-link
+              v-for="locale in availableLocales"
+              :key="locale.code"
+              class="py-1 px-3 rounded-md xl:font-bold"
+              :to="switchLocalePath(locale.code)"
+              >{{ locale.name }}</nuxt-link
+            >
+          </div>
           <div class="mr-6">
             <div class="cursor-pointer">
               <font-awesome-icon icon="fa-solid fa-bell" />
@@ -57,7 +84,7 @@
                 <ul>
                   <li class="p-2">
                     <nuxt-link
-                      :to="{name: `admin-dashboard___${$i18n.locale}`}"
+                      :to="{ name: `admin-dashboard___${$i18n.locale}` }"
                       class="
                         flex
                         items-center
@@ -77,7 +104,7 @@
                   </li>
                   <li class="p-2 border-t">
                     <nuxt-link
-                      :to="{name: `admin-create-schedule___${$i18n.locale}`}"
+                      :to="{ name: `admin-create-schedule___${$i18n.locale}` }"
                       class="
                         flex
                         items-center
@@ -130,6 +157,11 @@ export default {
     return {
       show: false,
     }
+  },
+  computed: {
+    availableLocales() {
+      return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
+    },
   },
   methods: {
     logout() {

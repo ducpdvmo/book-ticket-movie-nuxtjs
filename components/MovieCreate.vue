@@ -31,7 +31,7 @@
             w-full
             p-2.5
           "
-          placeholder="Movie's Name..."
+          :placeholder="$t('formAddNewMovie.movieName')"
         />
       </div>
       <div class="col-span-6 sm:col-span-3">
@@ -64,7 +64,7 @@
             w-full
             p-2.5
           "
-          placeholder="2022"
+          :placeholder="$t('formAddNewMovie.year')"
         />
       </div>
       <div class="col-span-6 sm:col-span-3">
@@ -97,7 +97,7 @@
             w-full
             p-2.5
           "
-          placeholder="Director"
+          :placeholder="$t('formAddNewMovie.director')"
         />
       </div>
       <div class="col-span-6 sm:col-span-3">
@@ -130,7 +130,7 @@
             w-full
             p-2.5
           "
-          placeholder="vmo dev"
+          :placeholder="$t('formAddNewMovie.producer')"
         />
       </div>
       <div class="col-span-6 sm:col-span-3">
@@ -164,7 +164,7 @@
             w-full
             p-2.5
           "
-          placeholder="Over view..."
+          :placeholder="$t('formAddNewMovie.overView')"
         ></textarea>
       </div>
       <div class="col-span-6 sm:col-span-3">
@@ -303,7 +303,7 @@
             font-medium
             text-gray-900
           "
-          >TrailerID</label
+          >{{$t('formAddNewMovie.trailer')}}</label
         >
         <input
           id="trailerID"
@@ -322,7 +322,7 @@
             w-full
             p-2.5
           "
-          placeholder="6DxjJzmYsXo"
+          :placeholder="$t('formAddNewMovie.trailer')"
         />
       </div>
       <div class="col-span-6 sm:col-span-3">
@@ -356,7 +356,7 @@
             w-full
             p-2.5
           "
-          placeholder="Yuamikami"
+          :placeholder="$t('formAddNewMovie.cast')"
         />
       </div>
       <div class="col-start-1 col-end-1">

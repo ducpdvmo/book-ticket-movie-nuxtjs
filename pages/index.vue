@@ -125,7 +125,7 @@
             class="flex justify-center items-center mt-5"
           >
             <movie
-              v-for="movie in movies"
+              v-for="movie in movies.slice().reverse()"
               :key="movie.movie_id"
               class="w-3/5"
               :movie="movie"

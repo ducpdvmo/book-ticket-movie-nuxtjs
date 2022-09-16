@@ -7,7 +7,6 @@
       bg-[#fffefec4]
       lg:w-4/5
       xl:py-10
-      xl:px-20
       flex
       justify-start
       flex-col

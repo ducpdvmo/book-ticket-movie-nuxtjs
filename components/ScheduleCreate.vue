@@ -160,7 +160,7 @@
               w-[47%]
               p-2.5
             "
-            placeholder="CINE_1205"
+            :placeholder="$t('formAddNewMovie.voucher')"
           />
           <input
             type="number"

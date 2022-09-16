@@ -38,13 +38,13 @@ export default {
     this.renderChart(
       {
         labels: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
+          this.$t('movieDetail.monday'),
+          this.$t('movieDetail.tuesday'),
+          this.$t('movieDetail.wednesday'),
+          this.$t('movieDetail.thursday'),
+          this.$t('movieDetail.friday'),
+          this.$t('movieDetail.saturday'),
+          this.$t('movieDetail.sunday')
         ],
         datasets: [
           {

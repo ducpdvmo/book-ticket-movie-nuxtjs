@@ -260,6 +260,7 @@ export default {
     createSuccess: 'Tạo thành công!',
     desCreated: 'Phim đã được tạo thành công',
     voucher: 'Mã giảm giá',
+    trailer: 'Mã xem nhanh'
   },
   tabs: {
     monday: 'Thứ 2',
