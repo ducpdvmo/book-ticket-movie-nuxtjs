@@ -15,7 +15,7 @@ export default {
   css: ['@/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '~/plugins/star-rating.js', mode: 'client' }],
+  plugins: [{ src: '~/plugins/star-rating.js', mode: 'client' },{ src: '~/plugins/youtobe.js', mode: 'client', ssr: false }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
