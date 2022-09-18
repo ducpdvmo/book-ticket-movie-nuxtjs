@@ -2,14 +2,15 @@
   <div
     class="
       mx-auto
-      min-w-[800px]
-      w-4/5
+      xl:min-w-[800px]
+      w-full
       bg-[#fffefec4]
-      py-10
-      px-20
+      lg:w-4/5
+      xl:py-10
       flex
-      justify-center
+      justify-start
       flex-col
+      z-50
     "
   >
     <tabs
@@ -21,13 +22,13 @@
       <tab
         v-for="(schedule, index) in schedules"
         :key="index"
-        :name="schedule.date_show"
+        :name="$t(`movieDetail.${schedule.date_show}`)"
         ><show-time :cinemas="schedule.cinemas"></show-time
       ></tab>
     </tabs>
     <button
       class="
-        min-w-[200px]
+        xl:min-w-[200px]
         mx-auto
         focus:outline-none
         text-white
@@ -44,7 +45,7 @@
       "
       @click="$emit('closeSchedule')"
     >
-      close
+      {{ $t('movieDetail.close') }}
     </button>
   </div>
 </template>
@@ -53,9 +54,7 @@
 import ShowTime from './ShowTime.vue'
 import 'vue-tabs-component/docs/resources/tabs-component.css'
 export default {
-  components: {
-    ShowTime,
-  },
+  components: { ShowTime },
   props: {
     schedules: {
       type: Array,

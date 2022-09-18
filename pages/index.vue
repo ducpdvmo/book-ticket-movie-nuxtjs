@@ -1,13 +1,14 @@
 <template>
   <div id="home">
-    <!-- <div
-      id="bg"
-      class="absolute top-0 left-0 h-screen w-screen bg-gray-600 z-[-1]"
-    ></div> -->
-    <div v-if="movies" class="w-[1280px] flex flex-col justify-center mx-auto">
+    <div
+      v-if="movies"
+      class="xl:w-[1280px] 2xl:w-[1380px] flex flex-col justify-center mx-auto"
+    >
       <div class="flex justify-end">
         <div class="flex items-center justify-start">
-          <p class="uppercase mr-4 text-lg text-[#90959b] font-bold">
+          <p
+            class="uppercase mr-4 text-base lg:text-lg text-[#90959b] font-bold"
+          >
             {{ $t('home.followUs') }}
           </p>
           <a
@@ -66,34 +67,102 @@
           /></a>
         </div>
       </div>
-      <VueSlickCarousel
-        ref="slick"
-        v-bind="slickOptions"
-        class="flex justify-center items-center mt-5"
-      >
-        <movie
-          v-for="movie in movies"
-          :key="movie.movie_id"
-          class="mx-5"
-          :movie="movie"
-        ></movie>
-        <template #prevArrow>
-          <div class="custom-arrow">
-            <font-awesome-icon
-              class="absolute top-[-16px] right-[-10px] w-8 h-8 text-yellow-500"
-              icon="fa-solid fa-circle-chevron-left"
-            />
-          </div>
-        </template>
-        <template #nextArrow>
-          <div class="custom-arrow relative">
-            <font-awesome-icon
-              class="absolute top-[-16px] left-[-10px] w-8 h-8 text-yellow-500"
-              icon="fa-solid fa-circle-chevron-right"
-            />
-          </div>
-        </template>
-      </VueSlickCarousel>
+      <div>
+        <div class="mb-10">
+          <p class="px-[20px] text-lg lg:text-2xl font-bold">
+            {{ $t('home.movieShow') }}
+          </p>
+          <VueSlickCarousel
+            ref="slick"
+            v-bind="slickOptions"
+            class="flex justify-center items-center mt-5"
+          >
+            <movie
+              v-for="movie in movies"
+              :key="movie.movie_id"
+              class=""
+              :movie="movie"
+            ></movie>
+            <template #prevArrow>
+              <div class="custom-arrow relative">
+                <font-awesome-icon
+                  class="
+                    absolute
+                    top-[-16px]
+                    right-[-10px]
+                    w-8
+                    h-8
+                    text-yellow-500
+                  "
+                  icon="fa-solid fa-circle-chevron-left"
+                />
+              </div>
+            </template>
+            <template #nextArrow>
+              <div class="custom-arrow relative">
+                <font-awesome-icon
+                  class="
+                    absolute
+                    top-[-16px]
+                    left-[-10px]
+                    w-8
+                    h-8
+                    text-yellow-500
+                  "
+                  icon="fa-solid fa-circle-chevron-right"
+                />
+              </div>
+            </template>
+          </VueSlickCarousel>
+        </div>
+        <div class="mb-10">
+          <p class="px-[20px] text-2xl font-bold">
+            {{ $t('home.comingsoon') }}
+          </p>
+          <VueSlickCarousel
+            ref="slick"
+            v-bind="slickOptions"
+            class="flex justify-center items-center mt-5"
+          >
+            <movie
+              v-for="movie in movies.slice().reverse()"
+              :key="movie.movie_id"
+              class="w-3/5"
+              :movie="movie"
+            ></movie>
+            <template #prevArrow>
+              <div class="custom-arrow">
+                <font-awesome-icon
+                  class="
+                    absolute
+                    top-[-16px]
+                    right-[-10px]
+                    w-8
+                    h-8
+                    text-yellow-500
+                  "
+                  icon="fa-solid fa-circle-chevron-left"
+                />
+              </div>
+            </template>
+            <template #nextArrow>
+              <div class="custom-arrow relative">
+                <font-awesome-icon
+                  class="
+                    absolute
+                    top-[-16px]
+                    left-[-10px]
+                    w-8
+                    h-8
+                    text-yellow-500
+                  "
+                  icon="fa-solid fa-circle-chevron-right"
+                />
+              </div>
+            </template>
+          </VueSlickCarousel>
+        </div>
+      </div>
     </div>
     <div
       v-else
@@ -126,7 +195,7 @@
           Try Again
         </button>
         <nuxt-link
-          to="/auth/login"
+          :to="{ name: `auth-login___${$i18n.locale}` }"
           class="
             my-5
             focus:outline-none
@@ -169,8 +238,6 @@ export default {
         slidesToScroll: 4,
         arrows: true,
         draggable: true,
-        // autoplay: true,
-        // autoplaySpeed: 10000,
         dots: false,
         responsive: [
           {
@@ -190,7 +257,7 @@ export default {
             },
           },
           {
-            breakpoint: 480,
+            breakpoint: 640,
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
@@ -220,4 +287,50 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.custom-arrow {
+  position: relative !important;
+  z-index: 3;
+}
+.custom-arrow.slick-prev {
+  left: 30px !important;
+}
+.custom-arrow.slick-next {
+  right: 30px !important;
+}
+.slick-slider {
+  display: flex !important;
+}
+@media (min-width: 640px) {
+  .custom-arrow.slick-prev {
+    left: 20px !important;
+  }
+  .custom-arrow.slick-next {
+    right: 20px !important;
+  }
+}
+@media (min-width: 768px) {
+  .custom-arrow.slick-prev {
+    left: 6px !important;
+  }
+  .custom-arrow.slick-next {
+    right: 6px !important;
+  }
+}
+@media (min-width: 1280px) {
+  .custom-arrow.slick-prev {
+    left: 8px !important;
+  }
+  .custom-arrow.slick-next {
+    right: 8px !important;
+  }
+}
+@media (min-width: 1536px) {
+  .custom-arrow.slick-prev {
+    left: 5px !important;
+  }
+  .custom-arrow.slick-next {
+    right: 5px !important;
+  }
+}
+</style>

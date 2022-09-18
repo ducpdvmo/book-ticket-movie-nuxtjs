@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="flex justify-between items-center">
-      <p class="text-lg font-medium">General Report</p>
+      <p class="text-lg font-medium">{{$t('dashboard.generalReport')}}</p>
       <p>
         <font-awesome-icon
           class="mr-2 font-light"
           icon="fa-solid fa-arrows-rotate"
-        />Reload Data
+        />{{$t('dashboard.reloadData')}}
       </p>
     </div>
     <div>
@@ -36,7 +36,7 @@
               </div>
             </div>
             <div class="text-3xl font-bold leading-8 mt-6">4.510</div>
-            <div class="text-base text-gray-600 mt-1">Ticket Sales</div>
+            <div class="text-base text-gray-600 mt-1">{{$t('dashboard.ticketSale')}}</div>
           </div>
         </div>
         <div class="report-box zoom-in w-[30%]">
@@ -63,8 +63,8 @@
                 />
               </div>
             </div>
-            <div class="text-3xl font-bold leading-8 mt-6">4.510</div>
-            <div class="text-base text-gray-600 mt-1">Total Movies</div>
+            <div class="text-3xl font-bold leading-8 mt-6">52</div>
+            <div class="text-base text-gray-600 mt-1">{{$t('dashboard.totalMovie')}}</div>
           </div>
         </div>
         <div class="report-box zoom-in w-[30%]">
@@ -91,8 +91,8 @@
                 />
               </div>
             </div>
-            <div class="text-3xl font-bold leading-8 mt-6">4.510</div>
-            <div class="text-base text-gray-600 mt-1">Total Income</div>
+            <div class="text-3xl font-bold leading-8 mt-6">12.050 $</div>
+            <div class="text-base text-gray-600 mt-1">{{$t('dashboard.totalIncome')}}</div>
           </div>
         </div>
       </div>

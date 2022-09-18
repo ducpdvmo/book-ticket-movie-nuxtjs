@@ -1,5 +1,5 @@
 <template>
-  <div class="w-4/5 mx-auto mt-10">
+  <div class="w-full flex items-center flex-col mx-auto xl:mt-10">
     <day-schedule
       v-for="(cinema, key) in cinemas"
       :key="key"

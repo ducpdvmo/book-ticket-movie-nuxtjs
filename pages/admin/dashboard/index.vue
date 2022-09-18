@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#F1F5F8] p-5 rounded-2xl h-screen">
+  <div class="bg-[#F1F5F8] p-5 rounded-2xl">
     <GeneralReport class="mb-20"></GeneralReport>
     <ChartSales :ticket-count="data1" :in-come="data2"></ChartSales>
   </div>

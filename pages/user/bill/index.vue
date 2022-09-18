@@ -1,31 +1,42 @@
 <template>
-  <div class="min-h-full w-[75%] rounded-3xl">
+  <div class="min-h-full w-full lg:w-[75%] rounded-3xl">
     <div class="font-bold">
-      <nuxt-link class="text-lg" to="/">Home</nuxt-link>
-      <nuxt-link class="text-lg" to="/user/profile"
-        ><font-awesome-icon class="text-sm" icon="fa-solid fa-chevron-right" />
-        User</nuxt-link
+      <nuxt-link
+        class="md:text-lg text-sm"
+        :to="{ name: `index___${$i18n.locale}` }"
+        >{{ $t('homeLayout.home') }}</nuxt-link
       >
-      <nuxt-link class="text-lg" to="/user/profile"
+      <nuxt-link
+        class="md:text-lg text-sm"
+        :to="{ name: `user-profile___${$i18n.locale}` }"
         ><font-awesome-icon class="text-sm" icon="fa-solid fa-chevron-right" />
-        Bills</nuxt-link
+        {{ $t('profile.user') }}</nuxt-link
+      >
+      <nuxt-link
+        class="md:text-lg text-sm"
+        :to="{ name: `user-bill___${$i18n.locale}` }"
+        ><font-awesome-icon class="text-sm" icon="fa-solid fa-chevron-right" />
+        {{ $t('profile.bills') }}</nuxt-link
       >
     </div>
     <div class="my-5 w-full">
-      <table class="w-full">
+      <table v-if="tempBills?.bills.length" class="w-full">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 w-full">
           <tr>
             <th scope="col" class="p-4">STT</th>
-            <th scope="col" class="py-3 px-6">Tên Phim</th>
-            <th scope="col" class="py-3 px-6">Suất Chiếu</th>
-            <th scope="col" class="py-3 px-6">Số lượng</th>
-            <th scope="col" class="py-3 px-6">Giá dịch vụ</th>
-            <th scope="col" class="py-3 px-6">Hành động</th>
+            <th scope="col" class="py-3 md:px-3">
+              {{ $t('bills.movieName') }}
+            </th>
+            <th scope="col" class="py-3 md:px-3">{{ $t('bills.showTime') }}</th>
+            <th scope="col" class="py-3 md:px-3">{{ $t('bills.quatity') }}</th>
+            <th scope="col" class="py-3 md:px-3">{{ $t('bills.cost') }}</th>
+            <th scope="col" class="py-3 md:px-3">{{ $t('bills.action') }}</th>
           </tr>
         </thead>
         <tbody>
           <BillTicket
             v-for="(bill, index) in tempBills.bills.slice().reverse()"
+            v-show="pageSize * page <= index && index < pageSize * (page + 1)"
             :key="index"
             :bill="bill"
             @handle:deleteBill="deleteBill(bill.id)"
@@ -33,17 +44,31 @@
           >
         </tbody>
       </table>
+      <p v-else>
+        Danh sách hóa đơn trống, vui lòng đặt vé để sử dụng tính năng này!
+      </p>
     </div>
+    <Pagination
+      v-show="tempBills.bills.length"
+      class="text-right mr-10"
+      :current-page="page"
+      :page-size="pageSize"
+      :data="tempBills.bills"
+      @page:update="pageUpdate"
+    ></Pagination>
   </div>
 </template>
 
 <script>
 import BillTicket from '../../../components/BillTicket.vue'
+import Pagination from '../../../components/Pagination.vue'
 export default {
-  components: { BillTicket },
+  components: { BillTicket, Pagination },
   data() {
     return {
       tempBills: null,
+      pageSize: 7,
+      page: 0,
     }
   },
   computed: {
@@ -56,7 +81,7 @@ export default {
   },
   created() {
     this.handelDataBill()
-    console.log(this.tempBills)
+    console.log(this.tempBills.bills)
   },
   methods: {
     handelDataBill() {
@@ -71,10 +96,9 @@ export default {
           (bill) => Object.keys(bill).length > 1
         )
       } else {
-        console.log(this.tempBills.bills);
         const bills = []
-        for(const key in this.tempBills.bills){
-          bills.push({...this.tempBills.bills[key], id: key})
+        for (const key in this.tempBills.bills) {
+          bills.push({ ...this.tempBills.bills[key], id: key })
         }
         this.tempBills.bills = bills.filter(
           (bill) => Object.keys(bill).length > 1
@@ -92,9 +116,9 @@ export default {
         this.bills = this.$store.getters['bill/getBill']
       })
     },
-    // deleteBIll(index) {
-    //   this.tempBills.splice(this.tempBills.length - 1 - index, 1)
-    // },
+    pageUpdate(pageNum) {
+      this.page = pageNum
+    },
   },
 }
 </script>

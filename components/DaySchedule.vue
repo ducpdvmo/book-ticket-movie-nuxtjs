@@ -1,23 +1,23 @@
 <template>
-  <div class="mb-10 mx-auto">
-    <ul class="flex items-center">
-      <li class="flex items-center justify-center min-w-[180px]">
+  <div class="mb-10 w-full flex justify-center">
+    <ul class="flex items-center justify-between sm:w-4/5 md:w-3/5 w-full">
+      <li class="flex items-center justify-center xl:min-w-[180px]">
         <img
           :src="logoCinema"
-          class="w-16 h-16 rounded-full cursor-pointer"
+          class="xl:w-16 xl:h-16 w-8 h-8 lg:w-12 lg:h-12 rounded-full cursor-pointer"
           :alt="cinemaName"
         />
-        <span class="text-green-500 font-bold uppercase text-xl ml-5">{{
-          cinemaName
+        <span class="text-green-500 font-bold uppercase xl:text-xl lg:text-sm text-xs ml-5">{{
+          $t(`bookTicket.${cinemaName}`)
         }}</span>
       </li>
       <li v-if="cinema.show_time.length">
-        <ul class="ml-[80px] flex">
+        <ul class="xl:ml-[80px] flex">
           <nuxt-link
             v-for="(show_time, index) in cinema.show_time"
             :key="index"
             :to="{
-              name: 'bookticket___vi',
+              name: `bookticket___${$i18n.locale}`,
               query: {
                 movie_id: show_time.movie_id,
                 schedule_id: show_time.schedule_id,
@@ -26,7 +26,7 @@
             ><button
               class="
                 mx-5
-                text-xl
+                xl:text-xl
                 font-bold
                 border
                 px-6
@@ -45,8 +45,8 @@
         </ul>
       </li>
       <li v-else>
-        <p class="ml-24 text-red-600 font-bold uppercase text-base">
-          Chưa Có Lịch Chiếu !
+        <p class="xl:ml-24 text-red-600 font-bold uppercase lg:text-sm xl:text-base text-xs">
+          {{ $t('movieDetail.noShowTime') }}
         </p>
       </li>
     </ul>

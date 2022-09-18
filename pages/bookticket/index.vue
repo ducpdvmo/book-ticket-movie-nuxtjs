@@ -1,5 +1,15 @@
 <template>
-  <div class="bg-[#1615158a] flex w-[1280px] mx-auto justify-around">
+  <div
+    class="
+      flex flex-col
+      lg:flex-row
+      mx-auto
+      mb-10
+      justify-around
+      w-full
+      xl:w-[1280px]
+    "
+  >
     <SeatCinema
       :list-seat="currentTicketRoom[0].listseat"
       @targetSeat="targetSeat"
@@ -18,7 +28,7 @@
         "
         @click="resetSelected"
       >
-        CHỌN LẠI
+        {{ $t('bookTicket.reSelect') }}
       </button>
     </SeatCinema>
     <BillInformation
@@ -36,12 +46,12 @@
             font-medium
             rounded-lg
             text-sm
-            px-5
+            px-3
             py-2.5
             text-center
             inline-flex
             items-center
-            mx-4
+            mr-4
           "
           @click="setSeatSelected"
         >
@@ -56,17 +66,16 @@
             font-medium
             rounded-lg
             text-sm
-            px-5
+            px-3
             py-2.5
             text-center
             inline-flex
             items-center
-            mx-4
           "
           @click="showPopup = true"
         >
           <font-awesome-icon class="mr-2" icon="fa-solid fa-credit-card" />
-          Đặt Vé Ngay
+          {{ $t('bookTicket.bookingNow') }}
         </button>
       </div>
     </BillInformation>
@@ -83,14 +92,16 @@
       </template>
       <template #title_noti
         ><p>
-          Do you realy want to payment? This process cannot be undone
+          {{ $t('bookTicket.contentPayment') }}
         </p></template
       >
-      <template #handle_name>Payment</template>
+      <template #handle_name>{{ $t('bookTicket.payment') }}</template>
       <template #title_success>
-        <h2 class="text-xl font-bold py-4">Payment Successfull</h2>
+        <h2 class="text-xl font-bold py-4">
+          {{ $t('bookTicket.paymentSuccess') }}
+        </h2>
         <p class="text-sm text-gray-500 px-8">
-          The Ticket be booked done, thanks you!
+          {{ $t('bookTicket.thanks') }}
         </p>
       </template>
     </GetPayment>
@@ -109,9 +120,11 @@ export default {
   name: 'BookTicket',
   components: { SeatCinema, BillInformation },
   provide() {
+    this.currentTicketRoom = this.fetchCurrentTicketRoom()
     return {
       movie: computed(() => this.movie),
       seatSelectedComputed: computed(() => this.seatSelected),
+      ticketRoom: this.currentTicketRoom,
     }
   },
   layout: 'home',
@@ -182,6 +195,7 @@ export default {
   },
   created() {
     this.currentTicketRoom = this.fetchCurrentTicketRoom()
+    console.log(this.billOfCurrentUser)
   },
   methods: {
     fetchCurrentTicketRoom() {
@@ -271,7 +285,7 @@ export default {
       // await addDoc(collection(db, "TicketForAdmin"), billForAdmin)
 
       let tempBill
-      if (this.billOfCurrentUser.length !== 0) {
+      if (this.billOfCurrentUser[0]?.bills?.length) {
         tempBill = JSON.parse(JSON.stringify(this.billOfCurrentUser[0]))
         delete tempBill.id
         if (Array.isArray(tempBill.bills)) tempBill.bills.push(bill)
@@ -286,13 +300,12 @@ export default {
           this.billOfCurrentUser.length !== 0
             ? this.billOfCurrentUser[0].id
             : null,
-        dataBill:
-          this.billOfCurrentUser.length !== 0
-            ? tempBill
-            : {
-                user_id: this.$store.getters['user/getUser'].uid,
-                bills: [bill],
-              },
+        dataBill: this.billOfCurrentUser[0].bills
+          ? tempBill
+          : {
+              user_id: this.$store.getters['user/getUser'].uid,
+              bills: [bill],
+            },
       }
       await this.$store.dispatch('bill/setBillOfUserId', payload)
       await this.$store.dispatch('bill/getAllBills')
@@ -316,7 +329,7 @@ export default {
       this.$store.commit('seatCinema/setSeatSelected', this.seatSelected)
       this.$store.commit('seatCinema/setTotalCost', this.totalCostDiscount)
       this.$router.push({
-        name: 'bookticket-combo___vi',
+        name: `bookticket-combo___${this.$i18n.locale}`,
         query: {
           movie_id: this.$route.query.movie_id,
           schedule_id: this.$route.query.schedule_id,

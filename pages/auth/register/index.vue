@@ -12,91 +12,146 @@
     "
   >
     <form
-      class="p-10 bg-white rounded-xl drop-shadow-lg space-y-5"
+      class="
+        p-10
+        bg-white
+        my-32
+        rounded-xl
+        drop-shadow-lg
+        space-y-5
+        mx-auto
+        w-[90%]
+        sm:w-4/5
+        md:w-3/5
+        lg:w-1/2
+        xl:w-2/5
+        flex flex-col
+        items-center
+      "
       @submit.prevent="onSubmit"
     >
       <h1 class="text-center text-3xl">Register</h1>
-      <div class="flex flex-col space-y-2">
-        <label class="text-sm font-light" for="email">Email</label>
-        <input
-          id="email"
-          v-model="email"
-          class="w-96 px-3 py-2 rounded-md border border-slate-400"
-          type="email"
-          placeholder="Your Email"
-          name="email"
-          @blur="checkValidate()"
-        />
-        <div
-          v-if="error !== null && invalid === 'email'"
-          class="
-            p-4
-            mb-4
-            text-sm text-red-700
-            bg-red-100
-            rounded-lg
-            dark:bg-red-200 dark:text-red-800
-          "
-          role="alert"
-        >
-          {{ error }}
+      <div
+        class="
+          flex flex-col
+          items-center
+          justify-center
+          space-y-2
+          w-full
+          sm:w-96
+        "
+      >
+        <div class="flex flex-col w-full">
+          <label class="text-sm text-left font-light" for="email">Email</label>
+          <input
+            id="email"
+            v-model="email"
+            class="sm:w-96 px-3 py-2 rounded-md border border-slate-400"
+            type="email"
+            placeholder="Your Email"
+            name="email"
+            @blur="checkValidate()"
+          />
+          <div
+            v-if="error !== null && invalid === 'email'"
+            class="
+              p-4
+              mb-4
+              text-sm text-red-700
+              bg-red-100
+              rounded-lg
+              dark:bg-red-200 dark:text-red-800
+            "
+            role="alert"
+          >
+            {{ error }}
+          </div>
         </div>
       </div>
-      <div class="flex flex-col space-y-2">
-        <label class="text-sm font-light" for="password">Password</label>
-        <input
-          id="password"
-          v-model="password"
-          class="w-96 px-3 py-2 rounded-md border border-slate-400"
-          type="password"
-          placeholder="Your Password"
-          name="password"
-          @blur="checkValidate()"
-        />
-        <div
-          v-if="error !== null && invalid === 'password'"
-          class="
-            p-4
-            mb-4
-            text-sm text-red-700
-            bg-red-100
-            rounded-lg
-            dark:bg-red-200 dark:text-red-800
-          "
-          role="alert"
-        >
-          {{ error }}
+      <div
+        class="
+          flex flex-col
+          items-center
+          justify-center
+          space-y-2
+          w-full
+          sm:w-96
+        "
+      >
+        <div class="flex flex-col w-full">
+          <label class="text-sm text-left font-light" for="password"
+            >Password</label
+          >
+          <input
+            id="password"
+            v-model="password"
+            class="sm:w-96 px-3 py-2 rounded-md border border-slate-400"
+            type="password"
+            placeholder="Your Password"
+            name="password"
+            @blur="checkValidate()"
+          />
+          <div
+            v-if="error !== null && invalid === 'password'"
+            class="
+              p-4
+              mb-4
+              text-sm text-red-700
+              bg-red-100
+              rounded-lg
+              dark:bg-red-200 dark:text-red-800
+            "
+            role="alert"
+          >
+            {{ error }}
+          </div>
         </div>
       </div>
-      <div class="flex flex-col space-y-2">
-        <label class="text-sm font-light" for="rePassword">Re-Password</label>
-        <input
-          id="rePassword"
-          v-model="rePassword"
-          class="w-96 px-3 py-2 rounded-md border border-slate-400"
-          type="password"
-          placeholder="Type Re-password"
-          name="rePassword"
-        />
-        <div
-          v-if="!checkValidateRePassword"
-          class="
-            p-4
-            mb-4
-            text-sm text-red-700
-            bg-red-100
-            rounded-lg
-            dark:bg-red-200 dark:text-red-800
-          "
-          role="alert"
-          @blur="checkValidate()"
-        >
-          Password does not match
+      <div
+        class="
+          flex flex-col
+          items-center
+          justify-center
+          space-y-2
+          w-full
+          sm:w-96
+        "
+      >
+        <div class="flex flex-col w-full">
+          <label
+            class="text-sm text-left font-light float-left"
+            for="rePassword"
+            >Re-Password</label
+          >
+          <input
+            id="rePassword"
+            v-model="rePassword"
+            class="sm:w-96 px-3 py-2 rounded-md border border-slate-400"
+            type="password"
+            placeholder="Type Re-password"
+            name="rePassword"
+          />
+          <div
+            v-if="!checkValidateRePassword"
+            class="
+              p-4
+              mb-4
+              text-sm text-red-700
+              bg-red-100
+              rounded-lg
+              dark:bg-red-200 dark:text-red-800
+            "
+            role="alert"
+            @blur="checkValidate()"
+          >
+            Password does not match
+          </div>
         </div>
       </div>
 
       <button
         class="
+          sm:w-96
           w-full
           px-10
           py-2
@@ -114,7 +169,7 @@
       <p class="text-sm font-semibold mt-2 pt-1 mb-0">
         Have an account yet?
         <nuxt-link
-          to="/auth/login"
+          :to="{ name: `auth-login___${$i18n.locale}` }"
           class="
             text-red-600
             hover:text-red-700
@@ -174,13 +229,23 @@ export default {
               userName: '',
               email: this.email,
               uid: res.result.localId,
-              avatar: 'https://support.pega.com/sites/default/files/pega-user-image/357/REG-356652.png',
+              avatar:
+                'https://support.pega.com/sites/default/files/pega-user-image/357/REG-356652.png',
             }
             await this.$store.dispatch('user/initUser', newUser)
             this.$store.commit('user/setUser', newUser)
+            const payload = {
+              methods: 'post',
+              id: null,
+              dataBill: {
+                user_id: res.result.localId,
+                bills: [],
+              },
+            }
+            await this.$store.dispatch('bill/setBillOfUserId', payload)
           })
           .then(() => {
-            this.$router.push('/')
+            window.location.assign('/')
           })
           .catch((e) => {
             this.error = e.data.error.message
