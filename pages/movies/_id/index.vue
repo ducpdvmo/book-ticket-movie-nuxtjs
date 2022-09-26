@@ -27,14 +27,20 @@
             w-full
             sm:w-4/5
             md:w-3/5
-            lg:w-1/3
-            lg:justify-start
+            lg:w-1/3 lg:justify-start
           "
         >
           <img
             :src="movie.photoUrl"
             alt="movie.name"
-            class="w-4/5 sm:w-3/5 md:h-[350px] h-[300px] lg:h-[400px] lg:w-4/5 mb-10"
+            class="
+              w-4/5
+              sm:w-3/5
+              md:h-[350px]
+              h-[300px]
+              lg:h-[400px] lg:w-4/5
+              mb-10
+            "
           />
           <div
             class="
@@ -61,6 +67,7 @@
                 py-2.5
                 mb-[15px]
               "
+              @click="showTrailerModal = true"
             >
               <font-awesome-icon class="mr-3" icon="fa-solid fa-play" />
               {{ $t('movieDetail.watchTrailer') }}
@@ -92,7 +99,16 @@
           </div>
         </div>
         <div class="text-white bg-[#00000055] pl-5 w-full lg:w-2/3 mr-[15px]">
-          <h1 class="text-2xl xl:text-4xl text-white text-center lg:text-left font-bold mb-[25px]">
+          <h1
+            class="
+              text-2xl
+              xl:text-4xl
+              text-white text-center
+              lg:text-left
+              font-bold
+              mb-[25px]
+            "
+          >
             {{ movie.name }}
             <span
               class="text-xl xl:text-2xl font-medium uppercase text-[#d02a4d]"
@@ -229,6 +245,13 @@
         </div>
       </div>
     </div>
+    <div>
+      <ModalTrailer
+        v-show="showTrailerModal"
+        :video-id="movie?.trailerID ? movie.trailerID : 'o4NzWTNqSto'"
+        @closeTrailer="showTrailerModal = false"
+      ></ModalTrailer>
+    </div>
     <div
       v-if="showTableSchedule"
       class="
@@ -258,9 +281,10 @@ import 'vue-tabs-component/docs/resources/tabs-component.css'
 import MovieSchedule from '../../../components/MovieSchedule.vue'
 import OverView from '../../../components/OverView.vue'
 import Review from '../../../components/Review.vue'
+import ModalTrailer from '../../../components/ModalTrailer.vue'
 export default {
   name: 'MovieDetail',
-  components: { MovieSchedule },
+  components: { MovieSchedule, ModalTrailer },
   provide() {
     return {
       movie: this.movie,
@@ -292,6 +316,7 @@ export default {
         },
       ],
       sizeStar: null,
+      showTrailerModal: false,
     }
   },
   computed: {},
